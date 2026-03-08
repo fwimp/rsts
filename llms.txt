@@ -1,0 +1,20 @@
+# rsts
+
+`rsts` provides an interface to performing Slay the Spire run analysis
+using R.
+
+## Installation
+
+You can install the development version of rsts like so:
+
+``` r
+pak::pkg_install("fwimp/rsts")
+```
+
+# Package index
+
+## All functions
+
+- [`load_sts_history()`](https://fwimp.github.io/rsts/reference/load_sts_history.md)
+  : Load Slay the Spire 2 Run Data
+
