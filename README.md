@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/fwimp/rsts/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/rsts/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `rsts` provides an interface to performing Slay the Spire run analysis
