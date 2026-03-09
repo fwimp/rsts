@@ -44,7 +44,12 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">load_sts_history</span><span class="op">(</span>path <span class="op">=</span> <span class="cn">NULL</span>, profilenum <span class="op">=</span> <span class="cn">NULL</span>, game <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">load_sts_history</span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  profilenum <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  game <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  platform <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"windows"</span>, <span class="st">"mac"</span>, <span class="st">"linux"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -55,12 +60,16 @@
 <dd><p>The path to your installation.</p></dd>
 
 
+<dt id="arg-profilenum">profilenum<a class="anchor" aria-label="anchor" href="#arg-profilenum"></a></dt>
+<dd><p>Which profile to retrieve data for (or NULL to retrieve all).</p></dd>
+
+
 <dt id="arg-game">game<a class="anchor" aria-label="anchor" href="#arg-game"></a></dt>
 <dd><p>Which game to retrieve run data for (2 = STS2, 1 = STS), currently only STS2 is implemented.</p></dd>
 
 
-<dt id="arg-profile-num">profile_num<a class="anchor" aria-label="anchor" href="#arg-profile-num"></a></dt>
-<dd><p>Which profile to retrieve data for (or NULL to retrieve all).</p></dd>
+<dt id="arg-platform">platform<a class="anchor" aria-label="anchor" href="#arg-platform"></a></dt>
+<dd><p>Which platform are you running on?</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -70,8 +79,9 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">load_sts2_history</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in load_sts2_history():</span> could not find function "load_sts2_history"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="fu">load_sts_history</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -79,7 +89,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Jane Doe.</p>
+  <p>Developed by Francis Windram.</p>
 </div>
 
 <div class="pkgdown-footer-right">

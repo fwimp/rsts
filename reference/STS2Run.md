@@ -1,0 +1,136 @@
+# R6 Class representing a Slay the Spire 2 run.
+
+This is the general holding class for an sts2 run. It stores the main
+metadata and lists containing more in-depth run data.
+
+## Value
+
+A new `STS2Run` object.
+
+## Public fields
+
+- `acts`:
+
+  A vector of the acts that the player encountered.
+
+- `ascension`:
+
+  The ascension level of the run.
+
+- `build_id`:
+
+  The build of the game that this run was generated from.
+
+- `game_mode`:
+
+  The game mode that the player was playing.
+
+- `killed_by_encounter`:
+
+  The encounter that killed the player.
+
+- `killed_by_event`:
+
+  The event that killed the player.
+
+- `map_point_history`:
+
+  A list storing the play-by-play of the run.
+
+- `modifiers`:
+
+  Any modifiers that the player had turned on.
+
+- `platform_type`:
+
+  The platform of the game (e.g. steam).
+
+- `players`:
+
+  A list of player information.
+
+- `run_time`:
+
+  The run duration (in seconds).
+
+- `schema_version`:
+
+  The run schema version.
+
+- `seed`:
+
+  The seed of the run.
+
+- `start_time`:
+
+  The start time (in seconds from unix epoch).
+
+- `was_abandoned`:
+
+  Whether the player abandoned the run.
+
+- `win`:
+
+  Whether the player won the run.
+
+## Methods
+
+### Public methods
+
+- [`STS2Run$new()`](#method-STS2Run-new)
+
+- [`STS2Run$print()`](#method-STS2Run-print)
+
+- [`STS2Run$clone()`](#method-STS2Run-clone)
+
+------------------------------------------------------------------------
+
+### Method `new()`
+
+Create a new run object from data parsed with jsonlite.
+
+#### Usage
+
+    STS2Run$new(rundata)
+
+#### Arguments
+
+- `rundata`:
+
+  The list output from jsonlite containing the run data.
+
+------------------------------------------------------------------------
+
+### Method [`print()`](https://rdrr.io/r/base/print.html)
+
+Print an `STS2Run` object.
+
+#### Usage
+
+    STS2Run$print(..., full = FALSE)
+
+#### Arguments
+
+- `...`:
+
+  Arguments to pass to [`print()`](https://rdrr.io/r/base/print.html).
+
+- `full`:
+
+  Whether to print extra internal run information.
+
+------------------------------------------------------------------------
+
+### Method `clone()`
+
+The objects of this class are cloneable with this method.
+
+#### Usage
+
+    STS2Run$clone(deep = FALSE)
+
+#### Arguments
+
+- `deep`:
+
+  Whether to make a deep clone.
