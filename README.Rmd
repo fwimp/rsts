@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# rsts
+# rsts <a href="https://fwimp.github.io/rsts/"><img src="man/figures/logo.svg" align="right" height="120" alt="rsts website" /></a>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/fwimp/rsts/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/rsts/actions/workflows/R-CMD-check.yaml)

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rsts
+# rsts <a href="https://fwimp.github.io/rsts/"><img src="man/figures/logo.svg" align="right" height="120" alt="rsts website" /></a>
 
 <!-- badges: start -->
 
