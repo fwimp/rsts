@@ -1,16 +1,15 @@
 Package: rsts
 Type: Package
-Title: What the Package Does (Title Case)
+Title: R Slay The Spire Interface
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
-      role = c("aut", "cre")
+      "Francis", "Windram",
+      email = "francis.windram17@imperial.ac.uk",
+      role = c("aut", "cre", "cph")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+Description: R6 classes and helpful functions for working With Slay The Spire run histories.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -21,3 +20,11 @@ Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/fwimp/rsts, https://fwimp.github.io/rsts/
 BugReports: https://github.com/fwimp/rsts/issues
+Imports: 
+    cli,
+    jsonlite,
+    R6,
+    rlang,
+    stringr
+Depends: 
+    R (>= 4.1.0)

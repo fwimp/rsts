@@ -4,14 +4,21 @@
 \alias{load_sts_history}
 \title{Load Slay the Spire 2 Run Data}
 \usage{
-load_sts_history(path = NULL, profilenum = NULL, game = 2)
+load_sts_history(
+  path = NULL,
+  profilenum = 1,
+  game = 2,
+  platform = c("windows", "mac", "linux")
+)
 }
 \arguments{
 \item{path}{The path to your installation.}
 
+\item{profilenum}{Which profile to retrieve data for (or NULL to retrieve all).}
+
 \item{game}{Which game to retrieve run data for (2 = STS2, 1 = STS), currently only STS2 is implemented.}
 
-\item{profile_num}{Which profile to retrieve data for (or NULL to retrieve all).}
+\item{platform}{Which platform are you running on?}
 }
 \value{
 The parsed run data.
@@ -20,5 +27,7 @@ The parsed run data.
 Load Slay the Spire 2 Run Data
 }
 \examples{
-load_sts2_history()
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+load_sts_history()
+\dontshow{\}) # examplesIf}
 }
