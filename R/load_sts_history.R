@@ -1,13 +1,14 @@
 #' Load Slay the Spire 2 Run Data
 #'
 #' @param path The path to your installation.
+#' @param id The steamID of the data you want to retrieve. If NULL, will just get the first ID directory.
 #' @param profilenum Which profile to retrieve data for (or NULL to retrieve all).
 #' @param game Which game to retrieve run data for (2 = STS2, 1 = STS), currently only STS2 is implemented.
 #' @param platform Which platform are you running on?
 #' @param players Only analyse runs with this number of players (or NULL for all, default).
 #'
 #' @note
-#' If you provide a range of numbers for the `players` argument, any number of players in this range will be included.
+#' If you provide a range of numbers for the `players` argument e.g. `1:3`, any number of players in this range will be included.
 #'
 #' @returns The parsed run data.
 #' @export
@@ -15,7 +16,7 @@
 #' @examplesIf interactive()
 #' load_sts_history()
 #'
-load_sts_history <- function(path = NULL, profilenum = 1, game = 2, platform = c("windows", "mac", "linux"), players = NULL) {
+load_sts_history <- function(path = NULL, id = NULL, profilenum = 1, game = 2, platform = c("windows", "mac", "linux"), players = NULL) {
   # Runs are located at C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\runs\<CHARACTER> on windows for STS1.
   # Runs are located at %APPDATA%/Roaming/SlayTheSpire2/steam/<STEAMID>/profile<x>/saves/history on windows for STS2.
   platform <- match.arg(platform)
@@ -34,10 +35,15 @@ load_sts_history <- function(path = NULL, profilenum = 1, game = 2, platform = c
     }
     # Only windows for now. Magic number is steamID so will not be consistent across players.
     # TODO: Must lookup some way.
-    default_location <- paste0("~/../AppData/Roaming/SlayTheSpire2/steam/76561198003753555/profile", profilenum,"/saves/history/")
+    basepath <- "~/../AppData/Roaming/SlayTheSpire2/steam"
+    if (is.null(id)){
+      id <- list.dirs(basepath, recursive = FALSE, full.names = FALSE)[1]
+    }
+    default_location <- file.path(basepath, id, paste0("profile", profilenum),"saves/history/")
     path <- default_location
   }
 
+  # TODO: Parallelise if this takes too long when people have a lot of runs.
   # Load runs
   cli::cli_progress_step("Loading runs...")
   run_files <- list.files(path, full.names = TRUE)
@@ -56,9 +62,6 @@ load_sts_history <- function(path = NULL, profilenum = 1, game = 2, platform = c
         if (!(length(x$players) %in% players)) {
           return(NULL)
         }
-      }
-      if (length(x$players) > 1) {
-        cli::cli_warn("Seed {x$seed} has more than one player, this functionality has not been fully checked.")
       }
       STS2Run$new(x)
     }, error = function(e) {

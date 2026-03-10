@@ -6,6 +6,7 @@
 \usage{
 load_sts_history(
   path = NULL,
+  id = NULL,
   profilenum = 1,
   game = 2,
   platform = c("windows", "mac", "linux"),
@@ -14,6 +15,8 @@ load_sts_history(
 }
 \arguments{
 \item{path}{The path to your installation.}
+
+\item{id}{The steamID of the data you want to retrieve. If NULL, will just get the first ID directory.}
 
 \item{profilenum}{Which profile to retrieve data for (or NULL to retrieve all).}
 
@@ -30,7 +33,7 @@ The parsed run data.
 Load Slay the Spire 2 Run Data
 }
 \note{
-If you provide a range of numbers for the \code{players} argument, any number of players in this range will be included.
+If you provide a range of numbers for the \code{players} argument e.g. \code{1:3}, any number of players in this range will be included.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
