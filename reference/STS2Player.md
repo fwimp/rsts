@@ -50,6 +50,8 @@ A new `STS2Player` object.
 
 - [`STS2Player$new()`](#method-STS2Player-new)
 
+- [`STS2Player$print()`](#method-STS2Player-print)
+
 - [`STS2Player$clone()`](#method-STS2Player-clone)
 
 ------------------------------------------------------------------------
@@ -60,7 +62,7 @@ Create a new run object from player data.
 
 #### Usage
 
-    STS2Player$new(playerdata, run = NULL)
+    STS2Player$new(playerdata, run = NULL, idx = 1)
 
 #### Arguments
 
@@ -72,6 +74,35 @@ Create a new run object from player data.
 - `run`:
 
   The STS2Run object that this player object originates from.
+
+- `idx`:
+
+  The index within the player list from which this player originates.
+
+------------------------------------------------------------------------
+
+### Method [`print()`](https://rdrr.io/r/base/print.html)
+
+Print an `STS2Player` object.
+
+#### Usage
+
+    STS2Player$print(..., full = FALSE, floor = FALSE)
+
+#### Arguments
+
+- `...`:
+
+  Arguments to pass to [`print()`](https://rdrr.io/r/base/print.html).
+
+- `full`:
+
+  Whether to show the full deck and relics of the player.
+
+- `floor`:
+
+  Whether to show the floor on which a card/relic was obtained when
+  `full = TRUE`.
 
 ------------------------------------------------------------------------
 

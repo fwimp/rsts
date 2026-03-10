@@ -7,6 +7,7 @@ Load Slay the Spire 2 Run Data
 ``` r
 load_sts_history(
   path = NULL,
+  id = NULL,
   profilenum = 1,
   game = 2,
   platform = c("windows", "mac", "linux"),
@@ -19,6 +20,11 @@ load_sts_history(
 - path:
 
   The path to your installation.
+
+- id:
+
+  The steamID of the data you want to retrieve. If NULL, will just get
+  the first ID directory.
 
 - profilenum:
 
@@ -44,8 +50,8 @@ The parsed run data.
 
 ## Note
 
-If you provide a range of numbers for the `players` argument, any number
-of players in this range will be included.
+If you provide a range of numbers for the `players` argument e.g. `1:3`,
+any number of players in this range will be included.
 
 ## Examples
 

@@ -31,6 +31,8 @@ A new `STS2Relics` object.
 
 - [`STS2Relics$new()`](#method-STS2Relics-new)
 
+- [`STS2Relics$print()`](#method-STS2Relics-print)
+
 - [`STS2Relics$clone()`](#method-STS2Relics-clone)
 
 ------------------------------------------------------------------------
@@ -53,6 +55,26 @@ Create a new relics object from player data.
 - `player`:
 
   The `STS2Player` object these relics belong to.
+
+------------------------------------------------------------------------
+
+### Method [`print()`](https://rdrr.io/r/base/print.html)
+
+Print an `STS2Relics` object.
+
+#### Usage
+
+    STS2Relics$print(..., floor = FALSE)
+
+#### Arguments
+
+- `...`:
+
+  Arguments to pass to [`print()`](https://rdrr.io/r/base/print.html).
+
+- `floor`:
+
+  Whether to show the floor on which a card was obtained.
 
 ------------------------------------------------------------------------
 
