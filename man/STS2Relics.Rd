@@ -27,6 +27,7 @@ It stores the main relic data for the player.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-STS2Relics-new}{\code{STS2Relics$new()}}
+\item \href{#method-STS2Relics-print}{\code{STS2Relics$print()}}
 \item \href{#method-STS2Relics-clone}{\code{STS2Relics$clone()}}
 }
 }
@@ -45,6 +46,25 @@ Create a new relics object from player data.
 \item{\code{relicdata}}{The subset of the list output from jsonlite, usually passed in via \code{STS2Player}.}
 
 \item{\code{player}}{The \code{STS2Player} object these relics belong to.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2Relics-print"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2Relics-print}{}}}
+\subsection{Method \code{print()}}{
+Print an \code{STS2Relics} object.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2Relics$print(..., floor = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Arguments to pass to \code{print()}.}
+
+\item{\code{floor}}{Whether to show the floor on which a card was obtained.}
 }
 \if{html}{\out{</div>}}
 }

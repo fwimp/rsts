@@ -40,6 +40,7 @@ It stores the main player data for the run.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-STS2Player-new}{\code{STS2Player$new()}}
+\item \href{#method-STS2Player-print}{\code{STS2Player$print()}}
 \item \href{#method-STS2Player-clone}{\code{STS2Player$clone()}}
 }
 }
@@ -49,7 +50,7 @@ It stores the main player data for the run.
 \subsection{Method \code{new()}}{
 Create a new run object from player data.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2Player$new(playerdata, run = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2Player$new(playerdata, run = NULL, idx = 1)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -58,6 +59,29 @@ Create a new run object from player data.
 \item{\code{playerdata}}{The subset of the list output from jsonlite, usually passed in via \code{STS2Run}.}
 
 \item{\code{run}}{The STS2Run object that this player object originates from.}
+
+\item{\code{idx}}{The index within the player list from which this player originates.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2Player-print"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2Player-print}{}}}
+\subsection{Method \code{print()}}{
+Print an \code{STS2Player} object.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2Player$print(..., full = FALSE, floor = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Arguments to pass to \code{print()}.}
+
+\item{\code{full}}{Whether to show the full deck and relics of the player.}
+
+\item{\code{floor}}{Whether to show the floor on which a card/relic was obtained when \code{full = TRUE}.}
 }
 \if{html}{\out{</div>}}
 }

@@ -72,7 +72,7 @@ STS2Run <- R6Class("STS2Run",
       self$modifiers <- rundata$modifiers
       self$platform_type <- rundata$platform_type
       # browser()
-      self$players <- lapply(rundata$players, \(x) {STS2Player$new(x, run = self)})
+      self$players <- lapply(1:length(rundata$players), \(i) {STS2Player$new(rundata$players[[i]], run = self, idx = i)})
       self$run_time <- rundata$run_time
       self$schema_version <- rundata$schema_version
       self$seed <- rundata$seed
@@ -90,33 +90,40 @@ STS2Run <- R6Class("STS2Run",
     #' @param full Whether to print extra internal run information.
     #'
     print = function(..., full = FALSE) {
-      cat(paste0("Seed ", self$seed, " @ Ascension ", self$ascension, "\n"))
+      cli::cli_rule(left = "Seed: {self$seed}")
+      cli::cli_text("Ascension: {self$ascension}")
       if (self$game_mode != "standard") {
-        cat(paste0("Gamemode: ", self$game_mode, "\n"))
+        cli::cli_text("Gamemode: {self$game_mode}")
       }
-      cat(paste0("Start: ", as.POSIXlt(self$start_time), "\n"))
-      cat(paste0("Duration: ", strftime(as.POSIXct("00:00:00", format="%H:%M:%S") + self$run_time, format="%H:%M:%S"), "\n"))
-      cat(paste0("Player/s: ", paste(sapply(self$players, \(x) {x$playercharacter}), collapse = ", "), "\n"))
+      if (length(self$modifiers) > 0) {
+        cli::cli_text("Modifiers: {self$modifiers}")
+      }
+      cli::cli_text("Start: {as.POSIXlt(self$start_time)} UTC")
+      cli::cli_text("Duration: {strftime(as.POSIXct('00:00:00', format='%H:%M:%S') + self$run_time, format='%H:%M:%S')}")
+      charcolour <- c("Ironclad" = cli::col_red, "Silent" = cli::col_green, "Regent" = cli::col_yellow, "Necrobinder" = cli::col_magenta, "Defect" = cli::col_blue)
+      chars_fmt <- sapply(self$players, \(x) {charcolour[[x$playercharacter]](x$playercharacter)})
+      cli::cli_text("Player{?s}: {chars_fmt}")
 
-      outcome <- if (self$win) {"Win"} else if (self$was_abandoned) {"Abandoned"} else {"Loss"}
-      cat(paste0("Outcome: ", outcome, "\n"))
+      cli::cli_text("Floors: {length(self$map)}")
+      outcome <- if (self$win) {cli::col_green("Win")} else if (self$was_abandoned) {cli::col_yellow("Abandoned")} else {cli::col_red("Loss")}
+      cli::cli_text("Outcome: {outcome}")
 
       if (!is.na(self$killed_by_encounter)) {
-        cat(paste0("Killed by encounter: ", self$killed_by_encounter, "\n"))
+        cli::cli_text("Killed by encounter: {cli::col_red(self$killed_by_encounter)}")
       }
 
       if (!is.na(self$killed_by_event)) {
-        cat(paste0("Killed by event: ", self$killed_by_event, "\n"))
+        cli::cli_text("Killed by event: {cli::col_red(self$killed_by_event)}")
       }
 
       if (full) {
-        cat(paste0("\n========== EXTRA DATA ==========\n"))
+        cli::cli_h2("Extra Data")
         if (self$game_mode == "standard") {
-          cat(paste0("Gamemode: ", self$game_mode, "\n"))
+          cli::cli_text("Gamemode: {self$game_mode}")
         }
-        cat(paste0("Build ID: ", self$build_id, "\n"))
-        cat(paste0("Platform: ", self$platform, "\n"))
-        cat(paste0("Schema Version:: ", self$schema_version, "\n"))
+        cli::cli_text("Build ID: {self$build_id}")
+        cli::cli_text("Platform: {self$platform_type}")
+        cli::cli_text("Schema Version: {self$schema_version}")
       }
       invisible(self)
     }
@@ -159,23 +166,49 @@ STS2Player <- R6Class("STS2Player",
     #'
     #' @param playerdata The subset of the list output from jsonlite, usually passed in via `STS2Run`.
     #' @param run The STS2Run object that this player object originates from.
+    #' @param idx The index within the player list from which this player originates.
     #' @returns A new `STS2Player` object.
     #'
-    initialize = function(playerdata, run = NULL) {
+    initialize = function(playerdata, run = NULL, idx = 1) {
       self$playercharacter <- format_sts2id(playerdata$character)
       self$deck <- STS2Deck$new(playerdata$deck, player = self)
       self$id <- playerdata$id
+      private$.idx <- idx
       self$max_potion_slot_count <- playerdata$max_potion_slot_count
       if (length(playerdata$potions) > 0) {
         self$potions <- format_sts2id(unlist(simplify2array(playerdata$potions)[1,]))
       }
       self$relics <- STS2Relics$new(playerdata$relics, player = self)
       self$run <- run
+    },
+
+    #' @description
+    #' Print an `STS2Player` object.
+    #'
+    #' @param ... Arguments to pass to `print()`.
+    #' @param full Whether to show the full deck and relics of the player.
+    #' @param floor Whether to show the floor on which a card/relic was obtained when `full = TRUE`.
+    #'
+    print = function(..., full = FALSE, floor = FALSE) {
+      charcolour <- c("Ironclad" = cli::col_red, "Silent" = cli::col_green, "Regent" = cli::col_yellow, "Necrobinder" = cli::col_magenta, "Defect" = cli::col_blue)
+      charcolfn <- charcolour[[self$playercharacter]]
+      cli::cli_text(cli::style_bold(charcolfn(self$playercharacter)))
+      cli::cli_text("HP: {cli::col_red(self$max_health)}")
+      cli::cli_text("Deck: {length(self$deck)} card{?s}")
+      cli::cli_text("Relics: {length(self$relics)}")
+      cli::cli_text("Potions: {length(self$potions)}")
+      if (full) {
+        cli::cli_h2("Relics")
+        print(self$relics, floor = floor)
+        cli::cli_h2("Deck")
+        print(self$deck, floor = floor)
+      }
     }
   ),
   private = list(
+    .idx = 0,
     find_max_health = function() {
-      private$.max_health <- self$run$map$floors[[length(self$run$map$floors)]]$player_stats[[self$id]]$max_hp
+      private$.max_health <- self$run$map$floors[[length(self$run$map$floors)]]$player_stats[[private$.idx]]$max_hp
       return(invisible(self))
     },
     .max_health = NULL
@@ -226,11 +259,31 @@ STS2Relics <- R6Class("STS2Relics",
         self$extra_data <- lapply(relicdata, \(x){x[-c(1,2)]})
         self$player <- player
       }
+    },
+
+    #' @description
+    #' Print an `STS2Relics` object.
+    #'
+    #' @param ... Arguments to pass to `print()`.
+    #' @param floor Whether to show the floor on which a card was obtained.
+    #'
+    print = function(..., floor = FALSE) {
+      floorfound <- ""
+      if (floor) {
+        floorfound <- paste0(" (", self$floorfound, ")")
+      }
+
+      cli::cli_bullets(cli::col_white(paste0(self$relicnames, floorfound)))
     }
   ),
   private = list(
   )
 )
+
+#' @export
+length.STS2Relics <- function(x) {
+  length(x$relicnames)
+}
 
 #' Set of Slay the Spire 2 Cards (R6).
 #'
@@ -294,6 +347,11 @@ STS2Deck <- R6Class("STS2Deck",
   )
 )
 
+#' @export
+length.STS2Deck <- function(x) {
+  length(x$cards)
+}
+
 #' Map points in a Slay The Spire 2 run (R6).
 #'
 #' @description
@@ -323,6 +381,11 @@ STS2Map <- R6Class("STS2Map",
     }
   ),
   private = list())
+
+#' @export
+length.STS2Map <- function(x) {
+  length(x$floors)
+}
 
 #' Slay the Spire 2 floor (R6).
 #'
