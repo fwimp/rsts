@@ -1,4 +1,4 @@
-# R6 Class representing a set of Slay the Spire 2 Cards.
+# Set of Slay the Spire 2 Cards (R6).
 
 This is the general holding class for a set of sts2 Cards. It stores the
 main card data for the player.
@@ -8,6 +8,10 @@ main card data for the player.
 A new `STS2Cards` object.
 
 ## Public fields
+
+- `player`:
+
+  The `STS2Player` object this deck belongs to.
 
 - `cards`:
 
@@ -27,17 +31,19 @@ A new `STS2Cards` object.
 
 - [`STS2Deck$new()`](#method-STS2Deck-new)
 
+- [`STS2Deck$print()`](#method-STS2Deck-print)
+
 - [`STS2Deck$clone()`](#method-STS2Deck-clone)
 
 ------------------------------------------------------------------------
 
 ### Method `new()`
 
-Create a new relics object from player data.
+Create a new deck object from player data.
 
 #### Usage
 
-    STS2Deck$new(carddata)
+    STS2Deck$new(carddata, player = NULL)
 
 #### Arguments
 
@@ -45,6 +51,30 @@ Create a new relics object from player data.
 
   The subset of the list output from jsonlite, usually passed in via
   `STS2Player`.
+
+- `player`:
+
+  The `STS2Player` object this deck belongs to.
+
+------------------------------------------------------------------------
+
+### Method [`print()`](https://rdrr.io/r/base/print.html)
+
+Print an `STS2Cards` object.
+
+#### Usage
+
+    STS2Deck$print(..., floor = FALSE)
+
+#### Arguments
+
+- `...`:
+
+  Arguments to pass to [`print()`](https://rdrr.io/r/base/print.html).
+
+- `floor`:
+
+  Whether to show the floor on which a card was obtained.
 
 ------------------------------------------------------------------------
 

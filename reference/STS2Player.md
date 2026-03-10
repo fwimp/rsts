@@ -1,4 +1,4 @@
-# R6 Class representing a Slay the Spire 2 player.
+# Slay the Spire 2 player (R6).
 
 This is the general holding class for an sts2 player. It stores the main
 player data for the run.
@@ -13,17 +13,17 @@ A new `STS2Player` object.
 
   The `STS2Run` object that this player object originates from.
 
-- `character`:
+- `playercharacter`:
 
   The character that the player was playing
 
 - `deck`:
 
-  The deck of the player at the end of the run.
+  The deck of the player at the end of the run. An `STS2Deck` object.
 
 - `id`:
 
-  The internal player id within the run.
+  The steam player id or 1 if single player.
 
 - `max_potion_slot_count`:
 
@@ -35,7 +35,10 @@ A new `STS2Player` object.
 
 - `relics`:
 
-  The relics held by the player at the end of the run.
+  The relics held by the player at the end of the run. An `STS2Relics`
+  object
+
+## Active bindings
 
 - `max_health`:
 

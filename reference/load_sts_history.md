@@ -9,7 +9,8 @@ load_sts_history(
   path = NULL,
   profilenum = 1,
   game = 2,
-  platform = c("windows", "mac", "linux")
+  platform = c("windows", "mac", "linux"),
+  players = NULL
 )
 ```
 
@@ -32,9 +33,19 @@ load_sts_history(
 
   Which platform are you running on?
 
+- players:
+
+  Only analyse runs with this number of players (or NULL for all,
+  default).
+
 ## Value
 
 The parsed run data.
+
+## Note
+
+If you provide a range of numbers for the `players` argument, any number
+of players in this range will be included.
 
 ## Examples
 

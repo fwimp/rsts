@@ -2,13 +2,19 @@
 
 ## All functions
 
-- [`STS2Deck`](https://fwimp.github.io/rsts/reference/STS2Deck.md) : R6
-  Class representing a set of Slay the Spire 2 Cards.
+- [`STS2Deck`](https://fwimp.github.io/rsts/reference/STS2Deck.md) : Set
+  of Slay the Spire 2 Cards (R6).
+- [`STS2Floor`](https://fwimp.github.io/rsts/reference/STS2Floor.md) :
+  Slay the Spire 2 floor (R6).
+- [`STS2Map`](https://fwimp.github.io/rsts/reference/STS2Map.md) : Map
+  points in a Slay The Spire 2 run (R6).
 - [`STS2Player`](https://fwimp.github.io/rsts/reference/STS2Player.md) :
-  R6 Class representing a Slay the Spire 2 player.
+  Slay the Spire 2 player (R6).
+- [`STS2PlayerMidrun`](https://fwimp.github.io/rsts/reference/STS2PlayerMidrun.md)
+  : A Slay the Spire 2 player, mid-run (R6).
 - [`STS2Relics`](https://fwimp.github.io/rsts/reference/STS2Relics.md) :
-  R6 Class representing a set of Slay the Spire 2 relics.
-- [`STS2Run`](https://fwimp.github.io/rsts/reference/STS2Run.md) : R6
-  Class representing a Slay the Spire 2 run.
+  Set of Slay the Spire 2 relics (R6).
+- [`STS2Run`](https://fwimp.github.io/rsts/reference/STS2Run.md) : Slay
+  the Spire 2 run (R6).
 - [`load_sts_history()`](https://fwimp.github.io/rsts/reference/load_sts_history.md)
   : Load Slay the Spire 2 Run Data

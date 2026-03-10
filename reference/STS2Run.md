@@ -1,4 +1,4 @@
-# R6 Class representing a Slay the Spire 2 run.
+# Slay the Spire 2 run (R6).
 
 This is the general holding class for an sts2 run. It stores the main
 metadata and lists containing more in-depth run data.
@@ -33,9 +33,9 @@ A new `STS2Run` object.
 
   The event that killed the player.
 
-- `map_point_history`:
+- `map`:
 
-  A list storing the play-by-play of the run.
+  A list storing the play-by-play of the run. An `STS2Map` object.
 
 - `modifiers`:
 
@@ -47,7 +47,7 @@ A new `STS2Run` object.
 
 - `players`:
 
-  A list of player information.
+  A list of player information. A list of `STS2Player` objects.
 
 - `run_time`:
 
@@ -63,7 +63,7 @@ A new `STS2Run` object.
 
 - `start_time`:
 
-  The start time (in seconds from unix epoch).
+  The start time (in seconds from unix epoch, UTC).
 
 - `was_abandoned`:
 

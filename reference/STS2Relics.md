@@ -1,4 +1,4 @@
-# R6 Class representing a set of Slay the Spire 2 relics.
+# Set of Slay the Spire 2 relics (R6).
 
 This is the general holding class for a set of sts2 relics. It stores
 the main relic data for the player.
@@ -8,6 +8,10 @@ the main relic data for the player.
 A new `STS2Relics` object.
 
 ## Public fields
+
+- `player`:
+
+  The `STS2Player` object these relics belong to.
 
 - `relicnames`:
 
@@ -37,7 +41,7 @@ Create a new relics object from player data.
 
 #### Usage
 
-    STS2Relics$new(relicdata)
+    STS2Relics$new(relicdata, player = NULL)
 
 #### Arguments
 
@@ -45,6 +49,10 @@ Create a new relics object from player data.
 
   The subset of the list output from jsonlite, usually passed in via
   `STS2Player`.
+
+- `player`:
+
+  The `STS2Player` object these relics belong to.
 
 ------------------------------------------------------------------------
 
