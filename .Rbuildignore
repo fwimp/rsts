@@ -6,3 +6,4 @@
 ^docs$
 ^pkgdown$
 ^\.github$
+^local_data$

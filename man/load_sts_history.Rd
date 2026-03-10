@@ -8,7 +8,8 @@ load_sts_history(
   path = NULL,
   profilenum = 1,
   game = 2,
-  platform = c("windows", "mac", "linux")
+  platform = c("windows", "mac", "linux"),
+  players = NULL
 )
 }
 \arguments{
@@ -19,12 +20,17 @@ load_sts_history(
 \item{game}{Which game to retrieve run data for (2 = STS2, 1 = STS), currently only STS2 is implemented.}
 
 \item{platform}{Which platform are you running on?}
+
+\item{players}{Only analyse runs with this number of players (or NULL for all, default).}
 }
 \value{
 The parsed run data.
 }
 \description{
 Load Slay the Spire 2 Run Data
+}
+\note{
+If you provide a range of numbers for the \code{players} argument, any number of players in this range will be included.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
