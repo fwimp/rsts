@@ -7,6 +7,8 @@ main card data for the player.
 
 A new `STS2Cards` object.
 
+Nothing (called for side-effect)
+
 ## Public fields
 
 - `player`:
@@ -70,7 +72,7 @@ Print an `STS2Cards` object.
 
 - `...`:
 
-  Arguments to pass to [`print()`](https://rdrr.io/r/base/print.html).
+  Unused.
 
 - `floor`:
 

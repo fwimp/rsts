@@ -7,6 +7,8 @@ player data for the run.
 
 A new `STS2Player` object.
 
+Nothing (called for side-effect)
+
 ## Public fields
 
 - `run`:

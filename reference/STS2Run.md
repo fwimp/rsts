@@ -7,6 +7,10 @@ metadata and lists containing more in-depth run data.
 
 A new `STS2Run` object.
 
+Nothing (called for side-effect)
+
+An `STS2Player` object or `NULL`.
+
 ## Public fields
 
 - `acts`:
@@ -73,6 +77,10 @@ A new `STS2Run` object.
 
   Whether the player won the run.
 
+- `ownerid`:
+
+  The steam ID of the run owner.
+
 ## Methods
 
 ### Public methods
@@ -80,6 +88,8 @@ A new `STS2Run` object.
 - [`STS2Run$new()`](#method-STS2Run-new)
 
 - [`STS2Run$print()`](#method-STS2Run-print)
+
+- [`STS2Run$get_individual_player_data()`](#method-STS2Run-get_individual_player_data)
 
 - [`STS2Run$clone()`](#method-STS2Run-clone)
 
@@ -91,13 +101,18 @@ Create a new run object from data parsed with jsonlite.
 
 #### Usage
 
-    STS2Run$new(rundata)
+    STS2Run$new(rundata, steamid = NULL)
 
 #### Arguments
 
 - `rundata`:
 
   The list output from jsonlite containing the run data.
+
+- `steamid`:
+
+  The owner's steamid (for differentiating in the case of multiplayer
+  runs).
 
 ------------------------------------------------------------------------
 
@@ -113,11 +128,28 @@ Print an `STS2Run` object.
 
 - `...`:
 
-  Arguments to pass to [`print()`](https://rdrr.io/r/base/print.html).
+  Unused.
 
 - `full`:
 
   Whether to print extra internal run information.
+
+------------------------------------------------------------------------
+
+### Method `get_individual_player_data()`
+
+Retrieve player data for a given player from a run.
+
+#### Usage
+
+    STS2Run$get_individual_player_data(id = NULL)
+
+#### Arguments
+
+- `id`:
+
+  the Steam ID of the player data to retrieve (or `NULL` to retrieve the
+  data of the run owner).
 
 ------------------------------------------------------------------------
 

@@ -16,5 +16,7 @@
   Set of Slay the Spire 2 relics (R6).
 - [`STS2Run`](https://fwimp.github.io/rsts/reference/STS2Run.md) : Slay
   the Spire 2 run (R6).
+- [`STS2RunHistory`](https://fwimp.github.io/rsts/reference/STS2RunHistory.md)
+  : Slay the Spire 2 run history (R6).
 - [`load_sts_history()`](https://fwimp.github.io/rsts/reference/load_sts_history.md)
   : Load Slay the Spire 2 Run Data

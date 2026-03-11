@@ -23,12 +23,12 @@ load_sts_history(
 
 - id:
 
-  The steamID of the data you want to retrieve. If NULL, will just get
-  the first ID directory.
+  The Steam ID of the data you want to retrieve. If `NULL`, will just
+  get the first ID directory when `path = NULL`.
 
 - profilenum:
 
-  Which profile to retrieve data for (or NULL to retrieve all).
+  Which profile to retrieve data for (or `NULL` to retrieve all).
 
 - game:
 
@@ -41,7 +41,7 @@ load_sts_history(
 
 - players:
 
-  Only analyse runs with this number of players (or NULL for all,
+  Only analyse runs with this number of players (or `NULL` for all,
   default).
 
 ## Value
@@ -52,6 +52,10 @@ The parsed run data.
 
 If you provide a range of numbers for the `players` argument e.g. `1:3`,
 any number of players in this range will be included.
+
+If you provide a path yourself, make sure to provide a steam ID to
+consider as the "owning" player. This is necessary for any functions
+that automatically get player data from multiplayer runs.
 
 ## Examples
 
