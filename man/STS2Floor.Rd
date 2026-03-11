@@ -20,6 +20,12 @@ This is the general holding class for a sts2 floor.
 
 \item{\code{player_stats}}{The stats of the player/s at the end of this floor. A list of \code{STS2PlayerMidrun} objects.}
 
+\item{\code{turns_taken}}{The number of turns this room took.}
+
+\item{\code{model_id}}{The model id of the encounter (or \code{NULL} if rest site/treasure room).}
+
+\item{\code{monsters}}{The monsters present on the floor.}
+
 \item{\code{rooms}}{A list of the unparsed room data.}
 }
 \if{html}{\out{</div>}}

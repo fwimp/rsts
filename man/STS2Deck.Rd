@@ -22,6 +22,10 @@ It stores the main card data for the player.
 \item{\code{floorfound}}{The floors upon which the cards were found.}
 
 \item{\code{upgradelevel}}{The upgrade level of each card.}
+
+\item{\code{enchantments}}{The enchantments assigned to each card}
+
+\item{\code{enchantamt}}{The amount of an enchantment assigned to each card}
 }
 \if{html}{\out{</div>}}
 }

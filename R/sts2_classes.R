@@ -42,7 +42,7 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' @description
   #' Retrieve player data for a given player from runs.
   #'
-  #' @param id the Steam ID of the player data to retrieve (or `NULL` to retrieve the data of the run owner).
+  #' @param id The Steam ID of the player data to retrieve (or `NULL` to retrieve the data of the run owner).
   #' @param excludemissing Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)
   #'
   #'  @returns A list of `STS2Player` objects.
@@ -62,9 +62,25 @@ STS2RunHistory <- R6Class("STS2RunHistory",
       found_playerdata <- found_playerdata[which(!sapply(found_playerdata, is.null))]
     }
     return(found_playerdata)
+  },
+
+  #' @description
+  #' Retrieve runs by seed.
+  #'
+  #' @param seed The seed (or seeds) that one wishes to retrieve.
+  #'
+  #'  @returns An `STS2RunHistory` object containing only selected seeds.
+  #'
+  get_runs_byseed = function(seed) {
+    STS2RunHistory$new(self$runs[sapply(self$runs, \(x) {ifelse(x$seed %in% seed, TRUE, FALSE)})], steamid = self$ownerid)
   }
   ),
   private = list())
+
+#' @export
+length.STS2RunHistory <- function(x) {
+  length(x$runs)
+}
 
 #' @export
 `[.STS2RunHistory` <- function(x, i) {
@@ -152,7 +168,6 @@ STS2Run <- R6Class("STS2Run",
       self$killed_by_event <- ifelse(rundata$killed_by_event == "NONE.NONE", NA, format_sts2id(rundata$killed_by_event))
       self$modifiers <- rundata$modifiers
       self$platform_type <- rundata$platform_type
-      # browser()
       self$players <- lapply(1:length(rundata$players), \(i) {STS2Player$new(rundata$players[[i]], run = self, idx = i)})
       self$run_time <- rundata$run_time
       self$schema_version <- rundata$schema_version
@@ -418,6 +433,11 @@ STS2Deck <- R6Class("STS2Deck",
     #' @field upgradelevel The upgrade level of each card.
     upgradelevel = numeric(),
 
+    #' @field enchantments The enchantments assigned to each card
+    enchantments = character(),
+
+    #' @field enchantamt The amount of an enchantment assigned to each card
+    enchantamt = numeric(),
     #' @description
     #' Create a new deck object from player data.
     #'
@@ -426,13 +446,21 @@ STS2Deck <- R6Class("STS2Deck",
     #' @returns A new `STS2Cards` object.
     #'
     initialize = function(carddata, player = NULL) {
+      # browser()
       if (length(carddata) > 0) {
+        # TODO: rework so that card internal data is split out
+        # This will allow us to deal with situations where they are not present
+        # Could also consider making sure floors remember what number floor they actually are (somehow).
+        # Alternatively could use "card_choices" to rebuild picked cards.
         card_internal_data <- sapply(carddata, \(x){x[c("floor_added_to_deck", "id")]})
         card_upgrade_level <- sapply(carddata, \(x){unlist(x["current_upgrade_level"]) %||% 0})
-        names(card_upgrade_level) <- NULL
-        self$upgradelevel <- as.numeric(card_upgrade_level)
         self$floorfound <- as.numeric(card_internal_data[1,])
         self$cards <- format_sts2id(as.character(card_internal_data[2,]))
+        names(card_upgrade_level) <- NULL
+        self$upgradelevel <- as.numeric(card_upgrade_level)
+        enchantments_tmp <- lapply(carddata, \(x){x$enchantment %||% list(amount = 0, id = "")})
+        self$enchantments <- format_sts2id(sapply(enchantments_tmp, \(x) {x$id}))
+        self$enchantamt <- sapply(enchantments_tmp, \(x) {x$amount})
         # TODO: Could remove character name from cards (e.g. Strike Defect -> Strike)
         self$player <- player
       }
@@ -446,16 +474,50 @@ STS2Deck <- R6Class("STS2Deck",
     #' @returns Nothing (called for side-effect)
     #'
     print = function(..., floor = FALSE) {
+      if (length(self) < 1) {
+        cli::cli_text("No cards present!")
+      }
       floorfound <- ""
       if (floor) {
         floorfound <- paste0(" (", self$floorfound, ")")
       }
+
+      # create colourmap based upon upgradelevel and enchantment
+      colmap <- list(cli::col_white, cli::col_green, cli::col_magenta)
+
+      cols <- ifelse(
+        self$upgradelevel > 0,
+        1,
+        0
+      )
+      cols <- ifelse(
+        !is.na(self$enchantments),
+        2,
+        cols
+      )
+
       out <- ifelse(
         self$upgradelevel > 0,
-        cli::col_green(paste0(self$cards, sapply(self$upgradelevel, \(x) {if (x > 0) {rep("+", x)} else {""}}), floorfound)),
-        cli::col_white(paste0(self$cards, floorfound))
+        paste0(self$cards, sapply(self$upgradelevel, \(x) {if (x > 0) {rep("+", x)} else {""}})),
+        self$cards
         )
-      cli::cli_bullets(out)
+
+      out <- ifelse(
+        !is.na(self$enchantments),
+        paste0(self$cards, sapply(self$enchantments, \(x) {if (!is.na(x)) {paste0(" (", x, ")")} else {""}})),
+        out
+      )
+
+      out <- paste0(out, floorfound)
+
+      out_final <- c()
+      for (i in 1:length(out)) {
+        out_final <- c(out_final, colmap[[cols[i]+1]](out[i]))
+      }
+
+      out_final <- sort_by(out_final, cols, decreasing = TRUE)
+
+      cli::cli_bullets(out_final)
     }
   ),
   private = list(
@@ -521,6 +583,15 @@ STS2Floor <- R6Class("STS2Floor",
     #' @field player_stats The stats of the player/s at the end of this floor. A list of `STS2PlayerMidrun` objects.
     player_stats = list(),
 
+    #' @field turns_taken The number of turns this room took.
+    turns_taken = 0,
+
+    #' @field model_id The model id of the encounter (or `NULL` if rest site/treasure room).
+    model_id = NULL,
+
+    #' @field monsters The monsters present on the floor.
+    monsters = NULL,
+
     #' @field rooms A list of the unparsed room data.
     rooms = list(),
 
@@ -536,13 +607,45 @@ STS2Floor <- R6Class("STS2Floor",
       # browser()
       self$act <- act
       self$map <- map
-      self$floor_type <- ifelse(floordata$map_point_type == "unknown", "event", floordata$map_point_type)
+      self$floor_type <- floordata$map_point_type
+      # Will need better parsing later
+      # It seems like there's only ever 1 entry in the rooms field.
+      if(length(floordata$rooms) > 2) {
+        seed <- self$map$run$seed
+        cli::cli_warn("More than two rooms ({length(floordata$rooms)}) in floor data. Seed: {seed}, Act: {self$act}, Type: {self$floor_type}. Please report if you see this.")
+      }
+      # extract out room1 as we usually just need that
+      room1 <- floordata$rooms[[1]]
+      self$turns_taken <- sum(sapply(floordata$rooms, \(x) {x$turns_taken}))
+      if (self$floor_type == "unknown") {
+        if (!is.null(room1$room_type)) {
+          self$floor_type <- room1$room_type
+        } else {
+          self$floor_type <- "event"
+        }
+      }
+      if (!is.null(room1$model_id)) {
+        # If there's two rooms, we still only want the first.
+        self$model_id <- format_sts2id(as.character(room1$model_id))
+      }
+      if (length(floordata$rooms) > 1) {
+        # Get monsters from all rooms (filter for rooms with monsters and then put together all those)
+        self$monsters <- as.character(sapply(floordata$rooms[which(sapply(floordata$rooms, \(x) {ifelse(!is.null(x$monster_ids), TRUE, FALSE)}))],
+                                \(y) {format_sts2id(as.character(y$monster_ids))}
+                                ))
+      } else {
+        if (!is.null(room1$monster_ids)) {
+          self$monsters <- format_sts2id(as.character(room1$monster_ids))
+        }
+      }
+      # Save the raw room data just in case it's needed
+      self$rooms <- floordata$rooms
+
       self$player_stats <- lapply(1:length(floordata$player_stats), \(i) {
         playerinfo <- self$map$run$players[[i]]
         player_stats <- floordata$player_stats[[i]]
-        STS2PlayerMidrun$new(player_stats, floor = self, player = playerinfo)})
-      # Will need better parsing later
-      self$rooms <- floordata$rooms
+        STS2PlayerMidrun$new(player_stats, floor = self, player = playerinfo)
+      })
     }
   ),
   private = list())

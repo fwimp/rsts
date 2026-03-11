@@ -28,6 +28,7 @@ It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
 \item \href{#method-STS2RunHistory-new}{\code{STS2RunHistory$new()}}
 \item \href{#method-STS2RunHistory-print}{\code{STS2RunHistory$print()}}
 \item \href{#method-STS2RunHistory-get_individual_player_data}{\code{STS2RunHistory$get_individual_player_data()}}
+\item \href{#method-STS2RunHistory-get_runs_byseed}{\code{STS2RunHistory$get_runs_byseed()}}
 \item \href{#method-STS2RunHistory-clone}{\code{STS2RunHistory$clone()}}
 }
 }
@@ -79,11 +80,30 @@ Retrieve player data for a given player from runs.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{id}}{the Steam ID of the player data to retrieve (or \code{NULL} to retrieve the data of the run owner).}
+\item{\code{id}}{The Steam ID of the player data to retrieve (or \code{NULL} to retrieve the data of the run owner).}
 
 \item{\code{excludemissing}}{Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)
 
 @returns A list of \code{STS2Player} objects.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2RunHistory-get_runs_byseed"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_runs_byseed}{}}}
+\subsection{Method \code{get_runs_byseed()}}{
+Retrieve runs by seed.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_runs_byseed(seed)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{seed}}{The seed (or seeds) that one wishes to retrieve.
+
+@returns An \code{STS2RunHistory} object containing only selected seeds.}
 }
 \if{html}{\out{</div>}}
 }
