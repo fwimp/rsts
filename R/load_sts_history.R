@@ -1,14 +1,16 @@
 #' Load Slay the Spire 2 Run Data
 #'
 #' @param path The path to your installation.
-#' @param id The steamID of the data you want to retrieve. If NULL, will just get the first ID directory.
-#' @param profilenum Which profile to retrieve data for (or NULL to retrieve all).
+#' @param id The Steam ID of the data you want to retrieve. If `NULL`, will just get the first ID directory when `path = NULL`.
+#' @param profilenum Which profile to retrieve data for (or `NULL` to retrieve all).
 #' @param game Which game to retrieve run data for (2 = STS2, 1 = STS), currently only STS2 is implemented.
 #' @param platform Which platform are you running on?
-#' @param players Only analyse runs with this number of players (or NULL for all, default).
+#' @param players Only analyse runs with this number of players (or `NULL` for all, default).
 #'
 #' @note
 #' If you provide a range of numbers for the `players` argument e.g. `1:3`, any number of players in this range will be included.
+#'
+#' If you provide a path yourself, make sure to provide a steam ID to consider as the "owning" player. This is necessary for any functions that automatically get player data from multiplayer runs.
 #'
 #' @returns The parsed run data.
 #' @export
@@ -25,7 +27,15 @@ load_sts_history <- function(path = NULL, id = NULL, profilenum = 1, game = 2, p
   }
 
   platform <- tolower(platform)
-
+  if (!is.null(path) && is.null(id)) {
+    # Try to extract from the path
+    path <- gsub("\\\\", "/", path)
+    id <- stringr::str_extract(path, "\\/(\\d{17})\\/", group = 1)
+    if (is.na(id)) {
+      cli::cli_warn(c("!" = "Steam ID not provided alongside explicit path!", "i" = "Some functions may not work."))
+      id <- NULL
+    }
+  }
   if (is.null(path)) {
     if(platform != "windows") {
       cli::cli_abort(c(
@@ -42,6 +52,8 @@ load_sts_history <- function(path = NULL, id = NULL, profilenum = 1, game = 2, p
     default_location <- file.path(basepath, id, paste0("profile", profilenum),"saves/history/")
     path <- default_location
   }
+
+  path <- gsub("\\\\", "/", path)
 
   # TODO: Parallelise if this takes too long when people have a lot of runs.
   # Load runs
@@ -63,13 +75,15 @@ load_sts_history <- function(path = NULL, id = NULL, profilenum = 1, game = 2, p
           return(NULL)
         }
       }
-      STS2Run$new(x)
+      STS2Run$new(x, id)
     }, error = function(e) {
       cli::cli_warn("Error parsing run JSON for seed {x$seed}. Message: {e$message}")
       NULL
     })
 
   })
+
+  runs_parsed <- STS2RunHistory$new(runs_parsed, id)
   cli::cli_progress_done()
   return(runs_parsed)
 }

@@ -5,6 +5,8 @@
 \title{Slay the Spire 2 player (R6).}
 \value{
 A new \code{STS2Player} object.
+
+Nothing (called for side-effect)
 }
 \description{
 This is the general holding class for an sts2 player.

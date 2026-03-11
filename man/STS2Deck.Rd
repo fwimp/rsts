@@ -5,6 +5,8 @@
 \title{Set of Slay the Spire 2 Cards (R6).}
 \value{
 A new \code{STS2Cards} object.
+
+Nothing (called for side-effect)
 }
 \description{
 This is the general holding class for a set of sts2 Cards.
@@ -62,7 +64,7 @@ Print an \code{STS2Cards} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{Arguments to pass to \code{print()}.}
+\item{\code{...}}{Unused.}
 
 \item{\code{floor}}{Whether to show the floor on which a card was obtained.}
 }

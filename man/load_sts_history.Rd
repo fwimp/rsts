@@ -16,15 +16,15 @@ load_sts_history(
 \arguments{
 \item{path}{The path to your installation.}
 
-\item{id}{The steamID of the data you want to retrieve. If NULL, will just get the first ID directory.}
+\item{id}{The Steam ID of the data you want to retrieve. If \code{NULL}, will just get the first ID directory when \code{path = NULL}.}
 
-\item{profilenum}{Which profile to retrieve data for (or NULL to retrieve all).}
+\item{profilenum}{Which profile to retrieve data for (or \code{NULL} to retrieve all).}
 
 \item{game}{Which game to retrieve run data for (2 = STS2, 1 = STS), currently only STS2 is implemented.}
 
 \item{platform}{Which platform are you running on?}
 
-\item{players}{Only analyse runs with this number of players (or NULL for all, default).}
+\item{players}{Only analyse runs with this number of players (or \code{NULL} for all, default).}
 }
 \value{
 The parsed run data.
@@ -34,6 +34,8 @@ Load Slay the Spire 2 Run Data
 }
 \note{
 If you provide a range of numbers for the \code{players} argument e.g. \code{1:3}, any number of players in this range will be included.
+
+If you provide a path yourself, make sure to provide a steam ID to consider as the "owning" player. This is necessary for any functions that automatically get player data from multiplayer runs.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}

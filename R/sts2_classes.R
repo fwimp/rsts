@@ -1,11 +1,87 @@
+#' Slay the Spire 2 run history (R6).
+#'
+#' @description
+#' This is the general holding class for a full history of sts2 runs.
+#'
+#' It can be indexed like a list (i.e. `x[1]` or `x[[1]]`).
+#'
+STS2RunHistory <- R6Class("STS2RunHistory",
+  public = list(
+  #' @field runs The parsed run logs. A list of `STS2Run` objects.
+  runs = list(),
+  #' @field ownerid The steam ID of the run history owner.
+  ownerid = "",
+
+  #' @description
+  #' Create a new run history container from a list of `STS2Run` objects.
+  #'
+  #' @param historydata A list of `STS2Run` objects.
+  #' @param steamid The owner's steamid (for differentiating in the case of multiplayer runs).
+  #' @returns A new `STS2RunHistory` object.
+  #'
+  initialize = function(historydata, steamid = NULL) {
+    self$runs <- historydata
+    self$ownerid <- as.character(steamid)
+  },
+
+  #' @description
+  #' Print an `STS2RunHistory` object.
+  #'
+  #' @param ... Unused.
+  #'
+  #' @returns Nothing (called for side-effect)
+  #'
+  print = function(...) {
+    cli::cli_text("Run history for ID {self$ownerid}:\n")
+    for (x in self$runs) {
+      print(x)
+      cli::cli_text("")
+    }
+  },
+
+  #' @description
+  #' Retrieve player data for a given player from runs.
+  #'
+  #' @param id the Steam ID of the player data to retrieve (or `NULL` to retrieve the data of the run owner).
+  #' @param excludemissing Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)
+  #'
+  #'  @returns A list of `STS2Player` objects.
+  #'
+  get_individual_player_data = function(id = NULL, excludemissing = TRUE) {
+    if (is.null(id)) {
+      id <- self$ownerid
+      if (is.null(id)) {
+        cli::cli_abort("Owner ID not present, nor supplied in an argument.")
+      }
+    }
+    id <- as.character(id)
+    found_playerdata <- lapply(self$runs, \(x) {
+      x$get_individual_player_data(id)
+    })
+    if (excludemissing) {
+      found_playerdata <- found_playerdata[which(!sapply(found_playerdata, is.null))]
+    }
+    return(found_playerdata)
+  }
+  ),
+  private = list())
+
+#' @export
+`[.STS2RunHistory` <- function(x, i) {
+  x$runs[i]
+}
+
+#' @export
+`[[.STS2RunHistory` <- function(x, i, exact = TRUE) {
+  x$runs[[i, exact = exact]]
+}
+
 #' Slay the Spire 2 run (R6).
 #'
 #' @description
 #' This is the general holding class for an sts2 run.
 #' It stores the main metadata and lists containing more in-depth run data.
 #'
-#'
-
 STS2Run <- R6Class("STS2Run",
   public = list(
     #' @field acts A vector of the acts that the player encountered.
@@ -56,13 +132,18 @@ STS2Run <- R6Class("STS2Run",
     #' @field win Whether the player won the run.
     win = FALSE,
 
+    #' @field ownerid The steam ID of the run owner.
+    ownerid = "",
+
     #' @description
     #' Create a new run object from data parsed with jsonlite.
     #'
     #' @param rundata The list output from jsonlite containing the run data.
+    #' @param steamid The owner's steamid (for differentiating in the case of multiplayer runs).
     #' @returns A new `STS2Run` object.
     #'
-    initialize = function(rundata) {
+    initialize = function(rundata, steamid = NULL) {
+      self$ownerid <- as.character(steamid)
       self$acts <- format_sts2id(as.character(rundata$acts))
       self$ascension <- rundata$ascension
       self$build_id <- rundata$build_id
@@ -86,8 +167,10 @@ STS2Run <- R6Class("STS2Run",
     #' @description
     #' Print an `STS2Run` object.
     #'
-    #' @param ... Arguments to pass to `print()`.
+    #' @param ... Unused.
     #' @param full Whether to print extra internal run information.
+    #'
+    #' @returns Nothing (called for side-effect)
     #'
     print = function(..., full = FALSE) {
       cli::cli_rule(left = "Seed: {self$seed}")
@@ -125,7 +208,33 @@ STS2Run <- R6Class("STS2Run",
         cli::cli_text("Platform: {self$platform_type}")
         cli::cli_text("Schema Version: {self$schema_version}")
       }
-      invisible(self)
+    },
+
+    #' @description
+    #' Retrieve player data for a given player from a run.
+    #'
+    #' @param id the Steam ID of the player data to retrieve (or `NULL` to retrieve the data of the run owner).
+    #'
+    #' @returns An `STS2Player` object or `NULL`.
+    #'
+    get_individual_player_data = function(id = NULL) {
+      if (is.null(id)) {
+        id <- self$ownerid
+        if (is.null(id)) {
+          cli::cli_abort("Owner ID not present, nor supplied in an argument.")
+        }
+      }
+      id <- as.character(id)
+      if (id == self$ownerid) {
+        # Also capture single-player runs
+        id <- c(id, "1")
+      }
+      found_players <- self$players[which(sapply(self$players, \(x) {x$id %in% id}))]
+      if (length(found_players) > 0) {
+        return(found_players[[1]])
+      } else {
+        return(NULL)
+      }
     }
   ),
   private = list(
@@ -150,7 +259,7 @@ STS2Player <- R6Class("STS2Player",
     deck = list(),
 
     #' @field id The steam player id or 1 if single player.
-    id = 0,
+    id = "",
 
     #' @field max_potion_slot_count The maximum number of potions a player could hold.
     max_potion_slot_count = 0,
@@ -172,7 +281,7 @@ STS2Player <- R6Class("STS2Player",
     initialize = function(playerdata, run = NULL, idx = 1) {
       self$playercharacter <- format_sts2id(playerdata$character)
       self$deck <- STS2Deck$new(playerdata$deck, player = self)
-      self$id <- playerdata$id
+      self$id <- as.character(playerdata$id)
       private$.idx <- idx
       self$max_potion_slot_count <- playerdata$max_potion_slot_count
       if (length(playerdata$potions) > 0) {
@@ -188,6 +297,8 @@ STS2Player <- R6Class("STS2Player",
     #' @param ... Arguments to pass to `print()`.
     #' @param full Whether to show the full deck and relics of the player.
     #' @param floor Whether to show the floor on which a card/relic was obtained when `full = TRUE`.
+    #'
+    #' @returns Nothing (called for side-effect)
     #'
     print = function(..., full = FALSE, floor = FALSE) {
       charcolour <- c("Ironclad" = cli::col_red, "Silent" = cli::col_green, "Regent" = cli::col_yellow, "Necrobinder" = cli::col_magenta, "Defect" = cli::col_blue)
@@ -264,8 +375,10 @@ STS2Relics <- R6Class("STS2Relics",
     #' @description
     #' Print an `STS2Relics` object.
     #'
-    #' @param ... Arguments to pass to `print()`.
+    #' @param ... Unused.
     #' @param floor Whether to show the floor on which a card was obtained.
+    #'
+    #' @returns Nothing (called for side-effect)
     #'
     print = function(..., floor = FALSE) {
       floorfound <- ""
@@ -327,8 +440,10 @@ STS2Deck <- R6Class("STS2Deck",
     #' @description
     #' Print an `STS2Cards` object.
     #'
-    #' @param ... Arguments to pass to `print()`.
+    #' @param ... Unused.
     #' @param floor Whether to show the floor on which a card was obtained.
+    #'
+    #' @returns Nothing (called for side-effect)
     #'
     print = function(..., floor = FALSE) {
       floorfound <- ""

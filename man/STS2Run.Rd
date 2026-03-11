@@ -5,6 +5,10 @@
 \title{Slay the Spire 2 run (R6).}
 \value{
 A new \code{STS2Run} object.
+
+Nothing (called for side-effect)
+
+An \code{STS2Player} object or \code{NULL}.
 }
 \description{
 This is the general holding class for an sts2 run.
@@ -44,6 +48,8 @@ It stores the main metadata and lists containing more in-depth run data.
 \item{\code{was_abandoned}}{Whether the player abandoned the run.}
 
 \item{\code{win}}{Whether the player won the run.}
+
+\item{\code{ownerid}}{The steam ID of the run owner.}
 }
 \if{html}{\out{</div>}}
 }
@@ -52,6 +58,7 @@ It stores the main metadata and lists containing more in-depth run data.
 \itemize{
 \item \href{#method-STS2Run-new}{\code{STS2Run$new()}}
 \item \href{#method-STS2Run-print}{\code{STS2Run$print()}}
+\item \href{#method-STS2Run-get_individual_player_data}{\code{STS2Run$get_individual_player_data()}}
 \item \href{#method-STS2Run-clone}{\code{STS2Run$clone()}}
 }
 }
@@ -61,13 +68,15 @@ It stores the main metadata and lists containing more in-depth run data.
 \subsection{Method \code{new()}}{
 Create a new run object from data parsed with jsonlite.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2Run$new(rundata)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2Run$new(rundata, steamid = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{rundata}}{The list output from jsonlite containing the run data.}
+
+\item{\code{steamid}}{The owner's steamid (for differentiating in the case of multiplayer runs).}
 }
 \if{html}{\out{</div>}}
 }
@@ -84,9 +93,26 @@ Print an \code{STS2Run} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{Arguments to pass to \code{print()}.}
+\item{\code{...}}{Unused.}
 
 \item{\code{full}}{Whether to print extra internal run information.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2Run-get_individual_player_data"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2Run-get_individual_player_data}{}}}
+\subsection{Method \code{get_individual_player_data()}}{
+Retrieve player data for a given player from a run.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2Run$get_individual_player_data(id = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{the Steam ID of the player data to retrieve (or \code{NULL} to retrieve the data of the run owner).}
 }
 \if{html}{\out{</div>}}
 }
