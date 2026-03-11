@@ -30,6 +30,8 @@ Nothing (called for side-effect)
 
 - [`STS2RunHistory$get_individual_player_data()`](#method-STS2RunHistory-get_individual_player_data)
 
+- [`STS2RunHistory$get_runs_byseed()`](#method-STS2RunHistory-get_runs_byseed)
+
 - [`STS2RunHistory$clone()`](#method-STS2RunHistory-clone)
 
 ------------------------------------------------------------------------
@@ -83,7 +85,7 @@ Retrieve player data for a given player from runs.
 
 - `id`:
 
-  the Steam ID of the player data to retrieve (or `NULL` to retrieve the
+  The Steam ID of the player data to retrieve (or `NULL` to retrieve the
   data of the run owner).
 
 - `excludemissing`:
@@ -93,6 +95,24 @@ Retrieve player data for a given player from runs.
   runs in the history.)
 
   @returns A list of `STS2Player` objects.
+
+------------------------------------------------------------------------
+
+### Method `get_runs_byseed()`
+
+Retrieve runs by seed.
+
+#### Usage
+
+    STS2RunHistory$get_runs_byseed(seed)
+
+#### Arguments
+
+- `seed`:
+
+  The seed (or seeds) that one wishes to retrieve.
+
+  @returns An `STS2RunHistory` object containing only selected seeds.
 
 ------------------------------------------------------------------------
 

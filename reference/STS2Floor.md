@@ -25,6 +25,18 @@ A new `STS2Floor` object.
   The stats of the player/s at the end of this floor. A list of
   `STS2PlayerMidrun` objects.
 
+- `turns_taken`:
+
+  The number of turns this room took.
+
+- `model_id`:
+
+  The model id of the encounter (or `NULL` if rest site/treasure room).
+
+- `monsters`:
+
+  The monsters present on the floor.
+
 - `rooms`:
 
   A list of the unparsed room data.

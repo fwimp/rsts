@@ -72,6 +72,7 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 <ul><li><p><a href="#method-STS2RunHistory-new"><code>STS2RunHistory$new()</code></a></p></li>
 <li><p><a href="#method-STS2RunHistory-print"><code>STS2RunHistory$print()</code></a></p></li>
 <li><p><a href="#method-STS2RunHistory-get_individual_player_data"><code>STS2RunHistory$get_individual_player_data()</code></a></p></li>
+<li><p><a href="#method-STS2RunHistory-get_runs_byseed"><code>STS2RunHistory$get_runs_byseed()</code></a></p></li>
 <li><p><a href="#method-STS2RunHistory-clone"><code>STS2RunHistory$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-STS2RunHistory-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
@@ -119,7 +120,7 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>id</code></dt>
-<dd><p>the Steam ID of the player data to retrieve (or <code>NULL</code> to retrieve the data of the run owner).</p></dd>
+<dd><p>The Steam ID of the player data to retrieve (or <code>NULL</code> to retrieve the data of the run owner).</p></dd>
 
 
 <dt><code>excludemissing</code></dt>
@@ -130,15 +131,32 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-STS2RunHistory-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-STS2RunHistory-get_runs_byseed"></a><div class="section">
+<h3 id="method-get-runs-byseed-">Method <code>get_runs_byseed()</code><a class="anchor" aria-label="anchor" href="#method-get-runs-byseed-"></a></h3>
+<p>Retrieve runs by seed.</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">get_runs_byseed</span><span class="op">(</span><span class="va">seed</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>seed</code></dt>
+<dd><p>The seed (or seeds) that one wishes to retrieve.</p>
+<p>@returns An <code>STS2RunHistory</code> object containing only selected seeds.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-STS2RunHistory-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

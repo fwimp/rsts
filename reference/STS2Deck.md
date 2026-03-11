@@ -27,6 +27,14 @@ Nothing (called for side-effect)
 
   The upgrade level of each card.
 
+- `enchantments`:
+
+  The enchantments assigned to each card
+
+- `enchantamt`:
+
+  The amount of an enchantment assigned to each card
+
 ## Methods
 
 ### Public methods
