@@ -11,17 +11,22 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   runs = list(),
   #' @field ownerid The steam ID of the run history owner.
   ownerid = "",
+  #' @field filtersteps The filtering steps performed on this run history.
+  filtersteps = NULL,
 
   #' @description
   #' Create a new run history container from a list of `STS2Run` objects.
   #'
   #' @param historydata A list of `STS2Run` objects.
   #' @param steamid The owner's steamid (for differentiating in the case of multiplayer runs).
+  #' @param filtersteps The filtering steps performed on this run history.
+  #'
   #' @returns A new `STS2RunHistory` object.
   #'
-  initialize = function(historydata, steamid = NULL) {
+  initialize = function(historydata, steamid = NULL, filtersteps = NULL) {
     self$runs <- historydata
     self$ownerid <- as.character(steamid)
+    self$filtersteps = filtersteps
   },
 
   #' @description
@@ -33,6 +38,10 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #'
   print = function(...) {
     cli::cli_text("Run history for ID {self$ownerid}:\n")
+    if (!is.null(self$filtersteps)) {
+
+      cli::cli_ol(self$filtersteps)
+    }
     for (x in self$runs) {
       print(x)
       cli::cli_text("")
@@ -65,15 +74,97 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   },
 
   #' @description
+  #' Retrieve data for character/s across the run history.
+  #'
+  #' @param char The character/s to retrieve data for.
+  #'
+  #' @returns A list of `STS2Player` objects containing only selected characters.
+  #'
+  get_character = function(char) {
+    poss_chars <- c("ironclad", "silent", "regent", "necrobinder", "defect")
+    char <- tolower(char)
+    char <- char[char %in% poss_chars]
+    found_playerdata <- sapply(self$runs, \(x) {x$get_character(char)})
+    unlist(found_playerdata[which(sapply(found_playerdata, \(x) {length(x) > 0}))])
+  },
+
+  #' @description
   #' Retrieve runs by seed.
   #'
   #' @param seed The seed (or seeds) that one wishes to retrieve.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
   #'
-  #'  @returns An `STS2RunHistory` object containing only selected seeds.
+  #' @returns An `STS2RunHistory` object containing only selected seeds.
   #'
-  get_runs_byseed = function(seed) {
-    STS2RunHistory$new(self$runs[sapply(self$runs, \(x) {ifelse(x$seed %in% seed, TRUE, FALSE)})], steamid = self$ownerid)
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  get_run_byseed = function(seed, .filtertext = "filtered by seed") {
+    STS2RunHistory$new(
+      self$runs[sapply(self$runs, \(x) {x$seed %in% seed})],
+      steamid = self$ownerid,
+      filtersteps = c(self$filtersteps, .filtertext)
+      )
+  },
+
+  #' @description
+  #' Retrieve runs containing character/s across the run history.
+  #'
+  #' @param char The character/s to retrieve data for.
+  #'
+  #' @returns An `STS2RunHistory` object containing only selected seeds.
+  #'
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  get_run_bycharacter = function(char) {
+    runs_with_character <- self$get_character(char)
+    seeds <- unique(sapply(runs_with_character, \(x) x$run$seed))
+    self$get_run_byseed(seeds, .filtertext = "filtered by character")
+  },
+
+  #' @description
+  #' Retrieve runs with desired outcome/s across the run history.
+  #'
+  #' @param outcome The outcome/s to retrieve data for.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
+  #'
+  #' @returns An `STS2RunHistory` object containing only selected outcomes.
+  #'
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  get_run_byoutcome = function(outcome, .filtertext = "filtered by outcome") {
+    poss_outcomes <- c("win", "loss", "abandoned")
+    outcome <- outcome[outcome %in% poss_outcomes]
+    STS2RunHistory$new(
+      self$runs[which(sapply(self$runs, \(x) {tolower(x$get_outcome()) %in% outcome}))],
+      steamid = self$ownerid,
+      filtersteps = c(self$filtersteps, .filtertext)
+      )
+  },
+
+  #' @description
+  #' Retrieve runs with desired ascensions across the run history.
+  #'
+  #' @param ascension The ascensions to retrieve data for.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
+  #'
+  #' @returns An `STS2RunHistory` object containing only selected ascensions.
+  #'
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  get_run_byascension = function(ascension = 0, .filtertext = "filtered by ascension") {
+    ascension <- unique(max(min(ascension, 10), 0))
+    STS2RunHistory$new(
+      self$runs[which(sapply(self$runs, \(x) {x$ascension %in% ascension}))],
+      steamid = self$ownerid,
+      filtersteps = c(self$filtersteps, .filtertext)
+      )
   }
+
+  # TODO: A way to filter runs by date
   ),
   private = list())
 
@@ -84,7 +175,7 @@ length.STS2RunHistory <- function(x) {
 
 #' @export
 `[.STS2RunHistory` <- function(x, i) {
-  x$runs[i]
+  STS2RunHistory$new(x$runs[i], steamid = x$ownerid, filtersteps = c(x$filtersteps, "indexed"))
 }
 
 #' @export
@@ -250,6 +341,30 @@ STS2Run <- R6Class("STS2Run",
       } else {
         return(NULL)
       }
+    },
+
+    #' @description
+    #' Retrieve data for a character.
+    #'
+    #' @param char The character/s to retrieve data for.
+    #'
+    #' @returns A list of `STS2Player` objects containing only selected characters.
+    #'
+    get_character = function(char) {
+      poss_chars <- c("ironclad", "silent", "regent", "necrobinder", "defect")
+      char <- tolower(char)
+      char <- char[char %in% poss_chars]
+
+      self$players[which(sapply(self$players, \(x) {tolower(x$playercharacter) %in% char}))]
+    },
+
+    #' @description
+    #' Get run outcome.
+    #'
+    #' @returns The outcome of the run as a string (one of Win, Abandoned, or Loss).
+    #'
+    get_outcome = function(){
+      if (self$win) {"Win"} else if (self$was_abandoned) {"Abandoned"} else {"Loss"}
     }
   ),
   private = list(
@@ -630,7 +745,7 @@ STS2Floor <- R6Class("STS2Floor",
       }
       if (length(floordata$rooms) > 1) {
         # Get monsters from all rooms (filter for rooms with monsters and then put together all those)
-        self$monsters <- as.character(sapply(floordata$rooms[which(sapply(floordata$rooms, \(x) {ifelse(!is.null(x$monster_ids), TRUE, FALSE)}))],
+        self$monsters <- as.character(sapply(floordata$rooms[which(sapply(floordata$rooms, \(x) {!is.null(x$monster_ids)}))],
                                 \(y) {format_sts2id(as.character(y$monster_ids))}
                                 ))
       } else {

@@ -7,11 +7,30 @@
 A new \code{STS2RunHistory} object.
 
 Nothing (called for side-effect)
+
+A list of \code{STS2Player} objects containing only selected characters.
+
+An \code{STS2RunHistory} object containing only selected seeds.
+
+An \code{STS2RunHistory} object containing only selected seeds.
+
+An \code{STS2RunHistory} object containing only selected outcomes.
+
+An \code{STS2RunHistory} object containing only selected ascensions.
 }
 \description{
 This is the general holding class for a full history of sts2 runs.
 
 It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
+}
+\note{
+\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+
+\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+
+\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+
+\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -19,6 +38,8 @@ It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
 \item{\code{runs}}{The parsed run logs. A list of \code{STS2Run} objects.}
 
 \item{\code{ownerid}}{The steam ID of the run history owner.}
+
+\item{\code{filtersteps}}{The filtering steps performed on this run history.}
 }
 \if{html}{\out{</div>}}
 }
@@ -28,7 +49,11 @@ It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
 \item \href{#method-STS2RunHistory-new}{\code{STS2RunHistory$new()}}
 \item \href{#method-STS2RunHistory-print}{\code{STS2RunHistory$print()}}
 \item \href{#method-STS2RunHistory-get_individual_player_data}{\code{STS2RunHistory$get_individual_player_data()}}
-\item \href{#method-STS2RunHistory-get_runs_byseed}{\code{STS2RunHistory$get_runs_byseed()}}
+\item \href{#method-STS2RunHistory-get_character}{\code{STS2RunHistory$get_character()}}
+\item \href{#method-STS2RunHistory-get_run_byseed}{\code{STS2RunHistory$get_run_byseed()}}
+\item \href{#method-STS2RunHistory-get_run_bycharacter}{\code{STS2RunHistory$get_run_bycharacter()}}
+\item \href{#method-STS2RunHistory-get_run_byoutcome}{\code{STS2RunHistory$get_run_byoutcome()}}
+\item \href{#method-STS2RunHistory-get_run_byascension}{\code{STS2RunHistory$get_run_byascension()}}
 \item \href{#method-STS2RunHistory-clone}{\code{STS2RunHistory$clone()}}
 }
 }
@@ -38,7 +63,7 @@ It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
 \subsection{Method \code{new()}}{
 Create a new run history container from a list of \code{STS2Run} objects.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$new(historydata, steamid = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$new(historydata, steamid = NULL, filtersteps = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -47,6 +72,8 @@ Create a new run history container from a list of \code{STS2Run} objects.
 \item{\code{historydata}}{A list of \code{STS2Run} objects.}
 
 \item{\code{steamid}}{The owner's steamid (for differentiating in the case of multiplayer runs).}
+
+\item{\code{filtersteps}}{The filtering steps performed on this run history.}
 }
 \if{html}{\out{</div>}}
 }
@@ -90,20 +117,95 @@ Retrieve player data for a given player from runs.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-STS2RunHistory-get_runs_byseed"></a>}}
-\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_runs_byseed}{}}}
-\subsection{Method \code{get_runs_byseed()}}{
-Retrieve runs by seed.
+\if{html}{\out{<a id="method-STS2RunHistory-get_character"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_character}{}}}
+\subsection{Method \code{get_character()}}{
+Retrieve data for character/s across the run history.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_runs_byseed(seed)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_character(char)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{seed}}{The seed (or seeds) that one wishes to retrieve.
+\item{\code{char}}{The character/s to retrieve data for.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2RunHistory-get_run_byseed"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_run_byseed}{}}}
+\subsection{Method \code{get_run_byseed()}}{
+Retrieve runs by seed.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_run_byseed(seed, .filtertext = "filtered by seed")}\if{html}{\out{</div>}}
+}
 
-@returns An \code{STS2RunHistory} object containing only selected seeds.}
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{seed}}{The seed (or seeds) that one wishes to retrieve.}
+
+\item{\code{.filtertext}}{The text to add to the filter list (mostly used internally).}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2RunHistory-get_run_bycharacter"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_run_bycharacter}{}}}
+\subsection{Method \code{get_run_bycharacter()}}{
+Retrieve runs containing character/s across the run history.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_run_bycharacter(char)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{char}}{The character/s to retrieve data for.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2RunHistory-get_run_byoutcome"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_run_byoutcome}{}}}
+\subsection{Method \code{get_run_byoutcome()}}{
+Retrieve runs with desired outcome/s across the run history.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_run_byoutcome(outcome, .filtertext = "filtered by outcome")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{outcome}}{The outcome/s to retrieve data for.}
+
+\item{\code{.filtertext}}{The text to add to the filter list (mostly used internally).}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2RunHistory-get_run_byascension"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_run_byascension}{}}}
+\subsection{Method \code{get_run_byascension()}}{
+Retrieve runs with desired ascensions across the run history.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_run_byascension(
+  ascension = 0,
+  .filtertext = "filtered by ascension"
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ascension}}{The ascensions to retrieve data for.}
+
+\item{\code{.filtertext}}{The text to add to the filter list (mostly used internally).}
 }
 \if{html}{\out{</div>}}
 }

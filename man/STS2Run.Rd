@@ -9,6 +9,10 @@ A new \code{STS2Run} object.
 Nothing (called for side-effect)
 
 An \code{STS2Player} object or \code{NULL}.
+
+A list of \code{STS2Player} objects containing only selected characters.
+
+The outcome of the run as a string (one of Win, Abandoned, or Loss).
 }
 \description{
 This is the general holding class for an sts2 run.
@@ -59,6 +63,8 @@ It stores the main metadata and lists containing more in-depth run data.
 \item \href{#method-STS2Run-new}{\code{STS2Run$new()}}
 \item \href{#method-STS2Run-print}{\code{STS2Run$print()}}
 \item \href{#method-STS2Run-get_individual_player_data}{\code{STS2Run$get_individual_player_data()}}
+\item \href{#method-STS2Run-get_character}{\code{STS2Run$get_character()}}
+\item \href{#method-STS2Run-get_outcome}{\code{STS2Run$get_outcome()}}
 \item \href{#method-STS2Run-clone}{\code{STS2Run$clone()}}
 }
 }
@@ -116,6 +122,33 @@ Retrieve player data for a given player from a run.
 }
 \if{html}{\out{</div>}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2Run-get_character"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2Run-get_character}{}}}
+\subsection{Method \code{get_character()}}{
+Retrieve data for a character.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2Run$get_character(char)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{char}}{The character/s to retrieve data for.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2Run-get_outcome"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2Run-get_outcome}{}}}
+\subsection{Method \code{get_outcome()}}{
+Get run outcome.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2Run$get_outcome()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-STS2Run-clone"></a>}}
