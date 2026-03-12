@@ -144,13 +144,18 @@ Retrieve data for character/s across the run history.
 
 #### Usage
 
-    STS2RunHistory$get_character(char)
+    STS2RunHistory$get_character(char, onlyowner = FALSE)
 
 #### Arguments
 
 - `char`:
 
   The character/s to retrieve data for.
+
+- `onlyowner`:
+
+  If TRUE, only retrieve runs where the owner was the character
+  specified.
 
 ------------------------------------------------------------------------
 
@@ -180,13 +185,26 @@ Retrieve runs containing character/s across the run history.
 
 #### Usage
 
-    STS2RunHistory$get_run_bycharacter(char)
+    STS2RunHistory$get_run_bycharacter(
+      char,
+      onlyowner = FALSE,
+      .filtertext = "filtered by character"
+    )
 
 #### Arguments
 
 - `char`:
 
   The character/s to retrieve data for.
+
+- `onlyowner`:
+
+  If TRUE, only retrieve runs where the owner was the character
+  specified.
+
+- `.filtertext`:
+
+  The text to add to the filter list (mostly used internally).
 
 ------------------------------------------------------------------------
 

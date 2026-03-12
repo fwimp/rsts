@@ -167,13 +167,18 @@ Retrieve data for a character.
 
 #### Usage
 
-    STS2Run$get_character(char)
+    STS2Run$get_character(char, onlyowner = FALSE)
 
 #### Arguments
 
 - `char`:
 
   The character/s to retrieve data for.
+
+- `onlyowner`:
+
+  If TRUE, only retrieve entries where the owner was the character
+  specified.
 
 ------------------------------------------------------------------------
 
