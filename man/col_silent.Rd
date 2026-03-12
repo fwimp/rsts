@@ -6,6 +6,9 @@
 \usage{
 col_silent(...)
 }
+\arguments{
+\item{...}{Character strings, they will be pasted together with paste0(), before applying the style function.}
+}
 \value{
 A silent-themed colour function.
 }

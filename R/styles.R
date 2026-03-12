@@ -1,6 +1,8 @@
 
 #' Colour text in an Ironclad-based theme.
 #'
+#' @param ... Character strings, they will be pasted together with paste0(), before applying the style function.
+#'
 #' @returns An ironclad-themed colour function.
 #' @export
 #'
@@ -11,6 +13,8 @@ col_ironclad <- cli::col_red
 
 #' Colour text in an Silent-based theme.
 #'
+#' @param ... Character strings, they will be pasted together with paste0(), before applying the style function.
+#'
 #' @returns A silent-themed colour function.
 #' @export
 #'
@@ -19,6 +23,8 @@ col_ironclad <- cli::col_red
 col_silent <- cli::make_ansi_style("#648E44")
 
 #' Colour text in an Regent-based theme.
+#'
+#' @param ... Character strings, they will be pasted together with paste0(), before applying the style function.
 #'
 #' @returns A regent-themed colour function.
 #' @export
@@ -29,6 +35,8 @@ col_regent <- cli::make_ansi_style("#C07609")
 
 #' Colour text in an Necrobinder-based theme.
 #'
+#' @param ... Character strings, they will be pasted together with paste0(), before applying the style function.
+#'
 #' @returns A necrobinder-themed colour function.
 #' @export
 #'
@@ -37,6 +45,8 @@ col_regent <- cli::make_ansi_style("#C07609")
 col_necrobinder <- cli::make_ansi_style("#B16580")
 
 #' Colour text in an Defect-based theme.
+#'
+#' @param ... Character strings, they will be pasted together with paste0(), before applying the style function.
 #'
 #' @returns A defect-themed colour function.
 #' @export
@@ -61,6 +71,7 @@ col_character <- function(char, text = NULL) {
   do.call(paste0("col_", tolower(char)), args = list(text %||% char))
 }
 
+#' @keywords internal
 .test_cols <- function(){
   print(col_ironclad("Ironclad"))
   print(col_silent("Silent"))

@@ -6,6 +6,9 @@
 \usage{
 col_regent(...)
 }
+\arguments{
+\item{...}{Character strings, they will be pasted together with paste0(), before applying the style function.}
+}
 \value{
 A regent-themed colour function.
 }

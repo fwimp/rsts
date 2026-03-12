@@ -6,6 +6,9 @@
 \usage{
 col_defect(...)
 }
+\arguments{
+\item{...}{Character strings, they will be pasted together with paste0(), before applying the style function.}
+}
 \value{
 A defect-themed colour function.
 }
