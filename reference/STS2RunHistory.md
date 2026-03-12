@@ -10,6 +10,30 @@ A new `STS2RunHistory` object.
 
 Nothing (called for side-effect)
 
+A list of `STS2Player` objects containing only selected characters.
+
+An `STS2RunHistory` object containing only selected seeds.
+
+An `STS2RunHistory` object containing only selected seeds.
+
+An `STS2RunHistory` object containing only selected outcomes.
+
+An `STS2RunHistory` object containing only selected ascensions.
+
+## Note
+
+`STS2Run` objects are passed by reference. As such if you modify a run
+in a filtered history, those changes will appear in the original list.
+
+`STS2Run` objects are passed by reference. As such if you modify a run
+in a filtered history, those changes will appear in the original list.
+
+`STS2Run` objects are passed by reference. As such if you modify a run
+in a filtered history, those changes will appear in the original list.
+
+`STS2Run` objects are passed by reference. As such if you modify a run
+in a filtered history, those changes will appear in the original list.
+
 ## Public fields
 
 - `runs`:
@@ -19,6 +43,10 @@ Nothing (called for side-effect)
 - `ownerid`:
 
   The steam ID of the run history owner.
+
+- `filtersteps`:
+
+  The filtering steps performed on this run history.
 
 ## Methods
 
@@ -30,7 +58,15 @@ Nothing (called for side-effect)
 
 - [`STS2RunHistory$get_individual_player_data()`](#method-STS2RunHistory-get_individual_player_data)
 
-- [`STS2RunHistory$get_runs_byseed()`](#method-STS2RunHistory-get_runs_byseed)
+- [`STS2RunHistory$get_character()`](#method-STS2RunHistory-get_character)
+
+- [`STS2RunHistory$get_run_byseed()`](#method-STS2RunHistory-get_run_byseed)
+
+- [`STS2RunHistory$get_run_bycharacter()`](#method-STS2RunHistory-get_run_bycharacter)
+
+- [`STS2RunHistory$get_run_byoutcome()`](#method-STS2RunHistory-get_run_byoutcome)
+
+- [`STS2RunHistory$get_run_byascension()`](#method-STS2RunHistory-get_run_byascension)
 
 - [`STS2RunHistory$clone()`](#method-STS2RunHistory-clone)
 
@@ -42,7 +78,7 @@ Create a new run history container from a list of `STS2Run` objects.
 
 #### Usage
 
-    STS2RunHistory$new(historydata, steamid = NULL)
+    STS2RunHistory$new(historydata, steamid = NULL, filtersteps = NULL)
 
 #### Arguments
 
@@ -54,6 +90,10 @@ Create a new run history container from a list of `STS2Run` objects.
 
   The owner's steamid (for differentiating in the case of multiplayer
   runs).
+
+- `filtersteps`:
+
+  The filtering steps performed on this run history.
 
 ------------------------------------------------------------------------
 
@@ -98,13 +138,29 @@ Retrieve player data for a given player from runs.
 
 ------------------------------------------------------------------------
 
-### Method `get_runs_byseed()`
+### Method `get_character()`
+
+Retrieve data for character/s across the run history.
+
+#### Usage
+
+    STS2RunHistory$get_character(char)
+
+#### Arguments
+
+- `char`:
+
+  The character/s to retrieve data for.
+
+------------------------------------------------------------------------
+
+### Method `get_run_byseed()`
 
 Retrieve runs by seed.
 
 #### Usage
 
-    STS2RunHistory$get_runs_byseed(seed)
+    STS2RunHistory$get_run_byseed(seed, .filtertext = "filtered by seed")
 
 #### Arguments
 
@@ -112,7 +168,68 @@ Retrieve runs by seed.
 
   The seed (or seeds) that one wishes to retrieve.
 
-  @returns An `STS2RunHistory` object containing only selected seeds.
+- `.filtertext`:
+
+  The text to add to the filter list (mostly used internally).
+
+------------------------------------------------------------------------
+
+### Method `get_run_bycharacter()`
+
+Retrieve runs containing character/s across the run history.
+
+#### Usage
+
+    STS2RunHistory$get_run_bycharacter(char)
+
+#### Arguments
+
+- `char`:
+
+  The character/s to retrieve data for.
+
+------------------------------------------------------------------------
+
+### Method `get_run_byoutcome()`
+
+Retrieve runs with desired outcome/s across the run history.
+
+#### Usage
+
+    STS2RunHistory$get_run_byoutcome(outcome, .filtertext = "filtered by outcome")
+
+#### Arguments
+
+- `outcome`:
+
+  The outcome/s to retrieve data for.
+
+- `.filtertext`:
+
+  The text to add to the filter list (mostly used internally).
+
+------------------------------------------------------------------------
+
+### Method `get_run_byascension()`
+
+Retrieve runs with desired ascensions across the run history.
+
+#### Usage
+
+    STS2RunHistory$get_run_byascension(
+      ascension = 0,
+      .filtertext = "filtered by ascension"
+    )
+
+#### Arguments
+
+- `ascension`:
+
+  The ascensions to retrieve data for.
+
+- `.filtertext`:
+
+  The text to add to the filter list (mostly used internally).
 
 ------------------------------------------------------------------------
 

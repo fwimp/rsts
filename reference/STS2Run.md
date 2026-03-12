@@ -11,6 +11,10 @@ Nothing (called for side-effect)
 
 An `STS2Player` object or `NULL`.
 
+A list of `STS2Player` objects containing only selected characters.
+
+The outcome of the run as a string (one of Win, Abandoned, or Loss).
+
 ## Public fields
 
 - `acts`:
@@ -91,6 +95,10 @@ An `STS2Player` object or `NULL`.
 
 - [`STS2Run$get_individual_player_data()`](#method-STS2Run-get_individual_player_data)
 
+- [`STS2Run$get_character()`](#method-STS2Run-get_character)
+
+- [`STS2Run$get_outcome()`](#method-STS2Run-get_outcome)
+
 - [`STS2Run$clone()`](#method-STS2Run-clone)
 
 ------------------------------------------------------------------------
@@ -150,6 +158,32 @@ Retrieve player data for a given player from a run.
 
   the Steam ID of the player data to retrieve (or `NULL` to retrieve the
   data of the run owner).
+
+------------------------------------------------------------------------
+
+### Method `get_character()`
+
+Retrieve data for a character.
+
+#### Usage
+
+    STS2Run$get_character(char)
+
+#### Arguments
+
+- `char`:
+
+  The character/s to retrieve data for.
+
+------------------------------------------------------------------------
+
+### Method `get_outcome()`
+
+Get run outcome.
+
+#### Usage
+
+    STS2Run$get_outcome()
 
 ------------------------------------------------------------------------
 

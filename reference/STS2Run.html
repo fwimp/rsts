@@ -51,6 +51,8 @@ It stores the main metadata and lists containing more in-depth run data.</p>
     <p>A new <code>STS2Run</code> object.</p>
 <p>Nothing (called for side-effect)</p>
 <p>An <code>STS2Player</code> object or <code>NULL</code>.</p>
+<p>A list of <code>STS2Player</code> objects containing only selected characters.</p>
+<p>The outcome of the run as a string (one of Win, Abandoned, or Loss).</p>
     </div>
     <div class="section level2">
     <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
@@ -133,6 +135,8 @@ It stores the main metadata and lists containing more in-depth run data.</p>
 <ul><li><p><a href="#method-STS2Run-new"><code>STS2Run$new()</code></a></p></li>
 <li><p><a href="#method-STS2Run-print"><code>STS2Run$print()</code></a></p></li>
 <li><p><a href="#method-STS2Run-get_individual_player_data"><code>STS2Run$get_individual_player_data()</code></a></p></li>
+<li><p><a href="#method-STS2Run-get_character"><code>STS2Run$get_character()</code></a></p></li>
+<li><p><a href="#method-STS2Run-get_outcome"><code>STS2Run$get_outcome()</code></a></p></li>
 <li><p><a href="#method-STS2Run-clone"><code>STS2Run$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-STS2Run-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
@@ -190,15 +194,39 @@ It stores the main metadata and lists containing more in-depth run data.</p>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-STS2Run-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-STS2Run-get_character"></a><div class="section">
+<h3 id="method-get-character-">Method <code>get_character()</code><a class="anchor" aria-label="anchor" href="#method-get-character-"></a></h3>
+<p>Retrieve data for a character.</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2Run</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2Run</span><span class="op">$</span><span class="fu">get_character</span><span class="op">(</span><span class="va">char</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>char</code></dt>
+<dd><p>The character/s to retrieve data for.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-STS2Run-get_outcome"></a><div class="section">
+<h3 id="method-get-outcome-">Method <code>get_outcome()</code><a class="anchor" aria-label="anchor" href="#method-get-outcome-"></a></h3>
+<p>Get run outcome.</p><div class="section">
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2Run</span><span class="op">$</span><span class="fu">get_outcome</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-STS2Run-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2Run</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
