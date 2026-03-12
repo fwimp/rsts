@@ -129,13 +129,15 @@ Retrieve player data for a given player from a run.
 \subsection{Method \code{get_character()}}{
 Retrieve data for a character.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2Run$get_character(char)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2Run$get_character(char, onlyowner = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{char}}{The character/s to retrieve data for.}
+
+\item{\code{onlyowner}}{If TRUE, only retrieve entries where the owner was the character specified.}
 }
 \if{html}{\out{</div>}}
 }

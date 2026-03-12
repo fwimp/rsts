@@ -77,14 +77,15 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' Retrieve data for character/s across the run history.
   #'
   #' @param char The character/s to retrieve data for.
+  #' @param onlyowner If TRUE, only retrieve runs where the owner was the character specified.
   #'
   #' @returns A list of `STS2Player` objects containing only selected characters.
   #'
-  get_character = function(char) {
+  get_character = function(char, onlyowner = FALSE) {
     poss_chars <- c("ironclad", "silent", "regent", "necrobinder", "defect")
     char <- tolower(char)
     char <- char[char %in% poss_chars]
-    found_playerdata <- sapply(self$runs, \(x) {x$get_character(char)})
+    found_playerdata <- sapply(self$runs, \(x) {x$get_character(char, onlyowner = onlyowner)})
     unlist(found_playerdata[which(sapply(found_playerdata, \(x) {length(x) > 0}))])
   },
 
@@ -111,16 +112,18 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' Retrieve runs containing character/s across the run history.
   #'
   #' @param char The character/s to retrieve data for.
+  #' @param onlyowner If TRUE, only retrieve runs where the owner was the character specified.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
   #'
   #' @returns An `STS2RunHistory` object containing only selected seeds.
   #'
   #' @note
   #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
   #'
-  get_run_bycharacter = function(char) {
-    runs_with_character <- self$get_character(char)
+  get_run_bycharacter = function(char, onlyowner = FALSE, .filtertext = "filtered by character") {
+    runs_with_character <- self$get_character(char, onlyowner = onlyowner)
     seeds <- unique(sapply(runs_with_character, \(x) x$run$seed))
-    self$get_run_byseed(seeds, .filtertext = "filtered by character")
+    self$get_run_byseed(seeds, .filtertext = .filtertext)
   },
 
   #' @description
@@ -164,7 +167,15 @@ STS2RunHistory <- R6Class("STS2RunHistory",
       )
   }
 
+  # generate_summary = function() {
+  #   # TODO: Finish
+  #   seeds <- sapply(self$runs, \(x) (x$seed))
+  #   ascensions <- sapply(self$runs, \(x) (x$ascension))
+  #   gamemode <- sapply(self$runs, \(x) (x$game_mode))
+  # }
+
   # TODO: A way to filter runs by date
+  # TODO: A way to filter runs
   ),
   private = list())
 
@@ -347,15 +358,19 @@ STS2Run <- R6Class("STS2Run",
     #' Retrieve data for a character.
     #'
     #' @param char The character/s to retrieve data for.
+    #' @param onlyowner If TRUE, only retrieve entries where the owner was the character specified.
     #'
     #' @returns A list of `STS2Player` objects containing only selected characters.
     #'
-    get_character = function(char) {
+    get_character = function(char, onlyowner = FALSE) {
       poss_chars <- c("ironclad", "silent", "regent", "necrobinder", "defect")
       char <- tolower(char)
       char <- char[char %in% poss_chars]
-
-      self$players[which(sapply(self$players, \(x) {tolower(x$playercharacter) %in% char}))]
+      if (onlyowner) {
+        self$players[which(sapply(self$players, \(x) {(tolower(x$playercharacter) %in% char) && (x$id %in% c(self$ownerid, "1"))}))]
+      } else {
+        self$players[which(sapply(self$players, \(x) {tolower(x$playercharacter) %in% char}))]
+      }
     },
 
     #' @description

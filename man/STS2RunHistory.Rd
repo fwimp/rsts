@@ -122,13 +122,15 @@ Retrieve player data for a given player from runs.
 \subsection{Method \code{get_character()}}{
 Retrieve data for character/s across the run history.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_character(char)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_character(char, onlyowner = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{char}}{The character/s to retrieve data for.}
+
+\item{\code{onlyowner}}{If TRUE, only retrieve runs where the owner was the character specified.}
 }
 \if{html}{\out{</div>}}
 }
@@ -158,13 +160,21 @@ Retrieve runs by seed.
 \subsection{Method \code{get_run_bycharacter()}}{
 Retrieve runs containing character/s across the run history.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_run_bycharacter(char)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_run_bycharacter(
+  char,
+  onlyowner = FALSE,
+  .filtertext = "filtered by character"
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{char}}{The character/s to retrieve data for.}
+
+\item{\code{onlyowner}}{If TRUE, only retrieve runs where the owner was the character specified.}
+
+\item{\code{.filtertext}}{The text to add to the filter list (mostly used internally).}
 }
 \if{html}{\out{</div>}}
 }
