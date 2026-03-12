@@ -1,0 +1,196 @@
+#' Slay the Spire 2 run history (R6).
+#'
+#' @description
+#' This is the general holding class for a full history of sts2 runs.
+#'
+#' It can be indexed like a list (i.e. `x[1]` or `x[[1]]`).
+#'
+STS2RunHistory <- R6Class("STS2RunHistory",
+  public = list(
+  #' @field runs The parsed run logs. A list of `STS2Run` objects.
+  runs = list(),
+  #' @field ownerid The steam ID of the run history owner.
+  ownerid = "",
+  #' @field filtersteps The filtering steps performed on this run history.
+  filtersteps = NULL,
+
+  #' @description
+  #' Create a new run history container from a list of `STS2Run` objects.
+  #'
+  #' @param historydata A list of `STS2Run` objects.
+  #' @param steamid The owner's steamid (for differentiating in the case of multiplayer runs).
+  #' @param filtersteps The filtering steps performed on this run history.
+  #'
+  #' @returns A new `STS2RunHistory` object.
+  #'
+  initialize = function(historydata, steamid = NULL, filtersteps = NULL) {
+    self$runs <- historydata
+    self$ownerid <- as.character(steamid)
+    self$filtersteps = filtersteps
+  },
+
+  #' @description
+  #' Print an `STS2RunHistory` object.
+  #'
+  #' @param ... Unused.
+  #'
+  #' @returns Nothing (called for side-effect)
+  #'
+  print = function(...) {
+    cli::cli_text("Run history for ID {self$ownerid}:\n")
+    if (!is.null(self$filtersteps)) {
+
+      cli::cli_ol(self$filtersteps)
+    }
+    for (x in self$runs) {
+      print(x)
+      cli::cli_text("")
+    }
+  },
+
+  #' @description
+  #' Retrieve player data for a given player from runs.
+  #'
+  #' @param id The Steam ID of the player data to retrieve (or `NULL` to retrieve the data of the run owner).
+  #' @param excludemissing Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)
+  #'
+  #'  @returns A list of `STS2Player` objects.
+  #'
+  get_individual_player_data = function(id = NULL, excludemissing = TRUE) {
+    if (is.null(id)) {
+      id <- self$ownerid
+      if (is.null(id)) {
+        cli::cli_abort("Owner ID not present, nor supplied in an argument.")
+      }
+    }
+    id <- as.character(id)
+    found_playerdata <- lapply(self$runs, \(x) {
+      x$get_individual_player_data(id)
+    })
+    if (excludemissing) {
+      found_playerdata <- found_playerdata[which(!sapply(found_playerdata, is.null))]
+    }
+    return(found_playerdata)
+  },
+
+  #' @description
+  #' Retrieve data for character/s across the run history.
+  #'
+  #' @param char The character/s to retrieve data for.
+  #' @param onlyowner If TRUE, only retrieve runs where the owner was the character specified.
+  #'
+  #' @returns A list of `STS2Player` objects containing only selected characters.
+  #'
+  get_character = function(char, onlyowner = FALSE) {
+    poss_chars <- c("ironclad", "silent", "regent", "necrobinder", "defect")
+    char <- tolower(char)
+    char <- char[char %in% poss_chars]
+    found_playerdata <- sapply(self$runs, \(x) {x$get_character(char, onlyowner = onlyowner)})
+    unlist(found_playerdata[which(sapply(found_playerdata, \(x) {length(x) > 0}))])
+  },
+
+  #' @description
+  #' Retrieve runs by seed.
+  #'
+  #' @param seed The seed (or seeds) that one wishes to retrieve.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
+  #'
+  #' @returns An `STS2RunHistory` object containing only selected seeds.
+  #'
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  filter_seed = function(seed, .filtertext = "filtered by seed") {
+    STS2RunHistory$new(
+      self$runs[sapply(self$runs, \(x) {x$seed %in% seed})],
+      steamid = self$ownerid,
+      filtersteps = c(self$filtersteps, .filtertext)
+      )
+  },
+
+  #' @description
+  #' Retrieve runs containing character/s across the run history.
+  #'
+  #' @param char The character/s to retrieve data for.
+  #' @param onlyowner If TRUE, only retrieve runs where the owner was the character specified.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
+  #'
+  #' @returns An `STS2RunHistory` object containing only selected seeds.
+  #'
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  filter_character = function(char, onlyowner = FALSE, .filtertext = "filtered by character") {
+    runs_with_character <- self$get_character(char, onlyowner = onlyowner)
+    seeds <- unique(sapply(runs_with_character, \(x) x$run$seed))
+    self$filter_seed(seeds, .filtertext = .filtertext)
+  },
+
+  #' @description
+  #' Retrieve runs with desired outcome/s across the run history.
+  #'
+  #' @param outcome The outcome/s to retrieve data for.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
+  #'
+  #' @returns An `STS2RunHistory` object containing only selected outcomes.
+  #'
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  filter_outcome = function(outcome, .filtertext = "filtered by outcome") {
+    outcome <- tolower(outcome)
+    poss_outcomes <- c("win", "loss", "abandoned")
+    outcome <- outcome[outcome %in% poss_outcomes]
+    STS2RunHistory$new(
+      self$runs[which(sapply(self$runs, \(x) {tolower(x$get_outcome()) %in% outcome}))],
+      steamid = self$ownerid,
+      filtersteps = c(self$filtersteps, .filtertext)
+      )
+  },
+
+  #' @description
+  #' Retrieve runs with desired ascensions across the run history.
+  #'
+  #' @param ascension The ascensions to retrieve data for.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
+  #'
+  #' @returns An `STS2RunHistory` object containing only selected ascensions.
+  #'
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  filter_byascension = function(ascension = 0, .filtertext = "filtered by ascension") {
+    ascension <- unique(max(min(ascension, 10), 0))
+    STS2RunHistory$new(
+      self$runs[which(sapply(self$runs, \(x) {x$ascension %in% ascension}))],
+      steamid = self$ownerid,
+      filtersteps = c(self$filtersteps, .filtertext)
+      )
+  }
+
+  # generate_summary = function() {
+  #   # TODO: Finish
+  #   seeds <- sapply(self$runs, \(x) (x$seed))
+  #   ascensions <- sapply(self$runs, \(x) (x$ascension))
+  #   gamemode <- sapply(self$runs, \(x) (x$game_mode))
+  # }
+
+  # TODO: A way to filter runs by date
+  # TODO: A way to filter runs
+  ),
+  private = list())
+
+#' @export
+length.STS2RunHistory <- function(x) {
+  length(x$runs)
+}
+
+#' @export
+`[.STS2RunHistory` <- function(x, i) {
+  STS2RunHistory$new(x$runs[i], steamid = x$ownerid, filtersteps = c(x$filtersteps, "indexed"))
+}
+
+#' @export
+`[[.STS2RunHistory` <- function(x, i, exact = TRUE) {
+  x$runs[[i, exact = exact]]
+}

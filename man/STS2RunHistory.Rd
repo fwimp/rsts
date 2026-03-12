@@ -50,10 +50,10 @@ It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
 \item \href{#method-STS2RunHistory-print}{\code{STS2RunHistory$print()}}
 \item \href{#method-STS2RunHistory-get_individual_player_data}{\code{STS2RunHistory$get_individual_player_data()}}
 \item \href{#method-STS2RunHistory-get_character}{\code{STS2RunHistory$get_character()}}
-\item \href{#method-STS2RunHistory-get_run_byseed}{\code{STS2RunHistory$get_run_byseed()}}
-\item \href{#method-STS2RunHistory-get_run_bycharacter}{\code{STS2RunHistory$get_run_bycharacter()}}
-\item \href{#method-STS2RunHistory-get_run_byoutcome}{\code{STS2RunHistory$get_run_byoutcome()}}
-\item \href{#method-STS2RunHistory-get_run_byascension}{\code{STS2RunHistory$get_run_byascension()}}
+\item \href{#method-STS2RunHistory-filter_seed}{\code{STS2RunHistory$filter_seed()}}
+\item \href{#method-STS2RunHistory-filter_character}{\code{STS2RunHistory$filter_character()}}
+\item \href{#method-STS2RunHistory-filter_byoutcome}{\code{STS2RunHistory$filter_byoutcome()}}
+\item \href{#method-STS2RunHistory-filter_byascension}{\code{STS2RunHistory$filter_byascension()}}
 \item \href{#method-STS2RunHistory-clone}{\code{STS2RunHistory$clone()}}
 }
 }
@@ -136,12 +136,12 @@ Retrieve data for character/s across the run history.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-STS2RunHistory-get_run_byseed"></a>}}
-\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_run_byseed}{}}}
-\subsection{Method \code{get_run_byseed()}}{
+\if{html}{\out{<a id="method-STS2RunHistory-filter_seed"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-filter_seed}{}}}
+\subsection{Method \code{filter_seed()}}{
 Retrieve runs by seed.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_run_byseed(seed, .filtertext = "filtered by seed")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$filter_seed(seed, .filtertext = "filtered by seed")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -155,12 +155,12 @@ Retrieve runs by seed.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-STS2RunHistory-get_run_bycharacter"></a>}}
-\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_run_bycharacter}{}}}
-\subsection{Method \code{get_run_bycharacter()}}{
+\if{html}{\out{<a id="method-STS2RunHistory-filter_character"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-filter_character}{}}}
+\subsection{Method \code{filter_character()}}{
 Retrieve runs containing character/s across the run history.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_run_bycharacter(
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$filter_character(
   char,
   onlyowner = FALSE,
   .filtertext = "filtered by character"
@@ -180,12 +180,12 @@ Retrieve runs containing character/s across the run history.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-STS2RunHistory-get_run_byoutcome"></a>}}
-\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_run_byoutcome}{}}}
-\subsection{Method \code{get_run_byoutcome()}}{
+\if{html}{\out{<a id="method-STS2RunHistory-filter_byoutcome"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-filter_byoutcome}{}}}
+\subsection{Method \code{filter_byoutcome()}}{
 Retrieve runs with desired outcome/s across the run history.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_run_byoutcome(outcome, .filtertext = "filtered by outcome")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$filter_byoutcome(outcome, .filtertext = "filtered by outcome")}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -199,12 +199,12 @@ Retrieve runs with desired outcome/s across the run history.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-STS2RunHistory-get_run_byascension"></a>}}
-\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_run_byascension}{}}}
-\subsection{Method \code{get_run_byascension()}}{
+\if{html}{\out{<a id="method-STS2RunHistory-filter_byascension"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-filter_byascension}{}}}
+\subsection{Method \code{filter_byascension()}}{
 Retrieve runs with desired ascensions across the run history.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_run_byascension(
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$filter_byascension(
   ascension = 0,
   .filtertext = "filtered by ascension"
 )}\if{html}{\out{</div>}}
