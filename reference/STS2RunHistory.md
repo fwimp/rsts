@@ -60,13 +60,13 @@ in a filtered history, those changes will appear in the original list.
 
 - [`STS2RunHistory$get_character()`](#method-STS2RunHistory-get_character)
 
-- [`STS2RunHistory$get_run_byseed()`](#method-STS2RunHistory-get_run_byseed)
+- [`STS2RunHistory$filter_seed()`](#method-STS2RunHistory-filter_seed)
 
-- [`STS2RunHistory$get_run_bycharacter()`](#method-STS2RunHistory-get_run_bycharacter)
+- [`STS2RunHistory$filter_character()`](#method-STS2RunHistory-filter_character)
 
-- [`STS2RunHistory$get_run_byoutcome()`](#method-STS2RunHistory-get_run_byoutcome)
+- [`STS2RunHistory$filter_outcome()`](#method-STS2RunHistory-filter_outcome)
 
-- [`STS2RunHistory$get_run_byascension()`](#method-STS2RunHistory-get_run_byascension)
+- [`STS2RunHistory$filter_byascension()`](#method-STS2RunHistory-filter_byascension)
 
 - [`STS2RunHistory$clone()`](#method-STS2RunHistory-clone)
 
@@ -159,13 +159,13 @@ Retrieve data for character/s across the run history.
 
 ------------------------------------------------------------------------
 
-### Method `get_run_byseed()`
+### Method `filter_seed()`
 
 Retrieve runs by seed.
 
 #### Usage
 
-    STS2RunHistory$get_run_byseed(seed, .filtertext = "filtered by seed")
+    STS2RunHistory$filter_seed(seed, .filtertext = "filtered by seed")
 
 #### Arguments
 
@@ -179,13 +179,13 @@ Retrieve runs by seed.
 
 ------------------------------------------------------------------------
 
-### Method `get_run_bycharacter()`
+### Method `filter_character()`
 
 Retrieve runs containing character/s across the run history.
 
 #### Usage
 
-    STS2RunHistory$get_run_bycharacter(
+    STS2RunHistory$filter_character(
       char,
       onlyowner = FALSE,
       .filtertext = "filtered by character"
@@ -208,13 +208,13 @@ Retrieve runs containing character/s across the run history.
 
 ------------------------------------------------------------------------
 
-### Method `get_run_byoutcome()`
+### Method `filter_outcome()`
 
 Retrieve runs with desired outcome/s across the run history.
 
 #### Usage
 
-    STS2RunHistory$get_run_byoutcome(outcome, .filtertext = "filtered by outcome")
+    STS2RunHistory$filter_outcome(outcome, .filtertext = "filtered by outcome")
 
 #### Arguments
 
@@ -228,13 +228,13 @@ Retrieve runs with desired outcome/s across the run history.
 
 ------------------------------------------------------------------------
 
-### Method `get_run_byascension()`
+### Method `filter_byascension()`
 
 Retrieve runs with desired ascensions across the run history.
 
 #### Usage
 
-    STS2RunHistory$get_run_byascension(
+    STS2RunHistory$filter_byascension(
       ascension = 0,
       .filtertext = "filtered by ascension"
     )

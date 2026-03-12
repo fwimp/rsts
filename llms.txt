@@ -11,6 +11,49 @@ You can install the development version of rsts like so:
 pak::pkg_install("fwimp/rsts")
 ```
 
+## Basic Usage
+
+To load your own run data, you can run the
+[`load_sts_history()`](https://fwimp.github.io/rsts/reference/load_sts_history.md)
+function.
+
+``` r
+library(rsts)
+myruns <- load_sts_history()
+```
+
+If you are on windows, this *should* automatically load your runs,
+however if you are on another platform or are having troubles you can
+specify the path to load manually.
+
+*Note: if you provide an explicit path, you should also set the `id=`
+argument to be your steam community ID (i.e. a 17-character number,
+usually starting with 7). This will help with working out who is “you”
+on multiplayer runs.*
+
+``` r
+library(rsts)
+myruns <- load_sts_history("path/to/runhistory", id=76561198000000000)
+length(myruns)
+#> [1] 18
+```
+
+Filters can be applied using the `filter_` methods:
+
+``` r
+justwins <- myruns$filter_outcome("Win")
+length(justwins)
+#> [1] 4
+```
+
+They can also be chained:
+
+``` r
+ironcladwins <- myruns$filter_outcome("Win")$filter_character("Ironclad", onlyowner = TRUE)
+length(ironcladwins)
+#> [1] 1
+```
+
 ## AI Statement
 
 Absolutely no AI or LLM tools were used in the development of this
@@ -37,6 +80,18 @@ in R, which spiralled out of control rather quickly.
   the Spire 2 run (R6).
 - [`STS2RunHistory`](https://fwimp.github.io/rsts/reference/STS2RunHistory.md)
   : Slay the Spire 2 run history (R6).
+- [`col_character()`](https://fwimp.github.io/rsts/reference/col_character.md)
+  : Colour text in an character-based theme.
+- [`col_defect()`](https://fwimp.github.io/rsts/reference/col_defect.md)
+  : Colour text in an Defect-based theme.
+- [`col_ironclad()`](https://fwimp.github.io/rsts/reference/col_ironclad.md)
+  : Colour text in an Ironclad-based theme.
+- [`col_necrobinder()`](https://fwimp.github.io/rsts/reference/col_necrobinder.md)
+  : Colour text in an Necrobinder-based theme.
+- [`col_regent()`](https://fwimp.github.io/rsts/reference/col_regent.md)
+  : Colour text in an Regent-based theme.
+- [`col_silent()`](https://fwimp.github.io/rsts/reference/col_silent.md)
+  : Colour text in an Silent-based theme.
 - [`load_sts_history()`](https://fwimp.github.io/rsts/reference/load_sts_history.md)
   : Load Slay the Spire 2 Run Data
 

@@ -77,6 +77,31 @@
 <code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"fwimp/rsts"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="basic-usage">Basic Usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
+</h2>
+<p>To load your own run data, you can run the <code><a href="reference/load_sts_history.html">load_sts_history()</a></code> function.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/rsts" class="external-link">rsts</a></span><span class="op">)</span></span>
+<span><span class="va">myruns</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_sts_history.html">load_sts_history</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>If you are on windows, this <em>should</em> automatically load your runs, however if you are on another platform or are having troubles you can specify the path to load manually.</p>
+<p><em>Note: if you provide an explicit path, you should also set the <code>id=</code> argument to be your steam community ID (i.e. a 17-character number, usually starting with 7). This will help with working out who is “you” on multiplayer runs.</em></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/rsts" class="external-link">rsts</a></span><span class="op">)</span></span>
+<span><span class="va">myruns</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_sts_history.html">load_sts_history</a></span><span class="op">(</span><span class="st">"path/to/runhistory"</span>, id<span class="op">=</span><span class="fl">76561198000000000</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">myruns</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 18</span></span></code></pre></div>
+<p>Filters can be applied using the <code>filter_</code> methods:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">justwins</span> <span class="op">&lt;-</span> <span class="va">myruns</span><span class="op">$</span><span class="fu">filter_outcome</span><span class="op">(</span><span class="st">"Win"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">justwins</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 4</span></span></code></pre></div>
+<p>They can also be chained:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ironcladwins</span> <span class="op">&lt;-</span> <span class="va">myruns</span><span class="op">$</span><span class="fu">filter_outcome</span><span class="op">(</span><span class="st">"Win"</span><span class="op">)</span><span class="op">$</span><span class="fu">filter_character</span><span class="op">(</span><span class="st">"Ironclad"</span>, onlyowner <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ironcladwins</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="ai-statement">AI Statement<a class="anchor" aria-label="anchor" href="#ai-statement"></a>
 </h2>
 <p>Absolutely no AI or LLM tools were used in the development of this package. This was initially a toy problem upon which to learn R6 classes in R, which spiralled out of control rather quickly.</p>

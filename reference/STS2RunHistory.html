@@ -36,7 +36,7 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Slay the Spire 2 run history (R6).</h1>
-      <small class="dont-index">Source: <a href="https://github.com/fwimp/rsts/blob/master/R/sts2_classes.R" class="external-link"><code>R/sts2_classes.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/fwimp/rsts/blob/master/R/sts2runhistory.R" class="external-link"><code>R/sts2runhistory.R</code></a></small>
       <div class="d-none name"><code>STS2RunHistory.Rd</code></div>
     </div>
 
@@ -89,10 +89,10 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 <li><p><a href="#method-STS2RunHistory-print"><code>STS2RunHistory$print()</code></a></p></li>
 <li><p><a href="#method-STS2RunHistory-get_individual_player_data"><code>STS2RunHistory$get_individual_player_data()</code></a></p></li>
 <li><p><a href="#method-STS2RunHistory-get_character"><code>STS2RunHistory$get_character()</code></a></p></li>
-<li><p><a href="#method-STS2RunHistory-get_run_byseed"><code>STS2RunHistory$get_run_byseed()</code></a></p></li>
-<li><p><a href="#method-STS2RunHistory-get_run_bycharacter"><code>STS2RunHistory$get_run_bycharacter()</code></a></p></li>
-<li><p><a href="#method-STS2RunHistory-get_run_byoutcome"><code>STS2RunHistory$get_run_byoutcome()</code></a></p></li>
-<li><p><a href="#method-STS2RunHistory-get_run_byascension"><code>STS2RunHistory$get_run_byascension()</code></a></p></li>
+<li><p><a href="#method-STS2RunHistory-filter_seed"><code>STS2RunHistory$filter_seed()</code></a></p></li>
+<li><p><a href="#method-STS2RunHistory-filter_character"><code>STS2RunHistory$filter_character()</code></a></p></li>
+<li><p><a href="#method-STS2RunHistory-filter_outcome"><code>STS2RunHistory$filter_outcome()</code></a></p></li>
+<li><p><a href="#method-STS2RunHistory-filter_byascension"><code>STS2RunHistory$filter_byascension()</code></a></p></li>
 <li><p><a href="#method-STS2RunHistory-clone"><code>STS2RunHistory$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-STS2RunHistory-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
@@ -175,11 +175,11 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-STS2RunHistory-get_run_byseed"></a><div class="section">
-<h3 id="method-get-run-byseed-">Method <code>get_run_byseed()</code><a class="anchor" aria-label="anchor" href="#method-get-run-byseed-"></a></h3>
+</div><p></p><hr><a id="method-STS2RunHistory-filter_seed"></a><div class="section">
+<h3 id="method-filter-seed-">Method <code>filter_seed()</code><a class="anchor" aria-label="anchor" href="#method-filter-seed-"></a></h3>
 <p>Retrieve runs by seed.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">get_run_byseed</span><span class="op">(</span><span class="va">seed</span>, .filtertext <span class="op">=</span> <span class="st">"filtered by seed"</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">filter_seed</span><span class="op">(</span><span class="va">seed</span>, .filtertext <span class="op">=</span> <span class="st">"filtered by seed"</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -195,11 +195,11 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-STS2RunHistory-get_run_bycharacter"></a><div class="section">
-<h3 id="method-get-run-bycharacter-">Method <code>get_run_bycharacter()</code><a class="anchor" aria-label="anchor" href="#method-get-run-bycharacter-"></a></h3>
+</div><p></p><hr><a id="method-STS2RunHistory-filter_character"></a><div class="section">
+<h3 id="method-filter-character-">Method <code>filter_character()</code><a class="anchor" aria-label="anchor" href="#method-filter-character-"></a></h3>
 <p>Retrieve runs containing character/s across the run history.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">get_run_bycharacter</span><span class="op">(</span></span>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">filter_character</span><span class="op">(</span></span>
 <span>  <span class="va">char</span>,</span>
 <span>  onlyowner <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  .filtertext <span class="op">=</span> <span class="st">"filtered by character"</span></span>
@@ -223,11 +223,11 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-STS2RunHistory-get_run_byoutcome"></a><div class="section">
-<h3 id="method-get-run-byoutcome-">Method <code>get_run_byoutcome()</code><a class="anchor" aria-label="anchor" href="#method-get-run-byoutcome-"></a></h3>
+</div><p></p><hr><a id="method-STS2RunHistory-filter_outcome"></a><div class="section">
+<h3 id="method-filter-outcome-">Method <code>filter_outcome()</code><a class="anchor" aria-label="anchor" href="#method-filter-outcome-"></a></h3>
 <p>Retrieve runs with desired outcome/s across the run history.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">get_run_byoutcome</span><span class="op">(</span><span class="va">outcome</span>, .filtertext <span class="op">=</span> <span class="st">"filtered by outcome"</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">filter_outcome</span><span class="op">(</span><span class="va">outcome</span>, .filtertext <span class="op">=</span> <span class="st">"filtered by outcome"</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -243,11 +243,11 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-STS2RunHistory-get_run_byascension"></a><div class="section">
-<h3 id="method-get-run-byascension-">Method <code>get_run_byascension()</code><a class="anchor" aria-label="anchor" href="#method-get-run-byascension-"></a></h3>
+</div><p></p><hr><a id="method-STS2RunHistory-filter_byascension"></a><div class="section">
+<h3 id="method-filter-byascension-">Method <code>filter_byascension()</code><a class="anchor" aria-label="anchor" href="#method-filter-byascension-"></a></h3>
 <p>Retrieve runs with desired ascensions across the run history.</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">get_run_byascension</span><span class="op">(</span></span>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">filter_byascension</span><span class="op">(</span></span>
 <span>  ascension <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  .filtertext <span class="op">=</span> <span class="st">"filtered by ascension"</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
