@@ -11,7 +11,8 @@ load_sts_history(
   profilenum = 1,
   game = 2,
   platform = c("windows", "mac", "linux"),
-  players = NULL
+  players = NULL,
+  .returnraw = FALSE
 )
 ```
 
@@ -43,6 +44,10 @@ load_sts_history(
 
   Only analyse runs with this number of players (or `NULL` for all,
   default).
+
+- .returnraw:
+
+  Return the raw JSON for runs (mostly for debugging).
 
 ## Value
 

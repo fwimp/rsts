@@ -48,7 +48,7 @@ those changes will appear in the original list.
 
 - [`STS2RunHistory$get_individual_player_data()`](#method-STS2RunHistory-get_individual_player_data)
 
-- [`STS2RunHistory$get_character()`](#method-STS2RunHistory-get_character)
+- [`STS2RunHistory$get_player_data()`](#method-STS2RunHistory-get_player_data)
 
 - [`STS2RunHistory$filter_seed()`](#method-STS2RunHistory-filter_seed)
 
@@ -119,7 +119,7 @@ Retrieve player data for a given player from runs.
 
 #### Usage
 
-    STS2RunHistory$get_individual_player_data(id = NULL, excludemissing = TRUE)
+    STS2RunHistory$get_individual_player_data(id = NULL)
 
 #### Arguments
 
@@ -128,32 +128,15 @@ Retrieve player data for a given player from runs.
   The Steam ID of the player data to retrieve (or `NULL` to retrieve the
   data of the run owner).
 
-- `excludemissing`:
-
-  Exclude entries from the list where the desired player is not present.
-  (This will result in a list that may be shorter than the number of
-  runs in the history.)
-
 ------------------------------------------------------------------------
 
-### Method `get_character()`
+### Method `get_player_data()`
 
-Retrieve data for character/s across the run history.
+Retrieve player data for all players from runs.
 
 #### Usage
 
-    STS2RunHistory$get_character(char, onlyowner = FALSE)
-
-#### Arguments
-
-- `char`:
-
-  The character/s to retrieve data for.
-
-- `onlyowner`:
-
-  If TRUE, only retrieve runs where the owner was the character
-  specified.
+    STS2RunHistory$get_player_data()
 
 ------------------------------------------------------------------------
 
