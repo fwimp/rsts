@@ -12,6 +12,8 @@ format_sts2id(id)
 
 - id:
 
+  The id/s to format.
+
 ## Value
 
 The formatted ids.

@@ -20,7 +20,24 @@ An `STS2RunHistory` object containing only selected outcomes.
 
 An `STS2RunHistory` object containing only selected ascensions.
 
+An `STS2RunHistory` object containing only selected player count/s
+
+An `STS2RunHistory` object containing only selected patch version/s
+
+An `STS2RunHistory` object containing only selected floor count/s
+
+An `data.frame` object containing a quick summary of the run.
+
 ## Note
+
+`STS2Run` objects are passed by reference. As such if you modify a run
+in a filtered history, those changes will appear in the original list.
+
+`STS2Run` objects are passed by reference. As such if you modify a run
+in a filtered history, those changes will appear in the original list.
+
+`STS2Run` objects are passed by reference. As such if you modify a run
+in a filtered history, those changes will appear in the original list.
 
 `STS2Run` objects are passed by reference. As such if you modify a run
 in a filtered history, those changes will appear in the original list.
@@ -66,7 +83,15 @@ in a filtered history, those changes will appear in the original list.
 
 - [`STS2RunHistory$filter_outcome()`](#method-STS2RunHistory-filter_outcome)
 
-- [`STS2RunHistory$filter_byascension()`](#method-STS2RunHistory-filter_byascension)
+- [`STS2RunHistory$filter_ascension()`](#method-STS2RunHistory-filter_ascension)
+
+- [`STS2RunHistory$filter_playercount()`](#method-STS2RunHistory-filter_playercount)
+
+- [`STS2RunHistory$filter_version()`](#method-STS2RunHistory-filter_version)
+
+- [`STS2RunHistory$filter_floorcount()`](#method-STS2RunHistory-filter_floorcount)
+
+- [`STS2RunHistory$generate_summary()`](#method-STS2RunHistory-generate_summary)
 
 - [`STS2RunHistory$clone()`](#method-STS2RunHistory-clone)
 
@@ -228,13 +253,13 @@ Retrieve runs with desired outcome/s across the run history.
 
 ------------------------------------------------------------------------
 
-### Method `filter_byascension()`
+### Method `filter_ascension()`
 
 Retrieve runs with desired ascensions across the run history.
 
 #### Usage
 
-    STS2RunHistory$filter_byascension(
+    STS2RunHistory$filter_ascension(
       ascension = 0,
       .filtertext = "filtered by ascension"
     )
@@ -248,6 +273,90 @@ Retrieve runs with desired ascensions across the run history.
 - `.filtertext`:
 
   The text to add to the filter list (mostly used internally).
+
+------------------------------------------------------------------------
+
+### Method `filter_playercount()`
+
+Retrieve runs with desired player count across the run history.
+
+#### Usage
+
+    STS2RunHistory$filter_playercount(
+      players = 1,
+      .filtertext = "filtered by player count"
+    )
+
+#### Arguments
+
+- `players`:
+
+  The player count/s to retrieve data for.
+
+- `.filtertext`:
+
+  The text to add to the filter list (mostly used internally).
+
+------------------------------------------------------------------------
+
+### Method `filter_version()`
+
+Retrieve runs with desired patch version across the run history.
+
+#### Usage
+
+    STS2RunHistory$filter_version(
+      cond = "==",
+      patch,
+      .filtertext = "filtered by version"
+    )
+
+#### Arguments
+
+- `cond`:
+
+  A condition (e.g. "=" or "\>").
+
+- `patch`:
+
+  The version to compare runs against.
+
+- `.filtertext`:
+
+  The text to add to the filter list (mostly used internally).
+
+------------------------------------------------------------------------
+
+### Method `filter_floorcount()`
+
+Retrieve runs with desired floor count across the run history.
+
+#### Usage
+
+    STS2RunHistory$filter_floorcount(
+      floors,
+      .filtertext = "filtered by number of floors"
+    )
+
+#### Arguments
+
+- `floors`:
+
+  The floor count/s to retrieve data for.
+
+- `.filtertext`:
+
+  The text to add to the filter list (mostly used internally).
+
+------------------------------------------------------------------------
+
+### Method `generate_summary()`
+
+Generate a summary dataframe for the run history.
+
+#### Usage
+
+    STS2RunHistory$generate_summary()
 
 ------------------------------------------------------------------------
 

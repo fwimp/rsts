@@ -13,8 +13,6 @@ An `STS2Player` object or `NULL`.
 
 A list of `STS2Player` objects containing only selected characters.
 
-The outcome of the run as a string (one of Win, Abandoned, or Loss).
-
 ## Public fields
 
 - `acts`:
@@ -85,6 +83,20 @@ The outcome of the run as a string (one of Win, Abandoned, or Loss).
 
   The steam ID of the run owner.
 
+## Active bindings
+
+- `outcome`:
+
+  The outcome of the run.
+
+- `numplayers`:
+
+  The number of players in the run.
+
+- `numfloors`:
+
+  The number of floors in the run.
+
 ## Methods
 
 ### Public methods
@@ -96,8 +108,6 @@ The outcome of the run as a string (one of Win, Abandoned, or Loss).
 - [`STS2Run$get_individual_player_data()`](#method-STS2Run-get_individual_player_data)
 
 - [`STS2Run$get_character()`](#method-STS2Run-get_character)
-
-- [`STS2Run$get_outcome()`](#method-STS2Run-get_outcome)
 
 - [`STS2Run$clone()`](#method-STS2Run-clone)
 
@@ -179,16 +189,6 @@ Retrieve data for a character.
 
   If TRUE, only retrieve entries where the owner was the character
   specified.
-
-------------------------------------------------------------------------
-
-### Method `get_outcome()`
-
-Get run outcome.
-
-#### Usage
-
-    STS2Run$get_outcome()
 
 ------------------------------------------------------------------------
 

@@ -55,10 +55,17 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 <p>An <code>STS2RunHistory</code> object containing only selected seeds.</p>
 <p>An <code>STS2RunHistory</code> object containing only selected outcomes.</p>
 <p>An <code>STS2RunHistory</code> object containing only selected ascensions.</p>
+<p>An <code>STS2RunHistory</code> object containing only selected player count/s</p>
+<p>An <code>STS2RunHistory</code> object containing only selected patch version/s</p>
+<p>An <code>STS2RunHistory</code> object containing only selected floor count/s</p>
+<p>An <code>data.frame</code> object containing a quick summary of the run.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
+<p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
+<p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
+<p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
 <p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
 <p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
 <p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
@@ -92,7 +99,11 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 <li><p><a href="#method-STS2RunHistory-filter_seed"><code>STS2RunHistory$filter_seed()</code></a></p></li>
 <li><p><a href="#method-STS2RunHistory-filter_character"><code>STS2RunHistory$filter_character()</code></a></p></li>
 <li><p><a href="#method-STS2RunHistory-filter_outcome"><code>STS2RunHistory$filter_outcome()</code></a></p></li>
-<li><p><a href="#method-STS2RunHistory-filter_byascension"><code>STS2RunHistory$filter_byascension()</code></a></p></li>
+<li><p><a href="#method-STS2RunHistory-filter_ascension"><code>STS2RunHistory$filter_ascension()</code></a></p></li>
+<li><p><a href="#method-STS2RunHistory-filter_playercount"><code>STS2RunHistory$filter_playercount()</code></a></p></li>
+<li><p><a href="#method-STS2RunHistory-filter_version"><code>STS2RunHistory$filter_version()</code></a></p></li>
+<li><p><a href="#method-STS2RunHistory-filter_floorcount"><code>STS2RunHistory$filter_floorcount()</code></a></p></li>
+<li><p><a href="#method-STS2RunHistory-generate_summary"><code>STS2RunHistory$generate_summary()</code></a></p></li>
 <li><p><a href="#method-STS2RunHistory-clone"><code>STS2RunHistory$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-STS2RunHistory-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
@@ -243,11 +254,11 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-STS2RunHistory-filter_byascension"></a><div class="section">
-<h3 id="method-filter-byascension-">Method <code>filter_byascension()</code><a class="anchor" aria-label="anchor" href="#method-filter-byascension-"></a></h3>
+</div><p></p><hr><a id="method-STS2RunHistory-filter_ascension"></a><div class="section">
+<h3 id="method-filter-ascension-">Method <code>filter_ascension()</code><a class="anchor" aria-label="anchor" href="#method-filter-ascension-"></a></h3>
 <p>Retrieve runs with desired ascensions across the run history.</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">filter_byascension</span><span class="op">(</span></span>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">filter_ascension</span><span class="op">(</span></span>
 <span>  ascension <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  .filtertext <span class="op">=</span> <span class="st">"filtered by ascension"</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -266,15 +277,97 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-STS2RunHistory-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-STS2RunHistory-filter_playercount"></a><div class="section">
+<h3 id="method-filter-playercount-">Method <code>filter_playercount()</code><a class="anchor" aria-label="anchor" href="#method-filter-playercount-"></a></h3>
+<p>Retrieve runs with desired player count across the run history.</p><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">filter_playercount</span><span class="op">(</span></span>
+<span>  players <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  .filtertext <span class="op">=</span> <span class="st">"filtered by player count"</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>players</code></dt>
+<dd><p>The player count/s to retrieve data for.</p></dd>
+
+
+<dt><code>.filtertext</code></dt>
+<dd><p>The text to add to the filter list (mostly used internally).</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-STS2RunHistory-filter_version"></a><div class="section">
+<h3 id="method-filter-version-">Method <code>filter_version()</code><a class="anchor" aria-label="anchor" href="#method-filter-version-"></a></h3>
+<p>Retrieve runs with desired patch version across the run history.</p><div class="section">
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">filter_version</span><span class="op">(</span></span>
+<span>  cond <span class="op">=</span> <span class="st">"=="</span>,</span>
+<span>  <span class="va">patch</span>,</span>
+<span>  .filtertext <span class="op">=</span> <span class="st">"filtered by version"</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>cond</code></dt>
+<dd><p>A condition (e.g. "=" or "&gt;").</p></dd>
+
+
+<dt><code>patch</code></dt>
+<dd><p>The version to compare runs against.</p></dd>
+
+
+<dt><code>.filtertext</code></dt>
+<dd><p>The text to add to the filter list (mostly used internally).</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-STS2RunHistory-filter_floorcount"></a><div class="section">
+<h3 id="method-filter-floorcount-">Method <code>filter_floorcount()</code><a class="anchor" aria-label="anchor" href="#method-filter-floorcount-"></a></h3>
+<p>Retrieve runs with desired floor count across the run history.</p><div class="section">
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">filter_floorcount</span><span class="op">(</span></span>
+<span>  <span class="va">floors</span>,</span>
+<span>  .filtertext <span class="op">=</span> <span class="st">"filtered by number of floors"</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>floors</code></dt>
+<dd><p>The floor count/s to retrieve data for.</p></dd>
+
+
+<dt><code>.filtertext</code></dt>
+<dd><p>The text to add to the filter list (mostly used internally).</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-STS2RunHistory-generate_summary"></a><div class="section">
+<h3 id="method-generate-summary-">Method <code>generate_summary()</code><a class="anchor" aria-label="anchor" href="#method-generate-summary-"></a></h3>
+<p>Generate a summary dataframe for the run history.</p><div class="section">
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">generate_summary</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-STS2RunHistory-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
