@@ -7,3 +7,15 @@
 #' @importFrom rlang %||%
 ## usethis namespace: end
 NULL
+
+#' @title Force R CMD CHECK to treat packages as imported.
+#'
+#' @note
+#' This allows us to force dependencies to be considered in the package (particularly necessary with R6 classes).
+#' @return Nothing
+#' @keywords internal
+#'
+.ignore_unused_imports <- function() {
+  lubridate::seconds_to_period(1)
+  invisible()
+}
