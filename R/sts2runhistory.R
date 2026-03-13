@@ -142,7 +142,7 @@ STS2RunHistory <- R6Class("STS2RunHistory",
     poss_outcomes <- c("win", "loss", "abandoned")
     outcome <- outcome[outcome %in% poss_outcomes]
     STS2RunHistory$new(
-      self$runs[which(sapply(self$runs, \(x) {tolower(x$get_outcome()) %in% outcome}))],
+      self$runs[which(sapply(self$runs, \(x) {tolower(x$outcome) %in% outcome}))],
       steamid = self$ownerid,
       filtersteps = c(self$filtersteps, .filtertext)
       )
@@ -159,24 +159,102 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' @note
   #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
   #'
-  filter_byascension = function(ascension = 0, .filtertext = "filtered by ascension") {
-    ascension <- unique(max(min(ascension, 10), 0))
+  filter_ascension = function(ascension = 0, .filtertext = "filtered by ascension") {
+    ascension <- unique(pmax(pmin(ascension, 10), 0))
     STS2RunHistory$new(
       self$runs[which(sapply(self$runs, \(x) {x$ascension %in% ascension}))],
       steamid = self$ownerid,
       filtersteps = c(self$filtersteps, .filtertext)
       )
+  },
+
+  #' @description
+  #' Retrieve runs with desired player count across the run history.
+  #'
+  #' @param players The player count/s to retrieve data for.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
+  #'
+  #' @returns An `STS2RunHistory` object containing only selected player count/s
+  #'
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  filter_playercount = function(players = 1, .filtertext = "filtered by player count") {
+    players <- unique(pmax(pmin(players, 4), 1))
+    STS2RunHistory$new(
+      self$runs[which(sapply(self$runs, \(x) {x$numplayers %in% players}))],
+      steamid = self$ownerid,
+      filtersteps = c(self$filtersteps, .filtertext)
+    )
+  },
+
+  #' @description
+  #' Retrieve runs with desired patch version across the run history.
+  #'
+  #' @param cond A condition (e.g. "=" or ">").
+  #' @param patch The version to compare runs against.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
+  #'
+  #' @returns An `STS2RunHistory` object containing only selected patch version/s
+  #'
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  filter_version = function(cond = "==", patch, .filtertext = "filtered by version") {
+    # Handle
+    if (missing(patch)) {
+      patch <- cond
+      cond <- "=="
+    }
+    STS2RunHistory$new(
+      self$runs[.compare_version(get_field(self$runs, "build_id"), cond, patch)],
+      steamid = self$ownerid,
+      filtersteps = c(self$filtersteps, .filtertext)
+      )
+  },
+
+  #' @description
+  #' Retrieve runs with desired floor count across the run history.
+  #'
+  #' @param floors The floor count/s to retrieve data for.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
+  #'
+  #' @returns An `STS2RunHistory` object containing only selected floor count/s
+  #'
+  #' @note
+  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  filter_floorcount = function(floors, .filtertext = "filtered by number of floors") {
+    # Clamp at floor 1, but max floors can be whatever
+    floors <- unique(pmax(floors, 1))
+    STS2RunHistory$new(
+      self$runs[which(sapply(self$runs, \(x) {x$numfloors %in% floors}))],
+      steamid = self$ownerid,
+      filtersteps = c(self$filtersteps, .filtertext)
+    )
+  },
+
+  #' @description
+  #' Generate a summary dataframe for the run history.
+  #'
+  #' @returns An `data.frame` object containing a quick summary of the run.
+  #'
+  generate_summary = function() {
+    fields <- c("seed", "ascension", "game_mode", "build_id", "numplayers", "start_time", "run_time", "outcome", "killed_by_encounter", "killed_by_event")
+    listout <- lapply(fields, \(x){get_field(self$runs, x)})
+    names(listout) <- fields
+    for (i in 1:4) {
+      listout[[paste0("player", i)]] <- sapply(self$runs, \(x) {tryCatch(x$players[[i]]$playercharacter, error = function(e){NA})})
+    }
+    out <- as.data.frame(listout)
+    out$start_time <- lubridate::as_datetime(out$start_time)
+    out$run_time <- lubridate::seconds_to_period(out$run_time)
+    return(out)
   }
 
-  # generate_summary = function() {
-  #   # TODO: Finish
-  #   seeds <- sapply(self$runs, \(x) (x$seed))
-  #   ascensions <- sapply(self$runs, \(x) (x$ascension))
-  #   gamemode <- sapply(self$runs, \(x) (x$game_mode))
-  # }
-
   # TODO: A way to filter runs by date
-  # TODO: A way to filter runs
+  # TODO: A way to filter by gamemode
+
   ),
   private = list())
 
@@ -193,4 +271,9 @@ length.STS2RunHistory <- function(x) {
 #' @export
 `[[.STS2RunHistory` <- function(x, i, exact = TRUE) {
   x$runs[[i, exact = exact]]
+}
+
+#' @export
+summary.STS2RunHistory <- function(object, ...) {
+  object$generate_summary()
 }

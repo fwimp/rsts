@@ -17,6 +17,14 @@ An \code{STS2RunHistory} object containing only selected seeds.
 An \code{STS2RunHistory} object containing only selected outcomes.
 
 An \code{STS2RunHistory} object containing only selected ascensions.
+
+An \code{STS2RunHistory} object containing only selected player count/s
+
+An \code{STS2RunHistory} object containing only selected patch version/s
+
+An \code{STS2RunHistory} object containing only selected floor count/s
+
+An \code{data.frame} object containing a quick summary of the run.
 }
 \description{
 This is the general holding class for a full history of sts2 runs.
@@ -24,6 +32,12 @@ This is the general holding class for a full history of sts2 runs.
 It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
 }
 \note{
+\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+
+\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+
+\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+
 \code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
 
 \code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
@@ -53,7 +67,11 @@ It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
 \item \href{#method-STS2RunHistory-filter_seed}{\code{STS2RunHistory$filter_seed()}}
 \item \href{#method-STS2RunHistory-filter_character}{\code{STS2RunHistory$filter_character()}}
 \item \href{#method-STS2RunHistory-filter_outcome}{\code{STS2RunHistory$filter_outcome()}}
-\item \href{#method-STS2RunHistory-filter_byascension}{\code{STS2RunHistory$filter_byascension()}}
+\item \href{#method-STS2RunHistory-filter_ascension}{\code{STS2RunHistory$filter_ascension()}}
+\item \href{#method-STS2RunHistory-filter_playercount}{\code{STS2RunHistory$filter_playercount()}}
+\item \href{#method-STS2RunHistory-filter_version}{\code{STS2RunHistory$filter_version()}}
+\item \href{#method-STS2RunHistory-filter_floorcount}{\code{STS2RunHistory$filter_floorcount()}}
+\item \href{#method-STS2RunHistory-generate_summary}{\code{STS2RunHistory$generate_summary()}}
 \item \href{#method-STS2RunHistory-clone}{\code{STS2RunHistory$clone()}}
 }
 }
@@ -199,12 +217,12 @@ Retrieve runs with desired outcome/s across the run history.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-STS2RunHistory-filter_byascension"></a>}}
-\if{latex}{\out{\hypertarget{method-STS2RunHistory-filter_byascension}{}}}
-\subsection{Method \code{filter_byascension()}}{
+\if{html}{\out{<a id="method-STS2RunHistory-filter_ascension"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-filter_ascension}{}}}
+\subsection{Method \code{filter_ascension()}}{
 Retrieve runs with desired ascensions across the run history.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$filter_byascension(
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$filter_ascension(
   ascension = 0,
   .filtertext = "filtered by ascension"
 )}\if{html}{\out{</div>}}
@@ -219,6 +237,85 @@ Retrieve runs with desired ascensions across the run history.
 }
 \if{html}{\out{</div>}}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2RunHistory-filter_playercount"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-filter_playercount}{}}}
+\subsection{Method \code{filter_playercount()}}{
+Retrieve runs with desired player count across the run history.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$filter_playercount(
+  players = 1,
+  .filtertext = "filtered by player count"
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{players}}{The player count/s to retrieve data for.}
+
+\item{\code{.filtertext}}{The text to add to the filter list (mostly used internally).}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2RunHistory-filter_version"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-filter_version}{}}}
+\subsection{Method \code{filter_version()}}{
+Retrieve runs with desired patch version across the run history.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$filter_version(
+  cond = "==",
+  patch,
+  .filtertext = "filtered by version"
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{cond}}{A condition (e.g. "=" or ">").}
+
+\item{\code{patch}}{The version to compare runs against.}
+
+\item{\code{.filtertext}}{The text to add to the filter list (mostly used internally).}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2RunHistory-filter_floorcount"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-filter_floorcount}{}}}
+\subsection{Method \code{filter_floorcount()}}{
+Retrieve runs with desired floor count across the run history.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$filter_floorcount(
+  floors,
+  .filtertext = "filtered by number of floors"
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{floors}}{The floor count/s to retrieve data for.}
+
+\item{\code{.filtertext}}{The text to add to the filter list (mostly used internally).}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2RunHistory-generate_summary"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-generate_summary}{}}}
+\subsection{Method \code{generate_summary()}}{
+Generate a summary dataframe for the run history.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$generate_summary()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-STS2RunHistory-clone"></a>}}

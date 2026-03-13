@@ -7,7 +7,7 @@
 format_sts2id(id)
 }
 \arguments{
-\item{id}{}
+\item{id}{The id/s to format.}
 }
 \value{
 The formatted ids.

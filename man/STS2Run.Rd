@@ -11,8 +11,6 @@ Nothing (called for side-effect)
 An \code{STS2Player} object or \code{NULL}.
 
 A list of \code{STS2Player} objects containing only selected characters.
-
-The outcome of the run as a string (one of Win, Abandoned, or Loss).
 }
 \description{
 This is the general holding class for an sts2 run.
@@ -57,6 +55,17 @@ It stores the main metadata and lists containing more in-depth run data.
 }
 \if{html}{\out{</div>}}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{outcome}}{The outcome of the run.}
+
+\item{\code{numplayers}}{The number of players in the run.}
+
+\item{\code{numfloors}}{The number of floors in the run.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -64,7 +73,6 @@ It stores the main metadata and lists containing more in-depth run data.
 \item \href{#method-STS2Run-print}{\code{STS2Run$print()}}
 \item \href{#method-STS2Run-get_individual_player_data}{\code{STS2Run$get_individual_player_data()}}
 \item \href{#method-STS2Run-get_character}{\code{STS2Run$get_character()}}
-\item \href{#method-STS2Run-get_outcome}{\code{STS2Run$get_outcome()}}
 \item \href{#method-STS2Run-clone}{\code{STS2Run$clone()}}
 }
 }
@@ -141,16 +149,6 @@ Retrieve data for a character.
 }
 \if{html}{\out{</div>}}
 }
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-STS2Run-get_outcome"></a>}}
-\if{latex}{\out{\hypertarget{method-STS2Run-get_outcome}{}}}
-\subsection{Method \code{get_outcome()}}{
-Get run outcome.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2Run$get_outcome()}\if{html}{\out{</div>}}
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-STS2Run-clone"></a>}}

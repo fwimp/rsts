@@ -78,7 +78,7 @@ STS2Run <- R6Class("STS2Run",
       self$run_time <- rundata$run_time
       self$schema_version <- rundata$schema_version
       self$seed <- rundata$seed
-      self$start_time <- rundata$start_time
+      self$start_time <- lubridate::as_datetime(rundata$start_time)
       self$was_abandoned <- rundata$was_abandoned
       self$win <- rundata$win
       # Map data must be loaded after players.
@@ -102,7 +102,7 @@ STS2Run <- R6Class("STS2Run",
       if (length(self$modifiers) > 0) {
         cli::cli_text("Modifiers: {self$modifiers}")
       }
-      cli::cli_text("Start: {as.POSIXlt(self$start_time)} UTC")
+      cli::cli_text("Start: {self$start_time}")
       cli::cli_text("Duration: {strftime(as.POSIXct('00:00:00', format='%H:%M:%S') + self$run_time, format='%H:%M:%S')}")
       # charcolour <- c("Ironclad" = cli::col_red, "Silent" = cli::col_green, "Regent" = cli::col_yellow, "Necrobinder" = cli::col_magenta, "Defect" = cli::col_blue)
       # chars_fmt <- sapply(self$players, \(x) {charcolour[[x$playercharacter]](x$playercharacter)})
@@ -176,17 +176,28 @@ STS2Run <- R6Class("STS2Run",
       } else {
         self$players[which(sapply(self$players, \(x) {tolower(x$playercharacter) %in% char}))]
       }
-    },
-
-    #' @description
-    #' Get run outcome.
-    #'
-    #' @returns The outcome of the run as a string (one of Win, Abandoned, or Loss).
-    #'
-    get_outcome = function(){
-      if (self$win) {"Win"} else if (self$was_abandoned) {"Abandoned"} else {"Loss"}
     }
   ),
   private = list(
+    .outcome = NULL
+  ),
+  active = list(
+    #' @field outcome The outcome of the run.
+    outcome = function(){
+      if (is.null(private$.outcome)) {
+        private$.outcome <- if (self$win) {"Win"} else if (self$was_abandoned) {"Abandoned"} else {"Loss"}
+      }
+      private$.outcome
+    },
+
+    #' @field numplayers The number of players in the run.
+    numplayers = function(){
+      length(self$players)
+    },
+
+    #' @field numfloors The number of floors in the run.
+    numfloors = function(){
+      length(self$map)
+    }
   )
 )
