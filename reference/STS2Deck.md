@@ -5,15 +5,14 @@ main card data for the player.
 
 ## Value
 
-A new `STS2Cards` object.
-
-Nothing (called for side-effect)
+A new STS2Deck object.
 
 ## Public fields
 
 - `player`:
 
-  The `STS2Player` object this deck belongs to.
+  The [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md)
+  object this deck belongs to.
 
 - `cards`:
 
@@ -60,17 +59,18 @@ Create a new deck object from player data.
 - `carddata`:
 
   The subset of the list output from jsonlite, usually passed in via
-  `STS2Player`.
+  [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md).
 
 - `player`:
 
-  The `STS2Player` object this deck belongs to.
+  The [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md)
+  object this deck belongs to.
 
 ------------------------------------------------------------------------
 
 ### Method [`print()`](https://rdrr.io/r/base/print.html)
 
-Print an `STS2Cards` object.
+Print an STS2Deck object.
 
 #### Usage
 

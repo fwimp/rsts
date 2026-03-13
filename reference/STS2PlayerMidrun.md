@@ -5,7 +5,7 @@ run.
 
 ## Value
 
-A new `STS2PlayerMidrun` object.
+A new STS2PlayerMidrun object.
 
 ## Note
 
@@ -17,11 +17,13 @@ they entered the fight with more than 0 HP.
 
 - `floor`:
 
-  The `STS2Floor` object this midrun object refers to.
+  The [STS2Floor](https://fwimp.github.io/rsts/reference/STS2Floor.md)
+  object this midrun object refers to.
 
 - `player`:
 
-  The `STS2Player` object this midrun object refers to.
+  The [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md)
+  object this midrun object refers to.
 
 - `current_gold`:
 
@@ -166,15 +168,18 @@ Create a new mid-run player object from player data.
 - `playerstats`:
 
   The individual player_stats output from jsonlite, usually passed in
-  via `STS2Player`.
+  via
+  [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md).
 
 - `floor`:
 
-  The `STS2Floor` object this midrun object refers to.
+  The [STS2Floor](https://fwimp.github.io/rsts/reference/STS2Floor.md)
+  object this midrun object refers to.
 
 - `player`:
 
-  The `STS2Player` object this midrun object refers to.
+  The [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md)
+  object this midrun object refers to.
 
 ------------------------------------------------------------------------
 

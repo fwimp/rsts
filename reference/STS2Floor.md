@@ -4,7 +4,7 @@ This is the general holding class for a sts2 floor.
 
 ## Value
 
-A new `STS2Floor` object.
+A new STS2Floor object.
 
 ## Public fields
 
@@ -14,7 +14,8 @@ A new `STS2Floor` object.
 
 - `map`:
 
-  The `STS2Map` object this floor belongs to.
+  The [STS2Map](https://fwimp.github.io/rsts/reference/STS2Map.md)
+  object this floor belongs to.
 
 - `floor_type`:
 
@@ -23,7 +24,8 @@ A new `STS2Floor` object.
 - `player_stats`:
 
   The stats of the player/s at the end of this floor. A list of
-  `STS2PlayerMidrun` objects.
+  [STS2PlayerMidrun](https://fwimp.github.io/rsts/reference/STS2PlayerMidrun.md)
+  objects.
 
 - `turns_taken`:
 
@@ -64,7 +66,7 @@ Create a new floor object from floor data.
 - `floordata`:
 
   The individual floor-level output from jsonlite, usually passed in via
-  `STS2Map`.
+  [STS2Map](https://fwimp.github.io/rsts/reference/STS2Map.md).
 
 - `act`:
 
@@ -72,7 +74,8 @@ Create a new floor object from floor data.
 
 - `map`:
 
-  The `STS2Map` object this floor belongs to.
+  The [STS2Map](https://fwimp.github.io/rsts/reference/STS2Map.md)
+  object this floor belongs to.
 
 ------------------------------------------------------------------------
 

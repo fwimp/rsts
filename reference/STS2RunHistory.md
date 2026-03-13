@@ -6,56 +6,29 @@ It can be indexed like a list (i.e. `x[1]` or `x[[1]]`).
 
 ## Value
 
-A new `STS2RunHistory` object.
+A new STS2RunHistory object.
 
-Nothing (called for side-effect)
+## Filters
 
-A list of `STS2Player` objects containing only selected characters.
+Any method starting `filter_` returns a new STS2RunHistory object.
 
-An `STS2RunHistory` object containing only selected seeds.
+As such these can be chained together:
 
-An `STS2RunHistory` object containing only selected seeds.
+    myruns <- load_sts_history()
+    myruns$filter_ascension(0)$filter_outcome("Win")
 
-An `STS2RunHistory` object containing only selected outcomes.
+## STS2Run objects
 
-An `STS2RunHistory` object containing only selected ascensions.
-
-An `STS2RunHistory` object containing only selected player count/s
-
-An `STS2RunHistory` object containing only selected patch version/s
-
-An `STS2RunHistory` object containing only selected floor count/s
-
-An `data.frame` object containing a quick summary of the run.
-
-## Note
-
-`STS2Run` objects are passed by reference. As such if you modify a run
-in a filtered history, those changes will appear in the original list.
-
-`STS2Run` objects are passed by reference. As such if you modify a run
-in a filtered history, those changes will appear in the original list.
-
-`STS2Run` objects are passed by reference. As such if you modify a run
-in a filtered history, those changes will appear in the original list.
-
-`STS2Run` objects are passed by reference. As such if you modify a run
-in a filtered history, those changes will appear in the original list.
-
-`STS2Run` objects are passed by reference. As such if you modify a run
-in a filtered history, those changes will appear in the original list.
-
-`STS2Run` objects are passed by reference. As such if you modify a run
-in a filtered history, those changes will appear in the original list.
-
-`STS2Run` objects are passed by reference. As such if you modify a run
-in a filtered history, those changes will appear in the original list.
+[STS2Run](https://fwimp.github.io/rsts/reference/STS2Run.md) objects are
+passed by reference. As such if you modify a run in a filtered history,
+those changes will appear in the original list.
 
 ## Public fields
 
 - `runs`:
 
-  The parsed run logs. A list of `STS2Run` objects.
+  The parsed run logs. A list of
+  [STS2Run](https://fwimp.github.io/rsts/reference/STS2Run.md) objects.
 
 - `ownerid`:
 
@@ -99,7 +72,8 @@ in a filtered history, those changes will appear in the original list.
 
 ### Method `new()`
 
-Create a new run history container from a list of `STS2Run` objects.
+Create a new run history container from a list of
+[STS2Run](https://fwimp.github.io/rsts/reference/STS2Run.md) objects.
 
 #### Usage
 
@@ -109,7 +83,8 @@ Create a new run history container from a list of `STS2Run` objects.
 
 - `historydata`:
 
-  A list of `STS2Run` objects.
+  A list of [STS2Run](https://fwimp.github.io/rsts/reference/STS2Run.md)
+  objects.
 
 - `steamid`:
 
@@ -124,7 +99,7 @@ Create a new run history container from a list of `STS2Run` objects.
 
 ### Method [`print()`](https://rdrr.io/r/base/print.html)
 
-Print an `STS2RunHistory` object.
+Print an STS2RunHistory object.
 
 #### Usage
 
@@ -158,8 +133,6 @@ Retrieve player data for a given player from runs.
   Exclude entries from the list where the desired player is not present.
   (This will result in a list that may be shorter than the number of
   runs in the history.)
-
-  @returns A list of `STS2Player` objects.
 
 ------------------------------------------------------------------------
 

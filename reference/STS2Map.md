@@ -4,7 +4,7 @@ This is the general holding class for STS2 map points.
 
 ## Value
 
-A new `STS2Map` object.
+A new STS2Map object.
 
 ## Public fields
 
@@ -14,7 +14,9 @@ A new `STS2Map` object.
 
 - `floors`:
 
-  The floors in the map. A list of `STS2Floor` objects.
+  The floors in the map. A list of
+  [STS2Floor](https://fwimp.github.io/rsts/reference/STS2Floor.md)
+  objects.
 
 ## Methods
 
@@ -39,11 +41,12 @@ Create a new map object from map data.
 - `mapdata`:
 
   The subset of the list output from jsonlite, usually passed in via
-  `STS2Player`.
+  [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md).
 
 - `run`:
 
-  The `STS2Run` object this map belongs to.
+  The [STS2Run](https://fwimp.github.io/rsts/reference/STS2Run.md)
+  object this map belongs to.
 
 ------------------------------------------------------------------------
 

@@ -12,7 +12,9 @@ get_field(x, fieldname)
 
 - x:
 
-  A list of `STS2Run` or `STS2Player` objects.
+  A list of [STS2Run](https://fwimp.github.io/rsts/reference/STS2Run.md)
+  or [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md)
+  objects.
 
 - fieldname:
 

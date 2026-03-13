@@ -48,32 +48,27 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A new <code>STS2RunHistory</code> object.</p>
-<p>Nothing (called for side-effect)</p>
-<p>A list of <code>STS2Player</code> objects containing only selected characters.</p>
-<p>An <code>STS2RunHistory</code> object containing only selected seeds.</p>
-<p>An <code>STS2RunHistory</code> object containing only selected seeds.</p>
-<p>An <code>STS2RunHistory</code> object containing only selected outcomes.</p>
-<p>An <code>STS2RunHistory</code> object containing only selected ascensions.</p>
-<p>An <code>STS2RunHistory</code> object containing only selected player count/s</p>
-<p>An <code>STS2RunHistory</code> object containing only selected patch version/s</p>
-<p>An <code>STS2RunHistory</code> object containing only selected floor count/s</p>
-<p>An <code>data.frame</code> object containing a quick summary of the run.</p>
+    <p>A new STS2RunHistory object.</p>
     </div>
     <div class="section level2">
-    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
-<p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
-<p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
-<p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
-<p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
-<p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
-<p><code>STS2Run</code> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
+    <h2 id="filters">Filters<a class="anchor" aria-label="anchor" href="#filters"></a></h2>
+
+
+<p>Any method starting <code>filter_</code> returns a new STS2RunHistory object.</p>
+<p>As such these can be chained together:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">myruns</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_sts_history.html">load_sts_history</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">myruns</span><span class="op">$</span><span class="fu">filter_ascension</span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">$</span><span class="fu">filter_outcome</span><span class="op">(</span><span class="st">"Win"</span><span class="op">)</span></span></code></pre><p></p></div>
+    </div>
+    <div class="section level2">
+    <h2 id="sts-run-objects">STS2Run objects<a class="anchor" aria-label="anchor" href="#sts-run-objects"></a></h2>
+
+
+<p><a href="STS2Run.html">STS2Run</a> objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.</p>
     </div>
     <div class="section level2">
     <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
     <p></p><div class="r6-fields"><dl><dt><code>runs</code></dt>
-<dd><p>The parsed run logs. A list of <code>STS2Run</code> objects.</p></dd>
+<dd><p>The parsed run logs. A list of <a href="STS2Run.html">STS2Run</a> objects.</p></dd>
 
 
 <dt><code>ownerid</code></dt>
@@ -107,7 +102,7 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 <li><p><a href="#method-STS2RunHistory-clone"><code>STS2RunHistory$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-STS2RunHistory-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
-<p>Create a new run history container from a list of <code>STS2Run</code> objects.</p><div class="section">
+<p>Create a new run history container from a list of <a href="STS2Run.html">STS2Run</a> objects.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/STS2RunHistory.html">STS2RunHistory</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">historydata</span>, steamid <span class="op">=</span> <span class="cn">NULL</span>, filtersteps <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -115,7 +110,7 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>historydata</code></dt>
-<dd><p>A list of <code>STS2Run</code> objects.</p></dd>
+<dd><p>A list of <a href="STS2Run.html">STS2Run</a> objects.</p></dd>
 
 
 <dt><code>steamid</code></dt>
@@ -131,7 +126,7 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 
 </div><p></p><hr><a id="method-STS2RunHistory-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
-<p>Print an <code>STS2RunHistory</code> object.</p><div class="section">
+<p>Print an STS2RunHistory object.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">STS2RunHistory</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -159,8 +154,7 @@ It can be indexed like a list (i.e. x[1] or x[[1]])."><meta property="og:image" 
 
 
 <dt><code>excludemissing</code></dt>
-<dd><p>Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)</p>
-<p>@returns A list of <code>STS2Player</code> objects.</p></dd>
+<dd><p>Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)</p></dd>
 
 
 </dl><p></p></div>

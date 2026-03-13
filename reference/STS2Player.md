@@ -5,15 +5,14 @@ player data for the run.
 
 ## Value
 
-A new `STS2Player` object.
-
-Nothing (called for side-effect)
+A new STS2Player object.
 
 ## Public fields
 
 - `run`:
 
-  The `STS2Run` object that this player object originates from.
+  The [STS2Run](https://fwimp.github.io/rsts/reference/STS2Run.md)
+  object that this player object originates from.
 
 - `playercharacter`:
 
@@ -21,7 +20,8 @@ Nothing (called for side-effect)
 
 - `deck`:
 
-  The deck of the player at the end of the run. An `STS2Deck` object.
+  The deck of the player at the end of the run. An
+  [STS2Deck](https://fwimp.github.io/rsts/reference/STS2Deck.md) object.
 
 - `id`:
 
@@ -37,7 +37,8 @@ Nothing (called for side-effect)
 
 - `relics`:
 
-  The relics held by the player at the end of the run. An `STS2Relics`
+  The relics held by the player at the end of the run. An
+  [STS2Relics](https://fwimp.github.io/rsts/reference/STS2Relics.md)
   object
 
 ## Active bindings
@@ -71,7 +72,7 @@ Create a new run object from player data.
 - `playerdata`:
 
   The subset of the list output from jsonlite, usually passed in via
-  `STS2Run`.
+  [STS2Run](https://fwimp.github.io/rsts/reference/STS2Run.md).
 
 - `run`:
 
@@ -85,7 +86,7 @@ Create a new run object from player data.
 
 ### Method [`print()`](https://rdrr.io/r/base/print.html)
 
-Print an `STS2Player` object.
+Print an STS2Player object.
 
 #### Usage
 

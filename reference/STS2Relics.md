@@ -5,15 +5,14 @@ the main relic data for the player.
 
 ## Value
 
-A new `STS2Relics` object.
-
-Nothing (called for side-effect)
+A new STS2Relics object.
 
 ## Public fields
 
 - `player`:
 
-  The `STS2Player` object these relics belong to.
+  The [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md)
+  object these relics belong to.
 
 - `relicnames`:
 
@@ -52,17 +51,18 @@ Create a new relics object from player data.
 - `relicdata`:
 
   The subset of the list output from jsonlite, usually passed in via
-  `STS2Player`.
+  [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md).
 
 - `player`:
 
-  The `STS2Player` object these relics belong to.
+  The [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md)
+  object these relics belong to.
 
 ------------------------------------------------------------------------
 
 ### Method [`print()`](https://rdrr.io/r/base/print.html)
 
-Print an `STS2Relics` object.
+Print an STS2Relics object.
 
 #### Usage
 

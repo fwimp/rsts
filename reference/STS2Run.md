@@ -5,13 +5,7 @@ metadata and lists containing more in-depth run data.
 
 ## Value
 
-A new `STS2Run` object.
-
-Nothing (called for side-effect)
-
-An `STS2Player` object or `NULL`.
-
-A list of `STS2Player` objects containing only selected characters.
+A new STS2Run object.
 
 ## Public fields
 
@@ -41,7 +35,8 @@ A list of `STS2Player` objects containing only selected characters.
 
 - `map`:
 
-  A list storing the play-by-play of the run. An `STS2Map` object.
+  A list storing the play-by-play of the run. An
+  [STS2Map](https://fwimp.github.io/rsts/reference/STS2Map.md) object.
 
 - `modifiers`:
 
@@ -53,7 +48,9 @@ A list of `STS2Player` objects containing only selected characters.
 
 - `players`:
 
-  A list of player information. A list of `STS2Player` objects.
+  A list of player information. A list of
+  [STS2Player](https://fwimp.github.io/rsts/reference/STS2Player.md)
+  objects.
 
 - `run_time`:
 
@@ -136,7 +133,7 @@ Create a new run object from data parsed with jsonlite.
 
 ### Method [`print()`](https://rdrr.io/r/base/print.html)
 
-Print an `STS2Run` object.
+Print an STS2Run object.
 
 #### Usage
 
