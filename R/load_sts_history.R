@@ -6,6 +6,7 @@
 #' @param game Which game to retrieve run data for (2 = STS2, 1 = STS), currently only STS2 is implemented.
 #' @param platform Which platform are you running on?
 #' @param players Only analyse runs with this number of players (or `NULL` for all, default).
+#' @param .returnraw Return the raw JSON for runs (mostly for debugging).
 #'
 #' @note
 #' If you provide a range of numbers for the `players` argument e.g. `1:3`, any number of players in this range will be included.
@@ -18,7 +19,7 @@
 #' @examplesIf interactive()
 #' load_sts_history()
 #'
-load_sts_history <- function(path = NULL, id = NULL, profilenum = 1, game = 2, platform = c("windows", "mac", "linux"), players = NULL) {
+load_sts_history <- function(path = NULL, id = NULL, profilenum = 1, game = 2, platform = c("windows", "mac", "linux"), players = NULL, .returnraw = FALSE) {
   # Runs are located at C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\runs\<CHARACTER> on windows for STS1.
   # Runs are located at %APPDATA%/Roaming/SlayTheSpire2/steam/<STEAMID>/profile<x>/saves/history on windows for STS2.
   platform <- match.arg(platform)
@@ -61,12 +62,18 @@ load_sts_history <- function(path = NULL, id = NULL, profilenum = 1, game = 2, p
   run_files <- list.files(path, full.names = TRUE)
   runs <- lapply(run_files, \(x) {
     tryCatch({
-      jsonlite::read_json(x)
+      # Weird shim to force steamIDs to be strings. Otherwise we get weird off-by-n errors due to floating point inprecision.
+      text <- stringr::str_replace_all(readr::read_file(x), ": (\\d{17}),", replacement = ': "\\1",')
+      jsonlite::fromJSON(text, simplifyVector = FALSE)
     }, error = function(e) {
       cli::cli_warn("Error reading run JSON for file {tail(strsplit(x, '/')[[1]], 1)}.")
       NULL
     })
   })
+
+  if (.returnraw) {
+    return(runs)
+  }
 
   runs_parsed <- lapply(runs, \(x) {
     tryCatch({

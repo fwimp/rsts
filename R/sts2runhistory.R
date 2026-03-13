@@ -63,37 +63,26 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' Retrieve player data for a given player from runs.
   #'
   #' @param id The Steam ID of the player data to retrieve (or `NULL` to retrieve the data of the run owner).
-  #' @param excludemissing Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)
   #'
-  get_individual_player_data = function(id = NULL, excludemissing = TRUE) {
+  get_individual_player_data = function(id = NULL) {
     if (is.null(id)) {
-      id <- self$ownerid
+      id <- c(self$ownerid, "1")
       if (is.null(id)) {
         cli::cli_abort("Owner ID not present, nor supplied in an argument.")
       }
     }
     id <- as.character(id)
-    found_playerdata <- lapply(self$runs, \(x) {
-      x$get_individual_player_data(id)
-    })
-    if (excludemissing) {
-      found_playerdata <- found_playerdata[which(!sapply(found_playerdata, is.null))]
-    }
+    found_playerdata <- unlist(get_field(self$runs, "players"))
+    found_playerdata <- found_playerdata[which(get_field(found_playerdata, "id") %in% id)]
+
     return(found_playerdata)
   },
 
   #' @description
-  #' Retrieve data for character/s across the run history.
+  #' Retrieve player data for all players from runs.
   #'
-  #' @param char The character/s to retrieve data for.
-  #' @param onlyowner If TRUE, only retrieve runs where the owner was the character specified.
-  #'
-  get_character = function(char, onlyowner = FALSE) {
-    poss_chars <- c("ironclad", "silent", "regent", "necrobinder", "defect")
-    char <- tolower(char)
-    char <- char[char %in% poss_chars]
-    found_playerdata <- sapply(self$runs, \(x) {x$get_character(char, onlyowner = onlyowner)})
-    unlist(found_playerdata[which(sapply(found_playerdata, \(x) {length(x) > 0}))])
+  get_player_data = function() {
+    unlist(get_field(self$runs, "players"))
   },
 
   #' @description
@@ -118,7 +107,7 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' @param .filtertext The text to add to the filter list (mostly used internally).
   #'
   filter_character = function(char, onlyowner = FALSE, .filtertext = "filtered by character") {
-    runs_with_character <- self$get_character(char, onlyowner = onlyowner)
+    runs_with_character <- private$get_character(char, onlyowner = onlyowner)
     seeds <- unique(sapply(runs_with_character, \(x) x$run$seed))
     self$filter_seed(seeds, .filtertext = .filtertext)
   },
@@ -226,7 +215,15 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   # TODO: A way to filter by gamemode
 
   ),
-  private = list())
+  private = list(
+    get_character = function(char, onlyowner = FALSE) {
+      poss_chars <- c("ironclad", "silent", "regent", "necrobinder", "defect")
+      char <- tolower(char)
+      char <- char[char %in% poss_chars]
+      found_playerdata <- sapply(self$runs, \(x) {x$get_character(char, onlyowner = onlyowner)})
+      unlist(found_playerdata[which(sapply(found_playerdata, \(x) {length(x) > 0}))])
+    }
+  ))
 
 #' @export
 length.STS2RunHistory <- function(x) {

@@ -44,7 +44,7 @@ myruns$filter_ascension(0)$filter_outcome("Win")
 \item \href{#method-STS2RunHistory-new}{\code{STS2RunHistory$new()}}
 \item \href{#method-STS2RunHistory-print}{\code{STS2RunHistory$print()}}
 \item \href{#method-STS2RunHistory-get_individual_player_data}{\code{STS2RunHistory$get_individual_player_data()}}
-\item \href{#method-STS2RunHistory-get_character}{\code{STS2RunHistory$get_character()}}
+\item \href{#method-STS2RunHistory-get_player_data}{\code{STS2RunHistory$get_player_data()}}
 \item \href{#method-STS2RunHistory-filter_seed}{\code{STS2RunHistory$filter_seed()}}
 \item \href{#method-STS2RunHistory-filter_character}{\code{STS2RunHistory$filter_character()}}
 \item \href{#method-STS2RunHistory-filter_outcome}{\code{STS2RunHistory$filter_outcome()}}
@@ -100,37 +100,26 @@ Print an \link{STS2RunHistory} object.
 \subsection{Method \code{get_individual_player_data()}}{
 Retrieve player data for a given player from runs.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_individual_player_data(id = NULL, excludemissing = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_individual_player_data(id = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{id}}{The Steam ID of the player data to retrieve (or \code{NULL} to retrieve the data of the run owner).}
-
-\item{\code{excludemissing}}{Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)}
 }
 \if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-STS2RunHistory-get_character"></a>}}
-\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_character}{}}}
-\subsection{Method \code{get_character()}}{
-Retrieve data for character/s across the run history.
+\if{html}{\out{<a id="method-STS2RunHistory-get_player_data"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-get_player_data}{}}}
+\subsection{Method \code{get_player_data()}}{
+Retrieve player data for all players from runs.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_character(char, onlyowner = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$get_player_data()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{char}}{The character/s to retrieve data for.}
-
-\item{\code{onlyowner}}{If TRUE, only retrieve runs where the owner was the character specified.}
-}
-\if{html}{\out{</div>}}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-STS2RunHistory-filter_seed"></a>}}

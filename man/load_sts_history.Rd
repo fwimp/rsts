@@ -10,7 +10,8 @@ load_sts_history(
   profilenum = 1,
   game = 2,
   platform = c("windows", "mac", "linux"),
-  players = NULL
+  players = NULL,
+  .returnraw = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ load_sts_history(
 \item{platform}{Which platform are you running on?}
 
 \item{players}{Only analyse runs with this number of players (or \code{NULL} for all, default).}
+
+\item{.returnraw}{Return the raw JSON for runs (mostly for debugging).}
 }
 \value{
 The parsed run data.
