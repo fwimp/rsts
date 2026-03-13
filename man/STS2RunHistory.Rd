@@ -4,52 +4,33 @@
 \alias{STS2RunHistory}
 \title{Slay the Spire 2 run history (R6).}
 \value{
-A new \code{STS2RunHistory} object.
-
-Nothing (called for side-effect)
-
-A list of \code{STS2Player} objects containing only selected characters.
-
-An \code{STS2RunHistory} object containing only selected seeds.
-
-An \code{STS2RunHistory} object containing only selected seeds.
-
-An \code{STS2RunHistory} object containing only selected outcomes.
-
-An \code{STS2RunHistory} object containing only selected ascensions.
-
-An \code{STS2RunHistory} object containing only selected player count/s
-
-An \code{STS2RunHistory} object containing only selected patch version/s
-
-An \code{STS2RunHistory} object containing only selected floor count/s
-
-An \code{data.frame} object containing a quick summary of the run.
+A new \link{STS2RunHistory} object.
 }
 \description{
 This is the general holding class for a full history of sts2 runs.
 
 It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
 }
-\note{
-\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+\section{Filters}{
 
-\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+Any method starting \code{filter_} returns a new \link{STS2RunHistory} object.
 
-\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+As such these can be chained together:
 
-\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
-
-\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
-
-\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
-
-\code{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{myruns <- load_sts_history()
+myruns$filter_ascension(0)$filter_outcome("Win")
+}\if{html}{\out{</div>}}
 }
+
+\section{STS2Run objects}{
+
+\link{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+}
+
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{runs}}{The parsed run logs. A list of \code{STS2Run} objects.}
+\item{\code{runs}}{The parsed run logs. A list of \link{STS2Run} objects.}
 
 \item{\code{ownerid}}{The steam ID of the run history owner.}
 
@@ -79,7 +60,7 @@ It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
 \if{html}{\out{<a id="method-STS2RunHistory-new"></a>}}
 \if{latex}{\out{\hypertarget{method-STS2RunHistory-new}{}}}
 \subsection{Method \code{new()}}{
-Create a new run history container from a list of \code{STS2Run} objects.
+Create a new run history container from a list of \link{STS2Run} objects.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$new(historydata, steamid = NULL, filtersteps = NULL)}\if{html}{\out{</div>}}
 }
@@ -87,7 +68,7 @@ Create a new run history container from a list of \code{STS2Run} objects.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{historydata}}{A list of \code{STS2Run} objects.}
+\item{\code{historydata}}{A list of \link{STS2Run} objects.}
 
 \item{\code{steamid}}{The owner's steamid (for differentiating in the case of multiplayer runs).}
 
@@ -100,7 +81,7 @@ Create a new run history container from a list of \code{STS2Run} objects.
 \if{html}{\out{<a id="method-STS2RunHistory-print"></a>}}
 \if{latex}{\out{\hypertarget{method-STS2RunHistory-print}{}}}
 \subsection{Method \code{print()}}{
-Print an \code{STS2RunHistory} object.
+Print an \link{STS2RunHistory} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$print(...)}\if{html}{\out{</div>}}
 }
@@ -127,9 +108,7 @@ Retrieve player data for a given player from runs.
 \describe{
 \item{\code{id}}{The Steam ID of the player data to retrieve (or \code{NULL} to retrieve the data of the run owner).}
 
-\item{\code{excludemissing}}{Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)
-
-@returns A list of \code{STS2Player} objects.}
+\item{\code{excludemissing}}{Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)}
 }
 \if{html}{\out{</div>}}
 }

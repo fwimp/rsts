@@ -4,7 +4,7 @@
 \alias{STS2Map}
 \title{Map points in a Slay The Spire 2 run (R6).}
 \value{
-A new \code{STS2Map} object.
+A new \link{STS2Map} object.
 }
 \description{
 This is the general holding class for STS2 map points.
@@ -14,7 +14,7 @@ This is the general holding class for STS2 map points.
 \describe{
 \item{\code{run}}{The run}
 
-\item{\code{floors}}{The floors in the map. A list of \code{STS2Floor} objects.}
+\item{\code{floors}}{The floors in the map. A list of \link{STS2Floor} objects.}
 }
 \if{html}{\out{</div>}}
 }
@@ -37,9 +37,9 @@ Create a new map object from map data.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{mapdata}}{The subset of the list output from jsonlite, usually passed in via \code{STS2Player}.}
+\item{\code{mapdata}}{The subset of the list output from jsonlite, usually passed in via \link{STS2Player}.}
 
-\item{\code{run}}{The \code{STS2Run} object this map belongs to.}
+\item{\code{run}}{The \link{STS2Run} object this map belongs to.}
 }
 \if{html}{\out{</div>}}
 }

@@ -4,7 +4,7 @@
 \alias{STS2Floor}
 \title{Slay the Spire 2 floor (R6).}
 \value{
-A new \code{STS2Floor} object.
+A new \link{STS2Floor} object.
 }
 \description{
 This is the general holding class for a sts2 floor.
@@ -14,11 +14,11 @@ This is the general holding class for a sts2 floor.
 \describe{
 \item{\code{act}}{The act this floor appeared in.}
 
-\item{\code{map}}{The \code{STS2Map} object this floor belongs to.}
+\item{\code{map}}{The \link{STS2Map} object this floor belongs to.}
 
 \item{\code{floor_type}}{The type of floor that this is.}
 
-\item{\code{player_stats}}{The stats of the player/s at the end of this floor. A list of \code{STS2PlayerMidrun} objects.}
+\item{\code{player_stats}}{The stats of the player/s at the end of this floor. A list of \link{STS2PlayerMidrun} objects.}
 
 \item{\code{turns_taken}}{The number of turns this room took.}
 
@@ -49,11 +49,11 @@ Create a new floor object from floor data.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{floordata}}{The individual floor-level output from jsonlite, usually passed in via \code{STS2Map}.}
+\item{\code{floordata}}{The individual floor-level output from jsonlite, usually passed in via \link{STS2Map}.}
 
 \item{\code{act}}{The act this floor appeared in.}
 
-\item{\code{map}}{The \code{STS2Map} object this floor belongs to.}
+\item{\code{map}}{The \link{STS2Map} object this floor belongs to.}
 }
 \if{html}{\out{</div>}}
 }

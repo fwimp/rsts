@@ -6,13 +6,13 @@
 #'
 STS2Player <- R6Class("STS2Player",
   public = list(
-    #' @field run The `STS2Run` object that this player object originates from.
+    #' @field run The [STS2Run] object that this player object originates from.
     run = NULL,
 
     #' @field playercharacter The character that the player was playing
     playercharacter = "",
 
-    #' @field deck The deck of the player at the end of the run. An `STS2Deck` object.
+    #' @field deck The deck of the player at the end of the run. An [STS2Deck] object.
     deck = list(),
 
     #' @field id The steam player id or 1 if single player.
@@ -24,16 +24,16 @@ STS2Player <- R6Class("STS2Player",
     #' @field potions The potions held by the player at the end of the run.
     potions = character(),
 
-    #' @field relics The relics held by the player at the end of the run. An `STS2Relics` object
+    #' @field relics The relics held by the player at the end of the run. An [STS2Relics] object
     relics = NULL,
 
     #' @description
     #' Create a new run object from player data.
     #'
-    #' @param playerdata The subset of the list output from jsonlite, usually passed in via `STS2Run`.
+    #' @param playerdata The subset of the list output from jsonlite, usually passed in via [STS2Run].
     #' @param run The STS2Run object that this player object originates from.
     #' @param idx The index within the player list from which this player originates.
-    #' @returns A new `STS2Player` object.
+    #' @returns A new [STS2Player] object.
     #'
     initialize = function(playerdata, run = NULL, idx = 1) {
       self$playercharacter <- format_sts2id(playerdata$character)
@@ -49,13 +49,11 @@ STS2Player <- R6Class("STS2Player",
     },
 
     #' @description
-    #' Print an `STS2Player` object.
+    #' Print an [STS2Player] object.
     #'
     #' @param ... Arguments to pass to `print()`.
     #' @param full Whether to show the full deck and relics of the player.
     #' @param floor Whether to show the floor on which a card/relic was obtained when `full = TRUE`.
-    #'
-    #' @returns Nothing (called for side-effect)
     #'
     print = function(..., full = FALSE, floor = FALSE) {
       # charcolour <- c("Ironclad" = cli::col_red, "Silent" = cli::col_green, "Regent" = cli::col_yellow, "Necrobinder" = cli::col_magenta, "Defect" = cli::col_blue)
@@ -85,7 +83,7 @@ STS2Player <- R6Class("STS2Player",
   active = list(
     #' @field max_health The max health of the character at the end of the run.
     max_health = function() {
-      # Note this only works when the `STS2Map` class has been initialised.
+      # Note this only works when the [STS2Map] class has been initialised.
       # As such this is sort of a deferred-calculation system
       if (is.null(private$.max_health)) {
         private$find_max_health()

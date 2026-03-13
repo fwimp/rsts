@@ -6,7 +6,7 @@
 #'
 STS2Deck <- R6Class("STS2Deck",
   public = list(
-    #' @field player The `STS2Player` object this deck belongs to.
+    #' @field player The [STS2Player] object this deck belongs to.
     player = NULL,
 
     #' @field cards A list of cards.
@@ -26,9 +26,9 @@ STS2Deck <- R6Class("STS2Deck",
     #' @description
     #' Create a new deck object from player data.
     #'
-    #' @param carddata The subset of the list output from jsonlite, usually passed in via `STS2Player`.
-    #' @param player The `STS2Player` object this deck belongs to.
-    #' @returns A new `STS2Cards` object.
+    #' @param carddata The subset of the list output from jsonlite, usually passed in via [STS2Player].
+    #' @param player The [STS2Player] object this deck belongs to.
+    #' @returns A new [STS2Deck] object.
     #'
     initialize = function(carddata, player = NULL) {
       # browser()
@@ -51,12 +51,10 @@ STS2Deck <- R6Class("STS2Deck",
       }
     },
     #' @description
-    #' Print an `STS2Cards` object.
+    #' Print an [STS2Deck] object.
     #'
     #' @param ... Unused.
     #' @param floor Whether to show the floor on which a card was obtained.
-    #'
-    #' @returns Nothing (called for side-effect)
     #'
     print = function(..., floor = FALSE) {
       if (length(self) < 1) {

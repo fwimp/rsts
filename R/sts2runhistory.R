@@ -7,7 +7,7 @@
 #'
 STS2RunHistory <- R6Class("STS2RunHistory",
   public = list(
-  #' @field runs The parsed run logs. A list of `STS2Run` objects.
+  #' @field runs The parsed run logs. A list of [STS2Run] objects.
   runs = list(),
   #' @field ownerid The steam ID of the run history owner.
   ownerid = "",
@@ -15,13 +15,26 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   filtersteps = NULL,
 
   #' @description
-  #' Create a new run history container from a list of `STS2Run` objects.
+  #' Create a new run history container from a list of [STS2Run] objects.
   #'
-  #' @param historydata A list of `STS2Run` objects.
+  #' @param historydata A list of [STS2Run] objects.
   #' @param steamid The owner's steamid (for differentiating in the case of multiplayer runs).
   #' @param filtersteps The filtering steps performed on this run history.
   #'
-  #' @returns A new `STS2RunHistory` object.
+  #' @section Filters:
+  #' Any method starting `filter_` returns a new [STS2RunHistory] object.
+  #'
+  #' As such these can be chained together:
+  #'
+  #' ```r
+  #' myruns <- load_sts_history()
+  #' myruns$filter_ascension(0)$filter_outcome("Win")
+  #' ```
+  #'
+  #' @section STS2Run objects:
+  #' [STS2Run] objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
+  #'
+  #' @returns A new [STS2RunHistory] object.
   #'
   initialize = function(historydata, steamid = NULL, filtersteps = NULL) {
     self$runs <- historydata
@@ -30,11 +43,9 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   },
 
   #' @description
-  #' Print an `STS2RunHistory` object.
+  #' Print an [STS2RunHistory] object.
   #'
   #' @param ... Unused.
-  #'
-  #' @returns Nothing (called for side-effect)
   #'
   print = function(...) {
     cli::cli_text("Run history for ID {self$ownerid}:\n")
@@ -53,8 +64,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #'
   #' @param id The Steam ID of the player data to retrieve (or `NULL` to retrieve the data of the run owner).
   #' @param excludemissing Exclude entries from the list where the desired player is not present. (This will result in a list that may be shorter than the number of runs in the history.)
-  #'
-  #'  @returns A list of `STS2Player` objects.
   #'
   get_individual_player_data = function(id = NULL, excludemissing = TRUE) {
     if (is.null(id)) {
@@ -79,8 +88,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' @param char The character/s to retrieve data for.
   #' @param onlyowner If TRUE, only retrieve runs where the owner was the character specified.
   #'
-  #' @returns A list of `STS2Player` objects containing only selected characters.
-  #'
   get_character = function(char, onlyowner = FALSE) {
     poss_chars <- c("ironclad", "silent", "regent", "necrobinder", "defect")
     char <- tolower(char)
@@ -94,11 +101,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #'
   #' @param seed The seed (or seeds) that one wishes to retrieve.
   #' @param .filtertext The text to add to the filter list (mostly used internally).
-  #'
-  #' @returns An `STS2RunHistory` object containing only selected seeds.
-  #'
-  #' @note
-  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
   #'
   filter_seed = function(seed, .filtertext = "filtered by seed") {
     STS2RunHistory$new(
@@ -115,11 +117,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' @param onlyowner If TRUE, only retrieve runs where the owner was the character specified.
   #' @param .filtertext The text to add to the filter list (mostly used internally).
   #'
-  #' @returns An `STS2RunHistory` object containing only selected seeds.
-  #'
-  #' @note
-  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
-  #'
   filter_character = function(char, onlyowner = FALSE, .filtertext = "filtered by character") {
     runs_with_character <- self$get_character(char, onlyowner = onlyowner)
     seeds <- unique(sapply(runs_with_character, \(x) x$run$seed))
@@ -131,11 +128,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #'
   #' @param outcome The outcome/s to retrieve data for.
   #' @param .filtertext The text to add to the filter list (mostly used internally).
-  #'
-  #' @returns An `STS2RunHistory` object containing only selected outcomes.
-  #'
-  #' @note
-  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
   #'
   filter_outcome = function(outcome, .filtertext = "filtered by outcome") {
     outcome <- tolower(outcome)
@@ -154,11 +146,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' @param ascension The ascensions to retrieve data for.
   #' @param .filtertext The text to add to the filter list (mostly used internally).
   #'
-  #' @returns An `STS2RunHistory` object containing only selected ascensions.
-  #'
-  #' @note
-  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
-  #'
   filter_ascension = function(ascension = 0, .filtertext = "filtered by ascension") {
     ascension <- unique(pmax(pmin(ascension, 10), 0))
     STS2RunHistory$new(
@@ -173,11 +160,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #'
   #' @param players The player count/s to retrieve data for.
   #' @param .filtertext The text to add to the filter list (mostly used internally).
-  #'
-  #' @returns An `STS2RunHistory` object containing only selected player count/s
-  #'
-  #' @note
-  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
   #'
   filter_playercount = function(players = 1, .filtertext = "filtered by player count") {
     players <- unique(pmax(pmin(players, 4), 1))
@@ -194,11 +176,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' @param cond A condition (e.g. "=" or ">").
   #' @param patch The version to compare runs against.
   #' @param .filtertext The text to add to the filter list (mostly used internally).
-  #'
-  #' @returns An `STS2RunHistory` object containing only selected patch version/s
-  #'
-  #' @note
-  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
   #'
   filter_version = function(cond = "==", patch, .filtertext = "filtered by version") {
     # Handle
@@ -219,11 +196,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' @param floors The floor count/s to retrieve data for.
   #' @param .filtertext The text to add to the filter list (mostly used internally).
   #'
-  #' @returns An `STS2RunHistory` object containing only selected floor count/s
-  #'
-  #' @note
-  #' `STS2Run` objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
-  #'
   filter_floorcount = function(floors, .filtertext = "filtered by number of floors") {
     # Clamp at floor 1, but max floors can be whatever
     floors <- unique(pmax(floors, 1))
@@ -236,8 +208,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
 
   #' @description
   #' Generate a summary dataframe for the run history.
-  #'
-  #' @returns An `data.frame` object containing a quick summary of the run.
   #'
   generate_summary = function() {
     fields <- c("seed", "ascension", "game_mode", "build_id", "numplayers", "start_time", "run_time", "outcome", "killed_by_encounter", "killed_by_event")

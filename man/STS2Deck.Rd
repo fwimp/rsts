@@ -4,9 +4,7 @@
 \alias{STS2Deck}
 \title{Set of Slay the Spire 2 Cards (R6).}
 \value{
-A new \code{STS2Cards} object.
-
-Nothing (called for side-effect)
+A new \link{STS2Deck} object.
 }
 \description{
 This is the general holding class for a set of sts2 Cards.
@@ -15,7 +13,7 @@ It stores the main card data for the player.
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{player}}{The \code{STS2Player} object this deck belongs to.}
+\item{\code{player}}{The \link{STS2Player} object this deck belongs to.}
 
 \item{\code{cards}}{A list of cards.}
 
@@ -49,9 +47,9 @@ Create a new deck object from player data.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{carddata}}{The subset of the list output from jsonlite, usually passed in via \code{STS2Player}.}
+\item{\code{carddata}}{The subset of the list output from jsonlite, usually passed in via \link{STS2Player}.}
 
-\item{\code{player}}{The \code{STS2Player} object this deck belongs to.}
+\item{\code{player}}{The \link{STS2Player} object this deck belongs to.}
 }
 \if{html}{\out{</div>}}
 }
@@ -60,7 +58,7 @@ Create a new deck object from player data.
 \if{html}{\out{<a id="method-STS2Deck-print"></a>}}
 \if{latex}{\out{\hypertarget{method-STS2Deck-print}{}}}
 \subsection{Method \code{print()}}{
-Print an \code{STS2Cards} object.
+Print an \link{STS2Deck} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{STS2Deck$print(..., floor = FALSE)}\if{html}{\out{</div>}}
 }

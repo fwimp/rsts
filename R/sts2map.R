@@ -8,15 +8,15 @@ STS2Map <- R6Class("STS2Map",
     #' @field run The run
     run = NULL,
 
-    #' @field floors The floors in the map. A list of `STS2Floor` objects.
+    #' @field floors The floors in the map. A list of [STS2Floor] objects.
     floors = list(),
 
     #' @description
     #' Create a new map object from map data.
     #'
-    #' @param mapdata The subset of the list output from jsonlite, usually passed in via `STS2Player`.
-    #' @param run The `STS2Run` object this map belongs to.
-    #' @returns A new `STS2Map` object.
+    #' @param mapdata The subset of the list output from jsonlite, usually passed in via [STS2Player].
+    #' @param run The [STS2Run] object this map belongs to.
+    #' @returns A new [STS2Map] object.
     #'
     initialize = function(mapdata, run = NULL) {
       self$run <- run
@@ -43,13 +43,13 @@ STS2Floor <- R6Class("STS2Floor",
     #' @field act The act this floor appeared in.
     act = 0,
 
-    #' @field map The `STS2Map` object this floor belongs to.
+    #' @field map The [STS2Map] object this floor belongs to.
     map = NULL,
 
     #' @field floor_type The type of floor that this is.
     floor_type = "",
 
-    #' @field player_stats The stats of the player/s at the end of this floor. A list of `STS2PlayerMidrun` objects.
+    #' @field player_stats The stats of the player/s at the end of this floor. A list of [STS2PlayerMidrun] objects.
     player_stats = list(),
 
     #' @field turns_taken The number of turns this room took.
@@ -67,10 +67,10 @@ STS2Floor <- R6Class("STS2Floor",
     #' @description
     #' Create a new floor object from floor data.
     #'
-    #' @param floordata The individual floor-level output from jsonlite, usually passed in via `STS2Map`.
-    #' @param map The `STS2Map` object this floor belongs to.
+    #' @param floordata The individual floor-level output from jsonlite, usually passed in via [STS2Map].
+    #' @param map The [STS2Map] object this floor belongs to.
     #' @param act The act this floor appeared in.
-    #' @returns A new `STS2Floor` object.
+    #' @returns A new [STS2Floor] object.
     #'
     initialize = function(floordata, act = 0, map = NULL) {
       # browser()
@@ -130,10 +130,10 @@ STS2Floor <- R6Class("STS2Floor",
 #'
 STS2PlayerMidrun <- R6Class("STS2PlayerMidrun",
   public = list(
-    #' @field floor The `STS2Floor` object this midrun object refers to.
+    #' @field floor The [STS2Floor] object this midrun object refers to.
     floor = NULL,
 
-    #' @field player The `STS2Player` object this midrun object refers to.
+    #' @field player The [STS2Player] object this midrun object refers to.
     player = NULL,
 
     # Consistent data
@@ -233,10 +233,10 @@ STS2PlayerMidrun <- R6Class("STS2PlayerMidrun",
     #' @description
     #' Create a new mid-run player object from player data.
     #'
-    #' @param playerstats The individual player_stats output from jsonlite, usually passed in via `STS2Player`.
-    #' @param floor The `STS2Floor` object this midrun object refers to.
-    #' @param player The `STS2Player` object this midrun object refers to.
-    #' @returns A new `STS2PlayerMidrun` object.
+    #' @param playerstats The individual player_stats output from jsonlite, usually passed in via [STS2Player].
+    #' @param floor The [STS2Floor] object this midrun object refers to.
+    #' @param player The [STS2Player] object this midrun object refers to.
+    #' @returns A new [STS2PlayerMidrun] object.
     #'
     initialize = function(playerstats, floor = NULL, player = NULL) {
       # browser()

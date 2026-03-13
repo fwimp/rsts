@@ -4,9 +4,7 @@
 \alias{STS2Player}
 \title{Slay the Spire 2 player (R6).}
 \value{
-A new \code{STS2Player} object.
-
-Nothing (called for side-effect)
+A new \link{STS2Player} object.
 }
 \description{
 This is the general holding class for an sts2 player.
@@ -15,11 +13,11 @@ It stores the main player data for the run.
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{run}}{The \code{STS2Run} object that this player object originates from.}
+\item{\code{run}}{The \link{STS2Run} object that this player object originates from.}
 
 \item{\code{playercharacter}}{The character that the player was playing}
 
-\item{\code{deck}}{The deck of the player at the end of the run. An \code{STS2Deck} object.}
+\item{\code{deck}}{The deck of the player at the end of the run. An \link{STS2Deck} object.}
 
 \item{\code{id}}{The steam player id or 1 if single player.}
 
@@ -27,7 +25,7 @@ It stores the main player data for the run.
 
 \item{\code{potions}}{The potions held by the player at the end of the run.}
 
-\item{\code{relics}}{The relics held by the player at the end of the run. An \code{STS2Relics} object}
+\item{\code{relics}}{The relics held by the player at the end of the run. An \link{STS2Relics} object}
 }
 \if{html}{\out{</div>}}
 }
@@ -58,7 +56,7 @@ Create a new run object from player data.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{playerdata}}{The subset of the list output from jsonlite, usually passed in via \code{STS2Run}.}
+\item{\code{playerdata}}{The subset of the list output from jsonlite, usually passed in via \link{STS2Run}.}
 
 \item{\code{run}}{The STS2Run object that this player object originates from.}
 
@@ -71,7 +69,7 @@ Create a new run object from player data.
 \if{html}{\out{<a id="method-STS2Player-print"></a>}}
 \if{latex}{\out{\hypertarget{method-STS2Player-print}{}}}
 \subsection{Method \code{print()}}{
-Print an \code{STS2Player} object.
+Print an \link{STS2Player} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{STS2Player$print(..., full = FALSE, floor = FALSE)}\if{html}{\out{</div>}}
 }

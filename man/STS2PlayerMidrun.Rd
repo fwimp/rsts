@@ -4,7 +4,7 @@
 \alias{STS2PlayerMidrun}
 \title{A Slay the Spire 2 player, mid-run (R6).}
 \value{
-A new \code{STS2PlayerMidrun} object.
+A new \link{STS2PlayerMidrun} object.
 }
 \description{
 This is the general holding class for a sts2 player at a point in the run.
@@ -16,9 +16,9 @@ For example current_hp on a floor where a player dies will be 0, even if they en
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{floor}}{The \code{STS2Floor} object this midrun object refers to.}
+\item{\code{floor}}{The \link{STS2Floor} object this midrun object refers to.}
 
-\item{\code{player}}{The \code{STS2Player} object this midrun object refers to.}
+\item{\code{player}}{The \link{STS2Player} object this midrun object refers to.}
 
 \item{\code{current_gold}}{Current gold.}
 
@@ -101,11 +101,11 @@ Create a new mid-run player object from player data.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{playerstats}}{The individual player_stats output from jsonlite, usually passed in via \code{STS2Player}.}
+\item{\code{playerstats}}{The individual player_stats output from jsonlite, usually passed in via \link{STS2Player}.}
 
-\item{\code{floor}}{The \code{STS2Floor} object this midrun object refers to.}
+\item{\code{floor}}{The \link{STS2Floor} object this midrun object refers to.}
 
-\item{\code{player}}{The \code{STS2Player} object this midrun object refers to.}
+\item{\code{player}}{The \link{STS2Player} object this midrun object refers to.}
 }
 \if{html}{\out{</div>}}
 }

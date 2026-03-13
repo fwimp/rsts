@@ -7,7 +7,7 @@
 get_field(x, fieldname)
 }
 \arguments{
-\item{x}{A list of \code{STS2Run} or \code{STS2Player} objects.}
+\item{x}{A list of \link{STS2Run} or \link{STS2Player} objects.}
 
 \item{fieldname}{The name of the field to retrieve.}
 }

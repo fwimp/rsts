@@ -4,13 +4,7 @@
 \alias{STS2Run}
 \title{Slay the Spire 2 run (R6).}
 \value{
-A new \code{STS2Run} object.
-
-Nothing (called for side-effect)
-
-An \code{STS2Player} object or \code{NULL}.
-
-A list of \code{STS2Player} objects containing only selected characters.
+A new \link{STS2Run} object.
 }
 \description{
 This is the general holding class for an sts2 run.
@@ -31,13 +25,13 @@ It stores the main metadata and lists containing more in-depth run data.
 
 \item{\code{killed_by_event}}{The event that killed the player.}
 
-\item{\code{map}}{A list storing the play-by-play of the run. An \code{STS2Map} object.}
+\item{\code{map}}{A list storing the play-by-play of the run. An \link{STS2Map} object.}
 
 \item{\code{modifiers}}{Any modifiers that the player had turned on.}
 
 \item{\code{platform_type}}{The platform of the game (e.g. steam).}
 
-\item{\code{players}}{A list of player information. A list of \code{STS2Player} objects.}
+\item{\code{players}}{A list of player information. A list of \link{STS2Player} objects.}
 
 \item{\code{run_time}}{The run duration (in seconds).}
 
@@ -99,7 +93,7 @@ Create a new run object from data parsed with jsonlite.
 \if{html}{\out{<a id="method-STS2Run-print"></a>}}
 \if{latex}{\out{\hypertarget{method-STS2Run-print}{}}}
 \subsection{Method \code{print()}}{
-Print an \code{STS2Run} object.
+Print an \link{STS2Run} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{STS2Run$print(..., full = FALSE)}\if{html}{\out{</div>}}
 }

@@ -6,7 +6,7 @@
 #'
 STS2Relics <- R6Class("STS2Relics",
   public = list(
-    #' @field player The `STS2Player` object these relics belong to.
+    #' @field player The [STS2Player] object these relics belong to.
     player = NULL,
     #' @field relicnames A list of relics.
     relicnames = character(),
@@ -20,9 +20,9 @@ STS2Relics <- R6Class("STS2Relics",
     #' @description
     #' Create a new relics object from player data.
     #'
-    #' @param relicdata The subset of the list output from jsonlite, usually passed in via `STS2Player`.
-    #' @param player The `STS2Player` object these relics belong to.
-    #' @returns A new `STS2Relics` object.
+    #' @param relicdata The subset of the list output from jsonlite, usually passed in via [STS2Player].
+    #' @param player The [STS2Player] object these relics belong to.
+    #' @returns A new [STS2Relics] object.
     #'
     initialize = function(relicdata, player = NULL) {
       if (length(relicdata) > 0) {
@@ -34,12 +34,10 @@ STS2Relics <- R6Class("STS2Relics",
     },
 
     #' @description
-    #' Print an `STS2Relics` object.
+    #' Print an [STS2Relics] object.
     #'
     #' @param ... Unused.
     #' @param floor Whether to show the floor on which a card was obtained.
-    #'
-    #' @returns Nothing (called for side-effect)
     #'
     print = function(..., floor = FALSE) {
       floorfound <- ""

@@ -24,7 +24,7 @@ STS2Run <- R6Class("STS2Run",
     #' @field killed_by_event The event that killed the player.
     killed_by_event = "",
 
-    #' @field map A list storing the play-by-play of the run. An `STS2Map` object.
+    #' @field map A list storing the play-by-play of the run. An [STS2Map] object.
     map = list(),
 
     #' @field modifiers Any modifiers that the player had turned on.
@@ -33,7 +33,7 @@ STS2Run <- R6Class("STS2Run",
     #' @field platform_type The platform of the game (e.g. steam).
     platform_type = "",
 
-    #' @field players A list of player information. A list of `STS2Player` objects.
+    #' @field players A list of player information. A list of [STS2Player] objects.
     players = list(),
 
     #' @field run_time The run duration (in seconds).
@@ -62,7 +62,7 @@ STS2Run <- R6Class("STS2Run",
     #'
     #' @param rundata The list output from jsonlite containing the run data.
     #' @param steamid The owner's steamid (for differentiating in the case of multiplayer runs).
-    #' @returns A new `STS2Run` object.
+    #' @returns A new [STS2Run] object.
     #'
     initialize = function(rundata, steamid = NULL) {
       self$ownerid <- as.character(steamid)
@@ -86,12 +86,10 @@ STS2Run <- R6Class("STS2Run",
     },
 
     #' @description
-    #' Print an `STS2Run` object.
+    #' Print an [STS2Run] object.
     #'
     #' @param ... Unused.
     #' @param full Whether to print extra internal run information.
-    #'
-    #' @returns Nothing (called for side-effect)
     #'
     print = function(..., full = FALSE) {
       cli::cli_rule(left = "Seed: {self$seed}")
@@ -137,8 +135,6 @@ STS2Run <- R6Class("STS2Run",
     #'
     #' @param id the Steam ID of the player data to retrieve (or `NULL` to retrieve the data of the run owner).
     #'
-    #' @returns An `STS2Player` object or `NULL`.
-    #'
     get_individual_player_data = function(id = NULL) {
       if (is.null(id)) {
         id <- self$ownerid
@@ -164,8 +160,6 @@ STS2Run <- R6Class("STS2Run",
     #'
     #' @param char The character/s to retrieve data for.
     #' @param onlyowner If TRUE, only retrieve entries where the owner was the character specified.
-    #'
-    #' @returns A list of `STS2Player` objects containing only selected characters.
     #'
     get_character = function(char, onlyowner = FALSE) {
       poss_chars <- c("ironclad", "silent", "regent", "necrobinder", "defect")

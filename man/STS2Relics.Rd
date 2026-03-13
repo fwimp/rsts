@@ -4,9 +4,7 @@
 \alias{STS2Relics}
 \title{Set of Slay the Spire 2 relics (R6).}
 \value{
-A new \code{STS2Relics} object.
-
-Nothing (called for side-effect)
+A new \link{STS2Relics} object.
 }
 \description{
 This is the general holding class for a set of sts2 relics.
@@ -15,7 +13,7 @@ It stores the main relic data for the player.
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{player}}{The \code{STS2Player} object these relics belong to.}
+\item{\code{player}}{The \link{STS2Player} object these relics belong to.}
 
 \item{\code{relicnames}}{A list of relics.}
 
@@ -45,9 +43,9 @@ Create a new relics object from player data.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{relicdata}}{The subset of the list output from jsonlite, usually passed in via \code{STS2Player}.}
+\item{\code{relicdata}}{The subset of the list output from jsonlite, usually passed in via \link{STS2Player}.}
 
-\item{\code{player}}{The \code{STS2Player} object these relics belong to.}
+\item{\code{player}}{The \link{STS2Player} object these relics belong to.}
 }
 \if{html}{\out{</div>}}
 }
@@ -56,7 +54,7 @@ Create a new relics object from player data.
 \if{html}{\out{<a id="method-STS2Relics-print"></a>}}
 \if{latex}{\out{\hypertarget{method-STS2Relics-print}{}}}
 \subsection{Method \code{print()}}{
-Print an \code{STS2Relics} object.
+Print an \link{STS2Relics} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{STS2Relics$print(..., floor = FALSE)}\if{html}{\out{</div>}}
 }

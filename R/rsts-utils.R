@@ -13,7 +13,7 @@ format_sts2id <- function(id) {
 
 #' Get field from a list of runs (or players)
 #'
-#' @param x A list of `STS2Run` or `STS2Player` objects.
+#' @param x A list of [STS2Run] or [STS2Player] objects.
 #' @param fieldname The name of the field to retrieve.
 #'
 #' @returns The formatted ids.
