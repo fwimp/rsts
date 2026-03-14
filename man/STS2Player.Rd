@@ -41,6 +41,7 @@ It stores the main player data for the run.
 \itemize{
 \item \href{#method-STS2Player-new}{\code{STS2Player$new()}}
 \item \href{#method-STS2Player-print}{\code{STS2Player$print()}}
+\item \href{#method-STS2Player-get_cards}{\code{STS2Player$get_cards()}}
 \item \href{#method-STS2Player-clone}{\code{STS2Player$clone()}}
 }
 }
@@ -82,6 +83,23 @@ Print an \link{STS2Player} object.
 \item{\code{full}}{Whether to show the full deck and relics of the player.}
 
 \item{\code{floor}}{Whether to show the floor on which a card/relic was obtained when \code{full = TRUE}.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2Player-get_cards"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2Player-get_cards}{}}}
+\subsection{Method \code{get_cards()}}{
+Retrieve the cards of a player.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2Player$get_cards(ignore_basics = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ignore_basics}}{If TRUE, don't return basic cards.}
 }
 \if{html}{\out{</div>}}
 }

@@ -172,10 +172,33 @@ STS2Run <- R6Class("STS2Run",
       } else {
         self$players[which(sapply(self$players, \(x) {tolower(x$playercharacter) %in% char}))]
       }
+    },
+
+    #' @description
+    #' Retrieve all the cards present in a run.
+    #'
+    #' @param ignore_basics Don't return basic cards.
+    #' @param return_unique Return only 1 entry per unique card.
+    #' @param char The character/s to filter by (or `NULL` to return all).
+    #'
+    get_cards = function(ignore_basics = FALSE, return_unique = FALSE, char = NULL) {
+      cards <- if (!is.null(char)) {
+        poss_chars <- c("ironclad", "silent", "regent", "necrobinder", "defect")
+        char <- tolower(char)
+        char <- char[char %in% poss_chars]
+        unlist(sapply(self$players, \(x) {if (tolower(x$playercharacter) %in% char) {x$get_cards(ignore_basics)} else {character()}}))
+      } else {
+        unlist(sapply(self$players, \(x) {x$get_cards(ignore_basics)}))
+      }
+      if (return_unique) {
+        cards <- unique(cards)
+      }
+      cards
     }
   ),
   private = list(
-    .outcome = NULL
+    .outcome = NULL,
+    .all_cards = NULL
   ),
   active = list(
     #' @field outcome The outcome of the run.

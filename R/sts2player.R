@@ -70,6 +70,21 @@ STS2Player <- R6Class("STS2Player",
         cli::cli_h2("Deck")
         print(self$deck, floor = floor)
       }
+    },
+
+    #' @description
+    #' Retrieve the cards of a player.
+    #'
+    #' @param ignore_basics If TRUE, don't return basic cards.
+    #'
+    get_cards = function(ignore_basics = FALSE) {
+      cards <- self$deck$cards
+      if (ignore_basics) {
+        cards <- cards[!startsWith(cards, "Strike ")]
+        cards <- cards[!startsWith(cards, "Defend ")]
+        # Ignore basics should eventually remove the starter deck entirely, but leave extra copies of starter cards.
+      }
+      cards
     }
   ),
   private = list(

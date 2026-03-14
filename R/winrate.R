@@ -30,7 +30,7 @@ winrate <- function(runhistory, plotit = TRUE, ci = TRUE, samples = 200, lower_q
     cis <- .generate_winrate_cis(winrate_basedf, samples, lower_quant, upper_quant)
     winprop <- dplyr::left_join(winprop, cis, by = dplyr::join_by("character"))
     winprop$character <- factor(winprop$character, levels = c("Ironclad", "Silent", "Regent", "Necrobinder", "Defect"))
-    p <- ggplot2::ggplot(winprop, ggplot2::aes(x = .data$character, y = .data$winrate, fill = .data$character, ymin = .data$lower, ymax = .data$upper)) + ggplot2::geom_col() + ggplot2::geom_errorbar(alpha = 0.5)
+    p <- ggplot2::ggplot(winprop, ggplot2::aes(x = .data$character, y = .data$winrate, fill = .data$character, ymin = .data$lower, ymax = .data$upper)) + ggplot2::geom_col() + ggplot2::geom_errorbar(alpha = 0.5, width = 0.3, linewidth = 0.75)
   } else {
     winprop$character <- factor(winprop$character, levels = c("Ironclad", "Silent", "Regent", "Necrobinder", "Defect"))
     p <- ggplot2::ggplot(winprop, ggplot2::aes(x = .data$character, y = .data$winrate, fill = .data$character)) + ggplot2::geom_col()

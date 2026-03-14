@@ -67,6 +67,7 @@ It stores the main metadata and lists containing more in-depth run data.
 \item \href{#method-STS2Run-print}{\code{STS2Run$print()}}
 \item \href{#method-STS2Run-get_individual_player_data}{\code{STS2Run$get_individual_player_data()}}
 \item \href{#method-STS2Run-get_character}{\code{STS2Run$get_character()}}
+\item \href{#method-STS2Run-get_cards}{\code{STS2Run$get_cards()}}
 \item \href{#method-STS2Run-clone}{\code{STS2Run$clone()}}
 }
 }
@@ -140,6 +141,27 @@ Retrieve data for a character.
 \item{\code{char}}{The character/s to retrieve data for.}
 
 \item{\code{onlyowner}}{If TRUE, only retrieve entries where the owner was the character specified.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2Run-get_cards"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2Run-get_cards}{}}}
+\subsection{Method \code{get_cards()}}{
+Retrieve all the cards present in a run.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2Run$get_cards(ignore_basics = FALSE, return_unique = FALSE, char = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ignore_basics}}{Don't return basic cards.}
+
+\item{\code{return_unique}}{Return only 1 entry per unique card.}
+
+\item{\code{char}}{The character/s to filter by (or \code{NULL} to return all).}
 }
 \if{html}{\out{</div>}}
 }
