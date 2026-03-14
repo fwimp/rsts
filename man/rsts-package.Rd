@@ -6,7 +6,7 @@
 \alias{rsts-package}
 \title{rsts: R Slay The Spire Interface}
 \description{
-R6 classes and helpful functions for working With Slay The Spire run histories.
+R6 classes and helpful functions for working with Slay The Spire run histories.
 }
 \seealso{
 Useful links:

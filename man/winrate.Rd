@@ -7,6 +7,8 @@
 winrate(
   runhistory,
   plotit = TRUE,
+  relative = FALSE,
+  expected = NULL,
   ci = TRUE,
   samples = 200,
   lower_quant = 0.025,
@@ -17,6 +19,10 @@ winrate(
 \item{runhistory}{An \link{STS2RunHistory} object, filtered if necessary.}
 
 \item{plotit}{Whether to plot the data or just return a summary \code{data.frame}}
+
+\item{relative}{Whether to calculate the character-based winrate relative to the total winrate.}
+
+\item{expected}{If set, the expected winrate to scale values relative to (automatically turns on \code{relative} when set.)}
 
 \item{ci}{Whether to calculate and plot 95\% confidence intervals}
 

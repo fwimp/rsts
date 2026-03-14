@@ -24,14 +24,12 @@ get_field <- function(x, fieldname) {
 }
 
 .sort_version <- function(x) {
-  rlang::check_installed("semver", reason = "for version sorting.")
-  order(semver::parse_version(gsub("v", "", x)))
+  order(numeric_version(gsub("v", "", x)))
 }
 
 .compare_version <- function(x, cond, val) {
-  rlang::check_installed("semver", reason = "for version comparison.")
   cond <- match.arg(cond, c("==", "!=", ">", "<", ">=", "<="))
-  x_semver <- semver::parse_version(gsub("v", "", x))
-  val_semver <- semver::parse_version(gsub("v", "", val))
-  do.call(cond, list(x_semver, val_semver))
+  x_ver <- numeric_version(gsub("v", "", x))
+  val_ver <- numeric_version(gsub("v", "", val))
+  do.call(cond, list(x_ver, val_ver))
 }

@@ -68,7 +68,7 @@ STS2Run <- R6Class("STS2Run",
       self$ownerid <- as.character(steamid)
       self$acts <- format_sts2id(as.character(rundata$acts))
       self$ascension <- rundata$ascension
-      self$build_id <- rundata$build_id
+      self$build_id <- gsub("v", "", rundata$build_id)
       self$game_mode <- rundata$game_mode
       self$killed_by_encounter <- ifelse(rundata$killed_by_encounter == "NONE.NONE", NA, format_sts2id(rundata$killed_by_encounter))
       self$killed_by_event <- ifelse(rundata$killed_by_event == "NONE.NONE", NA, format_sts2id(rundata$killed_by_event))

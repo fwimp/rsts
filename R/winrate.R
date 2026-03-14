@@ -2,6 +2,8 @@
 #'
 #' @param runhistory An [STS2RunHistory] object, filtered if necessary.
 #' @param plotit Whether to plot the data or just return a summary `data.frame`
+#' @param relative Whether to calculate the character-based winrate relative to the total winrate.
+#' @param expected If set, the expected winrate to scale values relative to (automatically turns on `relative` when set.)
 #' @param ci Whether to calculate and plot 95% confidence intervals
 #' @param samples The number of iterations to use when generating CIs.
 #' @param lower_quant The lower quantile of the CIs.
@@ -14,10 +16,15 @@
 #' myruns <- load_sts_history()
 #' winrate(myruns)
 #'
-winrate <- function(runhistory, plotit = TRUE, ci = TRUE, samples = 200, lower_quant = 0.025, upper_quant = 0.975) {
+winrate <- function(runhistory, plotit = TRUE, relative = FALSE, expected = NULL, ci = TRUE, samples = 200, lower_quant = 0.025, upper_quant = 0.975) {
   if (is.null(runhistory$ownerid)) {
     cli::cli_abort("runhistory$ownerid must be set!")
   }
+
+  if (!is.null(expected)) {
+    relative <- TRUE
+  }
+
   runhistory_filtered <- runhistory$filter_outcome(c("win", "loss"))
   runhistory_filtered <- runhistory$get_individual_player_data()
 
@@ -26,20 +33,38 @@ winrate <- function(runhistory, plotit = TRUE, ci = TRUE, samples = 200, lower_q
   outcome <- sapply(runhistory_filtered, \(x) {x$run$outcome})
   winrate_basedf <- data.frame(outcome, character = playerchar)
   winprop <- .summarise_winrate(winrate_basedf)
+  if(relative) {
+    overall_winrate <- expected %||% (length(winrate_basedf$outcome[winrate_basedf$outcome == "Win"]) / nrow(winrate_basedf))
+  }
   if (ci) {
     cis <- .generate_winrate_cis(winrate_basedf, samples, lower_quant, upper_quant)
     winprop <- dplyr::left_join(winprop, cis, by = dplyr::join_by("character"))
     winprop$character <- factor(winprop$character, levels = c("Ironclad", "Silent", "Regent", "Necrobinder", "Defect"))
+    if(relative) {
+      winprop$winrate <- winprop$winrate - overall_winrate
+      winprop$lower <- winprop$lower - overall_winrate
+      winprop$upper <- winprop$upper - overall_winrate
+    }
     p <- ggplot2::ggplot(winprop, ggplot2::aes(x = .data$character, y = .data$winrate, fill = .data$character, ymin = .data$lower, ymax = .data$upper)) + ggplot2::geom_col() + ggplot2::geom_errorbar(alpha = 0.5, width = 0.3, linewidth = 0.75)
   } else {
     winprop$character <- factor(winprop$character, levels = c("Ironclad", "Silent", "Regent", "Necrobinder", "Defect"))
+
+    if(relative) {
+      winprop$winrate <- winprop$winrate - overall_winrate
+    }
     p <- ggplot2::ggplot(winprop, ggplot2::aes(x = .data$character, y = .data$winrate, fill = .data$character)) + ggplot2::geom_col()
+  }
+
+  if (relative) {
+    p <- p + ggplot2::scale_y_continuous(limit = c(-1,1)) +
+      ggplot2::labs(x = "Character", y = "Relative Win Rate", title = paste0("Relative Win Rate by Character (expected = ", round(overall_winrate, 2),")"))
+  } else {
+    p <- p + ggplot2::scale_y_continuous(limit = c(0,1)) +
+      ggplot2::labs(x = "Character", y = "Win Rate", title = "Win Rate by Character")
   }
   if (plotit) {
     p <- p +
-      ggplot2::scale_y_continuous(limit = c(0,1)) +
       ggplot2::theme_bw() +
-      ggplot2::labs(x = "Character", y = "Win Rate") +
       ggplot2::theme(legend.position="none") +
       ggplot2::scale_fill_manual(
         values = c(
