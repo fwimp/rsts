@@ -72,7 +72,9 @@ STS2Run <- R6Class("STS2Run",
       self$game_mode <- rundata$game_mode
       self$killed_by_encounter <- ifelse(rundata$killed_by_encounter == "NONE.NONE", NA, format_sts2id(rundata$killed_by_encounter))
       self$killed_by_event <- ifelse(rundata$killed_by_event == "NONE.NONE", NA, format_sts2id(rundata$killed_by_event))
-      self$modifiers <- rundata$modifiers
+      if (!is.null(rundata$modifiers)) {
+        self$modifiers <- format_sts2id(as.character(unlist(rundata$modifiers)))
+      }
       self$platform_type <- rundata$platform_type
       self$players <- lapply(1:length(rundata$players), \(i) {STS2Player$new(rundata$players[[i]], run = self, idx = i)})
       self$run_time <- rundata$run_time

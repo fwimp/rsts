@@ -167,7 +167,7 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   #' @param .filtertext The text to add to the filter list (mostly used internally).
   #'
   filter_version = function(cond = "==", patch, .filtertext = "filtered by version") {
-    # Handle
+    # Handle cases where the user only specifies the patch version.
     if (missing(patch)) {
       patch <- cond
       cond <- "=="
@@ -196,6 +196,23 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   },
 
   #' @description
+  #' Retrieve runs with desired gamemode across the run history.
+  #'
+  #' @param gamemode The gamemode/s to retrieve data for.
+  #' @param .filtertext The text to add to the filter list (mostly used internally).
+  #'
+  filter_gamemode = function(gamemode, .filtertext = "filtered by gamemode") {
+    gamemode <- tolower(gamemode)
+    poss_gamemodes <- c("standard", "daily")
+    gamemode <- gamemode[gamemode %in% poss_gamemodes]
+    STS2RunHistory$new(
+      self$runs[which(sapply(self$runs, \(x) {tolower(x$game_mode) %in% gamemode}))],
+      steamid = self$ownerid,
+      filtersteps = c(self$filtersteps, .filtertext)
+    )
+  },
+
+  #' @description
   #' Generate a summary dataframe for the run history.
   #'
   generate_summary = function() {
@@ -212,7 +229,6 @@ STS2RunHistory <- R6Class("STS2RunHistory",
   }
 
   # TODO: A way to filter runs by date
-  # TODO: A way to filter by gamemode
 
   ),
   private = list(

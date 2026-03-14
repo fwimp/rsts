@@ -23,11 +23,13 @@ URL: https://github.com/fwimp/rsts, https://fwimp.github.io/rsts/
 BugReports: https://github.com/fwimp/rsts/issues
 Imports: 
     cli,
+    dplyr,
+    ggplot2,
     jsonlite,
     lubridate,
     R6,
-    readr,
     rlang,
+    stats,
     stringr
 Depends: 
     R (>= 4.1.0)

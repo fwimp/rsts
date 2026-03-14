@@ -52,6 +52,7 @@ myruns$filter_ascension(0)$filter_outcome("Win")
 \item \href{#method-STS2RunHistory-filter_playercount}{\code{STS2RunHistory$filter_playercount()}}
 \item \href{#method-STS2RunHistory-filter_version}{\code{STS2RunHistory$filter_version()}}
 \item \href{#method-STS2RunHistory-filter_floorcount}{\code{STS2RunHistory$filter_floorcount()}}
+\item \href{#method-STS2RunHistory-filter_gamemode}{\code{STS2RunHistory$filter_gamemode()}}
 \item \href{#method-STS2RunHistory-generate_summary}{\code{STS2RunHistory$generate_summary()}}
 \item \href{#method-STS2RunHistory-clone}{\code{STS2RunHistory$clone()}}
 }
@@ -269,6 +270,25 @@ Retrieve runs with desired floor count across the run history.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{floors}}{The floor count/s to retrieve data for.}
+
+\item{\code{.filtertext}}{The text to add to the filter list (mostly used internally).}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-STS2RunHistory-filter_gamemode"></a>}}
+\if{latex}{\out{\hypertarget{method-STS2RunHistory-filter_gamemode}{}}}
+\subsection{Method \code{filter_gamemode()}}{
+Retrieve runs with desired gamemode across the run history.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{STS2RunHistory$filter_gamemode(gamemode, .filtertext = "filtered by gamemode")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{gamemode}}{The gamemode/s to retrieve data for.}
 
 \item{\code{.filtertext}}{The text to add to the filter list (mostly used internally).}
 }

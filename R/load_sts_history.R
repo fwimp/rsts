@@ -22,6 +22,8 @@
 load_sts_history <- function(path = NULL, id = NULL, profilenum = 1, game = 2, platform = c("windows", "mac", "linux"), players = NULL, .returnraw = FALSE) {
   # Runs are located at C:\Program Files (x86)\Steam\steamapps\common\SlayTheSpire\runs\<CHARACTER> on windows for STS1.
   # Runs are located at %APPDATA%/Roaming/SlayTheSpire2/steam/<STEAMID>/profile<x>/saves/history on windows for STS2.
+  # mac: $HOME/Library/Application Support/SlayTheSpire2/steam/[SteamID]/
+  # Linux $HOME/.local/share/SlayTheSpire2/
   platform <- match.arg(platform)
   if(game != 2) {
     cli::cli_abort(c("x" = "This package currently only supports loading STS2 runs."))
@@ -62,9 +64,10 @@ load_sts_history <- function(path = NULL, id = NULL, profilenum = 1, game = 2, p
   run_files <- list.files(path, full.names = TRUE)
   runs <- lapply(run_files, \(x) {
     tryCatch({
-      # Weird shim to force steamIDs to be strings. Otherwise we get weird off-by-n errors due to floating point inprecision.
-      text <- stringr::str_replace_all(readr::read_file(x), ": (\\d{17}),", replacement = ': "\\1",')
-      jsonlite::fromJSON(text, simplifyVector = FALSE)
+      # bigint_as_char is an undocumented arg of read_json
+      # It forces bigints to be represented as strings, fixing the weird off-by-n errors due to floating point imprecision.
+      # It is considered a hack and so should not be used elsewhere really.
+      jsonlite::read_json(x, bigint_as_char = TRUE)
     }, error = function(e) {
       cli::cli_warn("Error reading run JSON for file {tail(strsplit(x, '/')[[1]], 1)}.")
       NULL
