@@ -106,6 +106,8 @@ A new STS2Run object.
 
 - [`STS2Run$get_character()`](#method-STS2Run-get_character)
 
+- [`STS2Run$get_cards()`](#method-STS2Run-get_cards)
+
 - [`STS2Run$clone()`](#method-STS2Run-clone)
 
 ------------------------------------------------------------------------
@@ -186,6 +188,30 @@ Retrieve data for a character.
 
   If TRUE, only retrieve entries where the owner was the character
   specified.
+
+------------------------------------------------------------------------
+
+### Method `get_cards()`
+
+Retrieve all the cards present in a run.
+
+#### Usage
+
+    STS2Run$get_cards(ignore_basics = FALSE, return_unique = FALSE, char = NULL)
+
+#### Arguments
+
+- `ignore_basics`:
+
+  Don't return basic cards.
+
+- `return_unique`:
+
+  Return only 1 entry per unique card.
+
+- `char`:
+
+  The character/s to filter by (or `NULL` to return all).
 
 ------------------------------------------------------------------------
 

@@ -55,6 +55,8 @@ A new STS2Player object.
 
 - [`STS2Player$print()`](#method-STS2Player-print)
 
+- [`STS2Player$get_cards()`](#method-STS2Player-get_cards)
+
 - [`STS2Player$clone()`](#method-STS2Player-clone)
 
 ------------------------------------------------------------------------
@@ -106,6 +108,22 @@ Print an STS2Player object.
 
   Whether to show the floor on which a card/relic was obtained when
   `full = TRUE`.
+
+------------------------------------------------------------------------
+
+### Method `get_cards()`
+
+Retrieve the cards of a player.
+
+#### Usage
+
+    STS2Player$get_cards(ignore_basics = FALSE)
+
+#### Arguments
+
+- `ignore_basics`:
+
+  If TRUE, don't return basic cards.
 
 ------------------------------------------------------------------------
 
