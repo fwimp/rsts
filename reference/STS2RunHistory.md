@@ -64,6 +64,8 @@ those changes will appear in the original list.
 
 - [`STS2RunHistory$filter_floorcount()`](#method-STS2RunHistory-filter_floorcount)
 
+- [`STS2RunHistory$filter_gamemode()`](#method-STS2RunHistory-filter_gamemode)
+
 - [`STS2RunHistory$generate_summary()`](#method-STS2RunHistory-generate_summary)
 
 - [`STS2RunHistory$clone()`](#method-STS2RunHistory-clone)
@@ -299,6 +301,26 @@ Retrieve runs with desired floor count across the run history.
 - `floors`:
 
   The floor count/s to retrieve data for.
+
+- `.filtertext`:
+
+  The text to add to the filter list (mostly used internally).
+
+------------------------------------------------------------------------
+
+### Method `filter_gamemode()`
+
+Retrieve runs with desired gamemode across the run history.
+
+#### Usage
+
+    STS2RunHistory$filter_gamemode(gamemode, .filtertext = "filtered by gamemode")
+
+#### Arguments
+
+- `gamemode`:
+
+  The gamemode/s to retrieve data for.
 
 - `.filtertext`:
 
