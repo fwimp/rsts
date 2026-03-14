@@ -1,6 +1,6 @@
 # rsts: R Slay The Spire Interface
 
-R6 classes and helpful functions for working With Slay The Spire run
+R6 classes and helpful functions for working with Slay The Spire run
 histories.
 
 ## See also

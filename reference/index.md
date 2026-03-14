@@ -32,5 +32,7 @@
   : Colour text in an Silent-based theme.
 - [`load_sts_history()`](https://fwimp.github.io/rsts/reference/load_sts_history.md)
   : Load Slay the Spire 2 Run Data
+- [`topcards()`](https://fwimp.github.io/rsts/reference/topcards.md) :
+  Retrieve the most-taken cards across a history of runs.
 - [`winrate()`](https://fwimp.github.io/rsts/reference/winrate.md) :
   Calculate (and potentially plot) winrates by character.

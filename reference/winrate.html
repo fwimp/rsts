@@ -47,6 +47,8 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">winrate</span><span class="op">(</span></span>
 <span>  <span class="va">runhistory</span>,</span>
 <span>  plotit <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  relative <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ci <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  samples <span class="op">=</span> <span class="fl">200</span>,</span>
 <span>  lower_quant <span class="op">=</span> <span class="fl">0.025</span>,</span>
@@ -64,6 +66,14 @@
 
 <dt id="arg-plotit">plotit<a class="anchor" aria-label="anchor" href="#arg-plotit"></a></dt>
 <dd><p>Whether to plot the data or just return a summary <code>data.frame</code></p></dd>
+
+
+<dt id="arg-relative">relative<a class="anchor" aria-label="anchor" href="#arg-relative"></a></dt>
+<dd><p>Whether to calculate the character-based winrate relative to the total winrate.</p></dd>
+
+
+<dt id="arg-expected">expected<a class="anchor" aria-label="anchor" href="#arg-expected"></a></dt>
+<dd><p>If set, the expected winrate to scale values relative to (automatically turns on <code>relative</code> when set.)</p></dd>
 
 
 <dt id="arg-ci">ci<a class="anchor" aria-label="anchor" href="#arg-ci"></a></dt>

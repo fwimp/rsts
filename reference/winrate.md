@@ -8,6 +8,8 @@ Calculate (and potentially plot) winrates by character.
 winrate(
   runhistory,
   plotit = TRUE,
+  relative = FALSE,
+  expected = NULL,
   ci = TRUE,
   samples = 200,
   lower_quant = 0.025,
@@ -26,6 +28,16 @@ winrate(
 - plotit:
 
   Whether to plot the data or just return a summary `data.frame`
+
+- relative:
+
+  Whether to calculate the character-based winrate relative to the total
+  winrate.
+
+- expected:
+
+  If set, the expected winrate to scale values relative to
+  (automatically turns on `relative` when set.)
 
 - ci:
 
