@@ -62,7 +62,17 @@ in R, which spiralled out of control rather quickly.
 
 # Package index
 
-## All functions
+## Object classes
+
+R6 classes for holding STS data.
+
+## Analysis
+
+Functions for analysing run histories.
+
+## Other
+
+Miscellaneous functions.
 
 - [`STS2Deck`](https://fwimp.github.io/rsts/reference/STS2Deck.md) : Set
   of Slay the Spire 2 Cards (R6).

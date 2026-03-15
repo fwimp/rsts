@@ -2,7 +2,7 @@
 
 This is the general holding class for a full history of sts2 runs.
 
-It can be indexed like a list (i.e. `x[1]` or `x[[1]]`).
+It can be indexed like a list (i.e. `x[1]`).
 
 ## Value
 

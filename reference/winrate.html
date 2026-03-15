@@ -49,6 +49,7 @@
 <span>  plotit <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  relative <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ignoreabandoned <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ci <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  samples <span class="op">=</span> <span class="fl">200</span>,</span>
 <span>  lower_quant <span class="op">=</span> <span class="fl">0.025</span>,</span>
@@ -73,7 +74,11 @@
 
 
 <dt id="arg-expected">expected<a class="anchor" aria-label="anchor" href="#arg-expected"></a></dt>
-<dd><p>If set, the expected winrate to scale values relative to (automatically turns on <code>relative</code> when set.)</p></dd>
+<dd><p>If set, the expected winrate to scale values relative to (automatically turns on <code>relative</code> when set).</p></dd>
+
+
+<dt id="arg-ignoreabandoned">ignoreabandoned<a class="anchor" aria-label="anchor" href="#arg-ignoreabandoned"></a></dt>
+<dd><p>Remove abandoned runs from data prior to analysis (otherwise abandoned runs count as losses).</p></dd>
 
 
 <dt id="arg-ci">ci<a class="anchor" aria-label="anchor" href="#arg-ci"></a></dt>

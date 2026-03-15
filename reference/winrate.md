@@ -10,6 +10,7 @@ winrate(
   plotit = TRUE,
   relative = FALSE,
   expected = NULL,
+  ignoreabandoned = FALSE,
   ci = TRUE,
   samples = 200,
   lower_quant = 0.025,
@@ -37,7 +38,12 @@ winrate(
 - expected:
 
   If set, the expected winrate to scale values relative to
-  (automatically turns on `relative` when set.)
+  (automatically turns on `relative` when set).
+
+- ignoreabandoned:
+
+  Remove abandoned runs from data prior to analysis (otherwise abandoned
+  runs count as losses).
 
 - ci:
 
