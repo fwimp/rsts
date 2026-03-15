@@ -9,6 +9,7 @@ A new \link{STS2Map} object.
 \description{
 This is the general holding class for STS2 map points.
 }
+\concept{R6}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

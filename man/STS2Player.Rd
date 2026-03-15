@@ -10,6 +10,7 @@ A new \link{STS2Player} object.
 This is the general holding class for an sts2 player.
 It stores the main player data for the run.
 }
+\concept{R6}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

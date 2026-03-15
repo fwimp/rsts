@@ -10,6 +10,7 @@ A new \link{STS2Run} object.
 This is the general holding class for an sts2 run.
 It stores the main metadata and lists containing more in-depth run data.
 }
+\concept{R6}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

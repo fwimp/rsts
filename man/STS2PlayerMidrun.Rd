@@ -13,6 +13,7 @@ This is the general holding class for a sts2 player at a point in the run.
 All fields in this are considered to be "at the end of this floor".
 For example current_hp on a floor where a player dies will be 0, even if they entered the fight with more than 0 HP.
 }
+\concept{R6}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

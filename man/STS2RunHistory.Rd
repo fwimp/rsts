@@ -27,6 +27,7 @@ myruns$filter_ascension(0)$filter_outcome("Win")
 \link{STS2Run} objects are passed by reference. As such if you modify a run in a filtered history, those changes will appear in the original list.
 }
 
+\concept{R6}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

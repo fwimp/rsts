@@ -36,3 +36,4 @@ topcards(myruns)
 topcards(myruns$filter_outcome("win"), n = 20, return_unique = TRUE)
 \dontshow{\}) # examplesIf}
 }
+\concept{analysis}

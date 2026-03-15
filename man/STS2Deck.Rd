@@ -10,6 +10,7 @@ A new \link{STS2Deck} object.
 This is the general holding class for a set of sts2 Cards.
 It stores the main card data for the player.
 }
+\concept{R6}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

@@ -47,3 +47,4 @@ myruns <- load_sts_history()
 winrate(myruns)
 \dontshow{\}) # examplesIf}
 }
+\concept{analysis}

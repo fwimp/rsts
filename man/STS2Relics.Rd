@@ -10,6 +10,7 @@ A new \link{STS2Relics} object.
 This is the general holding class for a set of sts2 relics.
 It stores the main relic data for the player.
 }
+\concept{R6}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

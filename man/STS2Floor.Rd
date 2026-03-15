@@ -9,6 +9,7 @@ A new \link{STS2Floor} object.
 \description{
 This is the general holding class for a sts2 floor.
 }
+\concept{R6}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
