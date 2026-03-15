@@ -4,14 +4,6 @@
 
 R6 classes for holding STS data.
 
-## Analysis
-
-Functions for analysing run histories.
-
-## Other
-
-Miscellaneous functions.
-
 - [`STS2Deck`](https://fwimp.github.io/rsts/reference/STS2Deck.md) : Set
   of Slay the Spire 2 Cards (R6).
 - [`STS2Floor`](https://fwimp.github.io/rsts/reference/STS2Floor.md) :
@@ -28,6 +20,20 @@ Miscellaneous functions.
   the Spire 2 run (R6).
 - [`STS2RunHistory`](https://fwimp.github.io/rsts/reference/STS2RunHistory.md)
   : Slay the Spire 2 run history (R6).
+
+## Analysis
+
+Functions for analysing run histories.
+
+- [`topcards()`](https://fwimp.github.io/rsts/reference/topcards.md) :
+  Retrieve the most-taken cards across a history of runs.
+- [`winrate()`](https://fwimp.github.io/rsts/reference/winrate.md) :
+  Calculate (and potentially plot) winrates by character.
+
+## Other
+
+Miscellaneous functions.
+
 - [`col_character()`](https://fwimp.github.io/rsts/reference/col_character.md)
   : Colour text in an character-based theme.
 - [`col_defect()`](https://fwimp.github.io/rsts/reference/col_defect.md)
@@ -42,7 +48,3 @@ Miscellaneous functions.
   : Colour text in an Silent-based theme.
 - [`load_sts_history()`](https://fwimp.github.io/rsts/reference/load_sts_history.md)
   : Load Slay the Spire 2 Run Data
-- [`topcards()`](https://fwimp.github.io/rsts/reference/topcards.md) :
-  Retrieve the most-taken cards across a history of runs.
-- [`winrate()`](https://fwimp.github.io/rsts/reference/winrate.md) :
-  Calculate (and potentially plot) winrates by character.
