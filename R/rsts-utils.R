@@ -33,3 +33,8 @@ get_field <- function(x, fieldname) {
   val_ver <- numeric_version(gsub("v", "", val))
   do.call(cond, list(x_ver, val_ver))
 }
+
+.find_common_ids <- function(runhistory) {
+  players <- runhistory$get_player_data()
+  table(get_field(players, "id"))
+}

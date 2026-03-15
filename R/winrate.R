@@ -3,7 +3,8 @@
 #' @param runhistory An [STS2RunHistory] object, filtered if necessary.
 #' @param plotit Whether to plot the data or just return a summary `data.frame`
 #' @param relative Whether to calculate the character-based winrate relative to the total winrate.
-#' @param expected If set, the expected winrate to scale values relative to (automatically turns on `relative` when set.)
+#' @param expected If set, the expected winrate to scale values relative to (automatically turns on `relative` when set).
+#' @param ignoreabandoned Remove abandoned runs from data prior to analysis (otherwise abandoned runs count as losses).
 #' @param ci Whether to calculate and plot 95% confidence intervals
 #' @param samples The number of iterations to use when generating CIs.
 #' @param lower_quant The lower quantile of the CIs.
@@ -16,7 +17,7 @@
 #' myruns <- load_sts_history()
 #' winrate(myruns)
 #'
-winrate <- function(runhistory, plotit = TRUE, relative = FALSE, expected = NULL, ci = TRUE, samples = 200, lower_quant = 0.025, upper_quant = 0.975) {
+winrate <- function(runhistory, plotit = TRUE, relative = FALSE, expected = NULL, ignoreabandoned = FALSE, ci = TRUE, samples = 200, lower_quant = 0.025, upper_quant = 0.975) {
   if (is.null(runhistory$ownerid)) {
     cli::cli_abort("runhistory$ownerid must be set!")
   }
@@ -25,13 +26,21 @@ winrate <- function(runhistory, plotit = TRUE, relative = FALSE, expected = NULL
     relative <- TRUE
   }
 
-  runhistory_filtered <- runhistory$filter_outcome(c("win", "loss"))
+  if (ignoreabandoned) {
+    runhistory_filtered <- runhistory$filter_outcome(c("win", "loss"))
+  }
+
   runhistory_filtered <- runhistory$get_individual_player_data()
 
   playerchar <- get_field(runhistory_filtered, "playercharacter")
   # Got to re-traverse the dataset to get outcomes for only found runs.
   outcome <- sapply(runhistory_filtered, \(x) {x$run$outcome})
   winrate_basedf <- data.frame(outcome, character = playerchar)
+
+  if (!ignoreabandoned) {
+    winrate_basedf$outcome[winrate_basedf$outcome == "Abandoned"] <- "Loss"
+  }
+
   winprop <- .summarise_winrate(winrate_basedf)
   if(relative) {
     overall_winrate <- expected %||% (length(winrate_basedf$outcome[winrate_basedf$outcome == "Win"]) / nrow(winrate_basedf))

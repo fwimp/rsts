@@ -9,6 +9,7 @@ winrate(
   plotit = TRUE,
   relative = FALSE,
   expected = NULL,
+  ignoreabandoned = FALSE,
   ci = TRUE,
   samples = 200,
   lower_quant = 0.025,
@@ -22,7 +23,9 @@ winrate(
 
 \item{relative}{Whether to calculate the character-based winrate relative to the total winrate.}
 
-\item{expected}{If set, the expected winrate to scale values relative to (automatically turns on \code{relative} when set.)}
+\item{expected}{If set, the expected winrate to scale values relative to (automatically turns on \code{relative} when set).}
+
+\item{ignoreabandoned}{Remove abandoned runs from data prior to analysis (otherwise abandoned runs count as losses).}
 
 \item{ci}{Whether to calculate and plot 95\% confidence intervals}
 

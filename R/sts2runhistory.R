@@ -3,7 +3,7 @@
 #' @description
 #' This is the general holding class for a full history of sts2 runs.
 #'
-#' It can be indexed like a list (i.e. `x[1]` or `x[[1]]`).
+#' It can be indexed like a list (i.e. `x[1]`).
 #'
 STS2RunHistory <- R6Class("STS2RunHistory",
   public = list(
@@ -57,6 +57,7 @@ STS2RunHistory <- R6Class("STS2RunHistory",
       print(x)
       cli::cli_text("")
     }
+    invisible(self)
   },
 
   #' @description
@@ -251,12 +252,18 @@ length.STS2RunHistory <- function(x) {
   STS2RunHistory$new(x$runs[i], steamid = x$ownerid, filtersteps = c(x$filtersteps, "indexed"))
 }
 
-#' @export
-`[[.STS2RunHistory` <- function(x, i, exact = TRUE) {
-  x$runs[[i, exact = exact]]
-}
+# #' @export
+# `[[.STS2RunHistory` <- function(x, i, exact = TRUE) {
+#   # Note: Defining this disables Rstudio's introspection
+#   x$runs[[i, exact = exact]]
+# }
 
 #' @export
 summary.STS2RunHistory <- function(object, ...) {
   object$generate_summary()
 }
+
+testR6 <- R6Class("testR6",
+  public = list(
+    test1 = list()
+  ))

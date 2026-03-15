@@ -9,7 +9,7 @@ A new \link{STS2RunHistory} object.
 \description{
 This is the general holding class for a full history of sts2 runs.
 
-It can be indexed like a list (i.e. \code{x[1]} or \code{x[[1]]}).
+It can be indexed like a list (i.e. \code{x[1]}).
 }
 \section{Filters}{
 
