@@ -5,6 +5,8 @@
 #'
 #' It can be indexed like a list (i.e. `x[1]`).
 #'
+#' @concept R6
+#'
 STS2RunHistory <- R6Class("STS2RunHistory",
   public = list(
   #' @field runs The parsed run logs. A list of [STS2Run] objects.

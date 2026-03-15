@@ -4,6 +4,7 @@
 #' This is the general holding class for a set of sts2 relics.
 #' It stores the main relic data for the player.
 #'
+#' @concept R6
 STS2Relics <- R6Class("STS2Relics",
   public = list(
     #' @field player The [STS2Player] object these relics belong to.

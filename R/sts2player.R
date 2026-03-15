@@ -4,6 +4,7 @@
 #' This is the general holding class for an sts2 player.
 #' It stores the main player data for the run.
 #'
+#' @concept R6
 STS2Player <- R6Class("STS2Player",
   public = list(
     #' @field run The [STS2Run] object that this player object originates from.

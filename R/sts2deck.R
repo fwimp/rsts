@@ -4,6 +4,7 @@
 #' This is the general holding class for a set of sts2 Cards.
 #' It stores the main card data for the player.
 #'
+#' @concept R6
 STS2Deck <- R6Class("STS2Deck",
   public = list(
     #' @field player The [STS2Player] object this deck belongs to.

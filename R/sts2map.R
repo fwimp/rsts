@@ -2,6 +2,8 @@
 #'
 #' @description
 #' This is the general holding class for STS2 map points.
+#'
+#' @concept R6
 
 STS2Map <- R6Class("STS2Map",
   public = list(
@@ -38,6 +40,7 @@ length.STS2Map <- function(x) {
 #' @description
 #' This is the general holding class for a sts2 floor.
 #'
+#' @concept R6
 STS2Floor <- R6Class("STS2Floor",
   public = list(
     #' @field act The act this floor appeared in.
@@ -128,6 +131,7 @@ STS2Floor <- R6Class("STS2Floor",
 #' All fields in this are considered to be "at the end of this floor".
 #' For example current_hp on a floor where a player dies will be 0, even if they entered the fight with more than 0 HP.
 #'
+#' @concept R6
 STS2PlayerMidrun <- R6Class("STS2PlayerMidrun",
   public = list(
     #' @field floor The [STS2Floor] object this midrun object refers to.

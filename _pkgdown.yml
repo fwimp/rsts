@@ -2,3 +2,16 @@ url: https://fwimp.github.io/rsts/
 template:
   bootstrap: 5
   light-switch: true
+reference:
+- title: Object classes
+  desc: R6 classes for holding STS data.
+- contents:
+  - has_concept("R6")
+- title: Analysis
+  desc: Functions for analysing run histories.
+- contents:
+  - has_concept("analysis")
+- title: Other
+  desc: Miscellaneous functions.
+- contents:
+  - lacks_concepts(c("R6", "analysis"))

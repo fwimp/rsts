@@ -11,6 +11,9 @@
 #' @param upper_quant The upper quantile of the CIs.
 #'
 #' @returns A `data.frame` summary of winrates by character.
+#'
+#' @concept analysis
+#'
 #' @export
 #'
 #' @examplesIf interactive()

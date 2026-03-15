@@ -7,6 +7,9 @@
 #' @param ignore_basics Don't consider basic cards (strike/defend).
 #'
 #' @returns A `data.frame` of cards and the number of times they appeared in a run
+#'
+#' @concept analysis
+#'
 #' @export
 #'
 #' @examplesIf interactive()

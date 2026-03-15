@@ -4,6 +4,8 @@
 #' This is the general holding class for an sts2 run.
 #' It stores the main metadata and lists containing more in-depth run data.
 #'
+#' @concept R6
+#'
 STS2Run <- R6Class("STS2Run",
   public = list(
     #' @field acts A vector of the acts that the player encountered.
